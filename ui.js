@@ -1,4 +1,3 @@
-// Define UI elements
 var ui = {
 	timer: document.getElementById('timer'),
 	robotState: document.getElementById('robot-state'),
@@ -36,7 +35,6 @@ NetworkTables.addRobotConnectionListener(onRobotConnection, true);
 // Sets function to be called when any NetworkTables key/value changes
 NetworkTables.addGlobalListener(onValueChanged, true);
 
-
 function onRobotConnection(connected) {
 	var state = connected ? 'Robot connected!' : 'Robot disconnected.';
 	console.log(state);
@@ -50,10 +48,9 @@ function onValueChanged(key, value, isNew) {
 	} else if (value == 'false') {
 		value = false;
 	}
-
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/drive/navX/yaw': // Gyro rotation
+		case '/SmartDashboard/yaw': // Gyro rotation
 			ui.gyro.val = value;
 			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
 			if (ui.gyro.visualVal < 0) { // Corrects for negative values
@@ -95,7 +92,7 @@ function onValueChanged(key, value, isNew) {
 			var s = 135;
 			if (value) {
 				// Make sure timer is reset to black when it starts
-				ui.timer.style.color = 'black';
+				ui.timer.style.color = '#FFFFFF';
 				// Function below adjusts time left every second
 				var countdown = setInterval(function() {
 					s--; // Subtract one second
@@ -113,7 +110,7 @@ function onValueChanged(key, value, isNew) {
 						return;
 					} else if (s <= 15) {
 						// Flash timer if less than 15 seconds left
-						ui.timer.style.color = (s % 2 === 0) ? '#FF3030' : 'transparent';
+						ui.timer.style.color = (s % 2 === 0) ? '#FF3030' : '#FFFFFF';
 					} else if (s <= 30) {
 						// Solid red timer when less than 30 seconds left.
 						ui.timer.style.color = '#FF3030';

@@ -12,17 +12,9 @@ let mainWindow;
 
 // Define global reference to the python server (which we'll start next).
 let server;
-
 function createWindow() {
-    // Start python server.
-    if (process.platform === 'win32') {
-        // If on Windows, use the batch command (py -3 ./server.py).
-        server = require('child_process').spawn('py', ['-3', '-m', 'pynetworktables2js']);
-    } else {
-        // If on unix-like/other OSes, use bash command (python3 ./server.py).
-        server = require('child_process').spawn('python3', ['-m', 'pynetworktables2js']);
-    }
-
+    // Start python server ON WINDOWS.
+    server = require('child_process').spawn('py', ['-3', '-m', 'pynetworktables2js', '--robot', 'roboRIO-5968-FRC.local']);
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
 		width: 1366,
