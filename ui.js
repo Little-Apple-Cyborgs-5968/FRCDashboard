@@ -27,7 +27,17 @@ var ui = {
 	autoSelect: document.getElementById('auto-select'),
     armPosition: document.getElementById('arm-position')
 };
+//Whether measured times are in teleop or auto
+var isTeleop = false;
 
+//Whether each time warning has already been said
+var said90 = false;
+var said60 = false;
+var said45 = false;
+var said30 = false;
+var said15 = false;
+var said10 = false;
+var said5 = false;
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
 // NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
 // Sets function to be called when robot dis/connects
@@ -86,41 +96,70 @@ function onValueChanged(key, value, isNew) {
 				ui.example.readout.innerHTML = 'Value is false';
 			}
 			break;
-		case '/SmartDashboard/timeRunning':
+		case '/SmartDashboard/timeRemaining':
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
-			var s = 135;
-			if (value) {
-				// Make sure timer is reset to black when it starts
-				ui.timer.style.color = '#FFFFFF';
-				// Function below adjusts time left every second
-				var countdown = setInterval(function() {
-					s--; // Subtract one second
-					// Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
-					var m = Math.floor(s / 60);
-					// Create seconds number that will actually be displayed after minutes are subtracted
-					var visualS = (s % 60);
-
-					// Add leading zero if seconds is one digit long, for proper time formatting.
-					visualS = visualS < 10 ? '0' + visualS : visualS;
-
-					if (s < 0) {
-						// Stop countdown when timer reaches zero
-						clearTimeout(countdown);
-						return;
-					} else if (s <= 15) {
-						// Flash timer if less than 15 seconds left
-						ui.timer.style.color = (s % 2 === 0) ? '#FF3030' : '#FFFFFF';
-					} else if (s <= 30) {
-						// Solid red timer when less than 30 seconds left.
-						ui.timer.style.color = '#FF3030';
-					}
-					ui.timer.innerHTML = m + ':' + visualS;
-				}, 1000);
-			} else {
-				s = 135;
+			var s = Math.floor(value);
+			
+			// Make sure timer is reset to black when it starts
+			ui.timer.style.color = '#FFFFFF';
+			
+			// Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
+			var m = Math.floor(s / 60);
+			// Create seconds number that will actually be displayed after minutes are subtracted
+			var visualS = (s % 60);
+			
+			if(s == -1.0){
+				m = 0;
+				visualS = 0;
 			}
-			NetworkTables.setValue(key, false);
+			else if (s <= 30) {
+				// Solid red timer when less than 30 seconds left.
+				ui.timer.style.color = '#FF3030';
+			}
+			
+			// Add leading zero if seconds is one digit long, for proper time formatting.
+			visualS = visualS < 10 ? '0' + visualS : visualS;
+			ui.timer.innerHTML = m + ':' + visualS;
+			
+			if(s == 90 && !said90 && isTeleop){
+				var audio = new Audio('voice\\90seconds.mp3');
+				audio.play();
+				said90 = true;
+			}
+			else if(s == 60 && !said60 && isTeleop){
+				var audio = new Audio('voice\\60seconds.mp3');
+				audio.play();
+				said60 = true;
+			}
+			else if(s == 45 && !said45 && isTeleop){
+				var audio = new Audio('voice\\45seconds.mp3');
+				audio.play();
+				said45 = true;
+			}
+			else if(s == 30 && !said30 && isTeleop){
+				var audio = new Audio('voice\\30seconds.mp3');
+				audio.play();
+				said30 = true;
+			}
+			else if(s == 15 && !said15 && isTeleop){
+				var audio = new Audio('voice\\15seconds.mp3');
+				audio.play();
+				said15 = true;
+			}
+			else if(s == 10 && !said10 && isTeleop){
+				var audio = new Audio('voice\\10seconds.mp3');
+				audio.play();
+				said10 = true;
+			}
+			else if(s == 5 && !said5 && isTeleop){
+				var audio = new Audio('voice\\5seconds.mp3');
+				audio.play();
+				said5 = true;
+			}
+			else if(s == 5 && !isTeleop){
+				isTeleop = true;
+			}
 			break;
 		case '/SmartDashboard/autonomous/options': // Load list of prewritten autonomous modes
 			// Clear previous list
