@@ -61,8 +61,8 @@ body > * {
     height: 20vh;
     width: 30vw;
     top: 0;
-    left: 0;
-    font-size: 20vh;
+    left: 45px;
+    font-size: 15vh;
     line-height: .8;
 }
 header {
@@ -75,12 +75,12 @@ header {
 #camera {
     padding: 0;
     position: fixed;
-    bottom: 0;
-    left: 0;
+    top:0;
+    right:0;
     width: 50vw;
-    height: 80vh;
+    height: 100vh;
     overflow: hidden;
-    background-color: #333;
+    background-color: #123;
     /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
     background-image: url('http://roborio-5968-frc.local:5800/?action=stream');
     background-repeat: no-repeat;
@@ -118,25 +118,11 @@ text {
     stroke: none;
     fill: white;
 }
-#gyro {
-    width: 175px;
-    height: 175px;
-    margin-left: 30px;
-    margin-top: 15px;
-}
-#gyro-arm {
-    -webkit-transform-origin: bottom;
-    -ms-transform-origin: bottom;
-    transform-origin: bottom;
-}
-#gyro-number {
-    font-size: 25px;
-    text-anchor: middle;
-}
 #robot-diagram {
     position: absolute;
-    bottom: 1px;
-    right: 1vw;
+    bottom:0;
+    left:0;
+    background-color:#222;
 }
 #robot-arm {
     -webkit-transform-origin: right;
@@ -155,4 +141,189 @@ aside {
 }
 aside > * {
     margin-bottom: 20px;
+}
+#robot-state {
+    position: fixed;
+    left:100px;
+    top:110px;
+}
+
+body {font-family: "Lato", sans-serif;}
+
+ul.tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Float the list items side by side */
+ul.tab li {float: left;}
+
+/* Style the links inside the list items */
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of links on hover */
+ul.tab li a:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+ul.tab li a:focus, .active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+#tabs {
+  position: absolute;
+  top:135px;
+  left:20px;
+}
+
+#Auto, #Warnings {
+  position: fixed;
+  top:185px;
+  font-family: "Lato", sans-serif;
+  font-size:18px;
+  left:20px;
+  width:272px;
+}
+
+#defaultOpen, #nextOpen {
+  width:135px;
+}
+
+#warningsList {
+  visibility:hidden;
+}
+
+#colorSelection {
+  position: fixed;
+  top:250px;
+  left:425px;
+  background-color:#333;
+}
+
+#redField {
+  position: fixed;
+  left:320px;
+  padding: 3px;
+  visibility:hidden;
+
+  -webkit-transform:rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+#blueField {
+  position: fixed;
+  left:320px;
+  padding: 3px;
+  visibility:hidden;
+}
+
+#submitAlliance {
+  display:block;
+  margin:0 auto;
+}
+
+#submitAlliance.active {
+  background-color:#222;
+}
+
+#hopper1Blue {
+  position: absolute;
+  left: 320px;
+  top: 100px;
+  height: 100px;
+  width: 100px;
+  opacity: 0.01;
+}
+
+#hopper1Blue:hover {
+  opacity:0.5;
+  background-color:yellow;
+}
+
+#hopper2Blue {
+  position: absolute;
+  left: 320px;
+  top: 270px;
+  height: 100px;
+  width: 100px;
+  background-color:#111;
+  opacity: 0.01;
+}
+
+#hopper2Blue:hover {
+  opacity:0.5;
+  background-color:yellow;
+}
+
+#hopper3Blue {
+  position: absolute;
+  left: 320px;
+  top: 450px;
+  height: 100px;
+  width: 100px;
+  background-color:#111;
+  opacity: 0.01;
+}
+
+#hopper3Blue:hover {
+  opacity:0.5;
+  background-color:yellow;
+}
+
+#hopper4Blue {
+  position: absolute;
+  left: 570px;
+  top: 160px;
+  height: 100px;
+  width: 100px;
+  background-color:#111;
+  opacity: 0.01;
+}
+
+#hopper4Blue:hover {
+  opacity:0.5;
+  background-color:yellow;
+}
+
+#hopper5Blue {
+  position: absolute;
+  left: 570px;
+  top: 365px;
+  height: 100px;
+  width: 100px;
+  background-color:#111;
+  opacity: 0.01;
+}
+
+#hopper5Blue:hover {
+  opacity:0.5;
+  background-color:yellow;
+}
+
+.blueButtons {
+  visibility: hidden;
 }

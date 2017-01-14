@@ -58,6 +58,7 @@ function onValueChanged(key, value, isNew) {
 	} else if (value == 'false') {
 		value = false;
 	}
+
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
 		case '/SmartDashboard/yaw': // Gyro rotation
@@ -100,15 +101,15 @@ function onValueChanged(key, value, isNew) {
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
 			var s = Math.floor(value);
-			
+
 			// Make sure timer is reset to black when it starts
 			ui.timer.style.color = '#FFFFFF';
-			
+
 			// Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
 			var m = Math.floor(s / 60);
 			// Create seconds number that will actually be displayed after minutes are subtracted
 			var visualS = (s % 60);
-			
+
 			if(s == -1.0){
 				m = 0;
 				visualS = 0;
@@ -117,11 +118,11 @@ function onValueChanged(key, value, isNew) {
 				// Solid red timer when less than 30 seconds left.
 				ui.timer.style.color = '#FF3030';
 			}
-			
+
 			// Add leading zero if seconds is one digit long, for proper time formatting.
 			visualS = visualS < 10 ? '0' + visualS : visualS;
 			ui.timer.innerHTML = m + ':' + visualS;
-			
+
 			if(s == 90 && !said90 && isTeleop){
 				var audio = new Audio('voice\\90seconds.mp3');
 				audio.play();
@@ -161,7 +162,7 @@ function onValueChanged(key, value, isNew) {
 				isTeleop = true;
 			}
 			break;
-		case '/SmartDashboard/autonomous/options': // Load list of prewritten autonomous modes
+		case '/SmartDashboard/options': // Load list of prewritten autonomous modes
 			// Clear previous list
 			while (ui.autoSelect.firstChild) {
 				ui.autoSelect.removeChild(ui.autoSelect.firstChild);
@@ -178,6 +179,17 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/autonomous/selected':
 			ui.autoSelect.value = value;
 			break;
+
+		// TODO: JAVA WRITE TO NETWORKTABLES FOR THESE WARNINGS
+		case '/SmartDashboard/warnings/none':
+			if(value) document.getElementById("None").style.visibility="visible";
+		case '/SmartDashboard/warnings/collision':
+			if(value) document.getElementById("Collision").style.visibility="visible";
+		case '/SmartDashboard/warnings/pneumatics':
+			if(value) document.getElementById("Pneumatics").style.visibility="visible";
+		case '/SmartDashboard/warnings/temperature':
+			if(value) document.getElementById("Temperature").style.visibility="visible";
+
 	}
 
 	// The following code manages tuning section of the interface.
@@ -287,3 +299,60 @@ ui.autoSelect.onchange = function() {
 ui.armPosition.oninput = function() {
 	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
 };
+
+// Automode and Warning tabs
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+function submitAlliance() {
+	document.getElementById("colorSelection").style.visibility="hidden";
+	if (document.getElementById("blueAlliance").checked) {
+		document.getElementById("blueField").style.visibility="visible";
+		document.getElementById("hopper1Blue").style.visibility="visible";
+		document.getElementById("hopper2Blue").style.visibility="visible";
+		document.getElementById("hopper3Blue").style.visibility="visible";
+		document.getElementById("hopper4Blue").style.visibility="visible";
+		document.getElementById("hopper5Blue").style.visibility="visible";
+	} else if (document.getElementById("redAlliance").checked) {
+		document.getElementById("redField").style.visibility="visible";
+	}
+	document.getElementById("defaultOpen").click();
+}
+
+function climb(climbing) {
+	if (climbing) {
+		var elem = document.getElementById("climb");
+	  var angle = 0;
+	  var id = setInterval(frame, 5);
+	  function frame() {
+			angle++;;
+			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
+	  }
+	}
+}
+
+function pneumatics(move) {
+	if (move) {
+		var elem = document.getElementById("pneumatics");
+		var yPos = 0;
+	  var id = setInterval(frame, 5);
+	  function frame() {
+			if (yPos > -30) {
+				yPos--;
+				elem.style.transform = 'translateY(' + yPos + 'px)';
+			}
+	  }
+	}
+}
