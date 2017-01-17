@@ -1,31 +1,6 @@
 var ui = {
 	timer: document.getElementById('timer'),
 	robotState: document.getElementById('robot-state'),
-	gyro: {
-		container: document.getElementById('gyro'),
-		val: 0,
-		offset: 0,
-		visualVal: 0,
-		arm: document.getElementById('gyro-arm'),
-		number: document.getElementById('gyro-number')
-	},
-	robotDiagram: {
-		arm: document.getElementById('robot-arm')
-	},
-	example: {
-		button: document.getElementById('example-button'),
-		readout: document.getElementById('example-readout')
-	},
-	tuning: {
-		list: document.getElementById('tuning'),
-		button: document.getElementById('tuning-button'),
-		name: document.getElementById('name'),
-		value: document.getElementById('value'),
-		set: document.getElementById('set'),
-		get: document.getElementById('get')
-	},
-	autoSelect: document.getElementById('auto-select'),
-    armPosition: document.getElementById('arm-position')
 };
 //Whether measured times are in teleop or auto
 var isTeleop = false;
@@ -191,7 +166,6 @@ function onValueChanged(key, value, isNew) {
 			if(value) document.getElementById("Temperature").style.visibility="visible";
 
 	}
-
 	// The following code manages tuning section of the interface.
 	// This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
 	var propName = key.substring(16, key.length);
@@ -256,50 +230,6 @@ function onValueChanged(key, value, isNew) {
 	}
 }
 
-// The rest of the doc is listeners for UI elements being clicked on
-ui.example.button.onclick = function() {
-	// Set NetworkTables values to the opposite of whether button has active class.
-	NetworkTables.setValue('/SmartDashboard/exampleVariable', this.className != 'active');
-};
-
-// Reset gyro value to 0 on click
-ui.gyro.container.onclick = function() {
-	// Store previous gyro val, will now be subtracted from val for callibration
-	ui.gyro.offset = ui.gyro.val;
-	// Trigger the gyro to recalculate value.
-	onValueChanged('/SmartDashboard/drive/navX/yaw', ui.gyro.val);
-};
-
-// Open tuning section when button is clicked
-ui.tuning.button.onclick = function() {
-	if (ui.tuning.list.style.display === 'none') {
-		ui.tuning.list.style.display = 'block';
-	} else {
-		ui.tuning.list.style.display = 'none';
-	}
-};
-
-// Manages get and set buttons at the top of the tuning pane
-ui.tuning.set.onclick = function() {
-	// Make sure the inputs have content, if they do update the NT value
-	if (ui.tuning.name.value && ui.tuning.value.value) {
-		NetworkTables.setValue('/SmartDashboard/' + ui.tuning.name.value, ui.tuning.value.value);
-	}
-};
-ui.tuning.get.onclick = function() {
-	ui.tuning.value.value = NetworkTables.getValue(ui.tuning.name.value);
-};
-
-// Update NetworkTables when autonomous selector is changed
-ui.autoSelect.onchange = function() {
-	NetworkTables.setValue('/SmartDashboard/autonomous/selected', this.value);
-};
-
-// Get value of arm height slider when it's adjusted
-ui.armPosition.oninput = function() {
-	NetworkTables.setValue('/SmartDashboard/arm/encoder', parseInt(this.value));
-};
-
 // Automode and Warning tabs
 
 function openTab(evt, tabName) {
@@ -320,15 +250,25 @@ function submitAlliance() {
 	document.getElementById("colorSelection").style.visibility="hidden";
 	if (document.getElementById("blueAlliance").checked) {
 		document.getElementById("blueField").style.visibility="visible";
-		document.getElementById("hopper1Blue").style.visibility="visible";
+		/*document.getElementById("hopper1Blue").style.visibility="visible";
 		document.getElementById("hopper2Blue").style.visibility="visible";
 		document.getElementById("hopper3Blue").style.visibility="visible";
 		document.getElementById("hopper4Blue").style.visibility="visible";
-		document.getElementById("hopper5Blue").style.visibility="visible";
+		document.getElementById("hopper5Blue").style.visibility="visible";*/
 	} else if (document.getElementById("redAlliance").checked) {
 		document.getElementById("redField").style.visibility="visible";
 	}
 	document.getElementById("defaultOpen").click();
+	dashboardInit();
+}
+
+function submitCamera() {
+	document.getElementById("cameraSelection").style.visibility="hidden";
+	if (document.getElementById("8070").checked) {
+		document.getElementById("camera1").style.visibility="visible";
+	} else if (document.getElementById("8080").checked) {
+		document.getElementById("camera2").style.visibility="visible";
+	}
 }
 
 function climb(climbing) {
@@ -355,4 +295,28 @@ function pneumatics(move) {
 			}
 	  }
 	}
+}
+
+function processTouch() {
+	if (document.getElementById("blueField").style.visibility === "visible") {
+		document.getElementById("blueField").addEventListener("touchstart", getTouchPosition, false);
+
+	} else {
+		console.log("Red");2
+	}
+}
+
+function getTouchPosition(e) {
+	e.preventDefault();
+	var x = e.changedTouches[0].pageX;
+	var y = e.changedTouches[0].pageY;
+	console.log("x: " +  x);
+	console.log("y: " + y);
+}
+
+function dashboardInit() {
+	var id = setInterval(frame, 0.5);
+  function frame() {
+		processTouch();
+  }
 }

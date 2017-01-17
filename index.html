@@ -49,16 +49,24 @@
         <input type="radio" id="blueAlliance" name="alliance"> Blue Alliance </input> <br><br>
         <button type="submit" id="submitAlliance"> Submit </button>
       </form>
-      <img src="field.png" id="blueField" height="629.64" width="351.92">
-      <input type="button" id="hopper1Blue" class="blueButtons"/>
+      <img src="field.png" id="blueField" height="765.568" width="422.304" class="fieldImage">
+      <!-- <input type="button" id="hopper1Blue" class="blueButtons"/>
       <input type="button" id="hopper2Blue" class="blueButtons"/>
       <input type="button" id="hopper3Blue" class="blueButtons"/>
       <input type="button" id="hopper4Blue" class="blueButtons"/>
-      <input type="button" id="hopper5Blue" class="blueButtons"/>
+      <input type="button" id="hopper5Blue" class="blueButtons"/> -->
 
-      <input type="button" id="hopper5Blue" class="blueButtons"/>
-      <img src="field.png" id="redField" height="629.64" width="351.92">
-      <div id="camera"></div>
+      <img src="field.png" id="redField" height="765.568" width="422.304" class="fieldImage">
+
+      <div id="camera1" class="camera"></div>
+      <div id="camera2" class="camera"></div>
+
+      <form action="javascript:submitCamera();" id="cameraSelection">
+        <p align="middle">Select Default Camera:</p><br>
+        <input type="radio" id="8070" name="camera"> http://raspberrypi:8070/?action=stream </input><br><br>
+        <input type="radio" id="8080" name="camera"> http://raspberrypi:8080/?action=stream </input> <br><br>
+        <button type="submit" id="submitAlliance"> Submit </button>
+      </form>
 
       <svg id="robot-diagram" width="320" height="200">
           <rect x="28" y="10" width="150" height="100" />
@@ -74,6 +82,7 @@
       <br><br><br>
       <button id="climb" onclick="javascript:climb(true);">Climb</button><br><br>
       <button id="pneumatics" onclick="javascript:pneumatics(true);">Pneumatics</button>
+
       <script src="ui.js"></script>
       <script src="/networktables/networktables.js"></script>
   </body>

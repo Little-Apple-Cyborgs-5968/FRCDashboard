@@ -16,11 +16,7 @@ body {
     overflow: hidden;
     background: #222;
 }
-button,
-input[type="text"],
-input[type="number"],
-.select-container,
-select {
+button, input[type="text"], input[type="number"], .select-container, select {
     color: white;
     background: #444;
     border: none;
@@ -72,32 +68,34 @@ header {
     left: 30vw;
     color: white;
 }
-#camera {
-    padding: 0;
-    position: fixed;
-    top:0;
-    right:0;
-    width: 50vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #123;
-    /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    background-image: url('http://roborio-5968-frc.local:5800/?action=stream');
-    background-repeat: no-repeat;
-    background-size: 50vw 80vh
+.camera {
+  padding: 0;
+  position: absolute;
+  top:0;
+  right:0;
+  width: 45vw;
+  height: 100vh;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: 50vw 80vh
 }
-#tuning {
-    width: 50vw;
-    height: 80vh;
-    bottom: 0;
-    left: 0;
+#camera1 {
+  /*background-image: url('http://raspberrypi:8070/?action=stream');*/
+  background-color: #123;
+  visibility:hidden;
 }
-#tuning div {
-    margin: 20px 0;
+#camera2 {
+  /*background-image: url('http://raspberrypi:8080/?action=stream');*/
+  background-color: #132;
+  visibility:hidden;
 }
-#tuning p {
-    margin-bottom: 10px;
+#cameraSelection {
+  position: absolute;
+  left:850px;
+  top: 250px;
+  background-color: #333;
 }
+
 article {
     top: 0;
     left: 50vw;
@@ -222,11 +220,6 @@ ul.tab li a:focus, .active {
 }
 
 #redField {
-  position: fixed;
-  left:320px;
-  padding: 3px;
-  visibility:hidden;
-
   -webkit-transform:rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -234,7 +227,7 @@ ul.tab li a:focus, .active {
   transform: rotate(180deg);
 }
 
-#blueField {
+.fieldImage {
   position: fixed;
   left:320px;
   padding: 3px;
@@ -245,85 +238,40 @@ ul.tab li a:focus, .active {
   display:block;
   margin:0 auto;
 }
-
 #submitAlliance.active {
   background-color:#222;
 }
-
 #hopper1Blue {
-  position: absolute;
   left: 320px;
   top: 100px;
-  height: 100px;
-  width: 100px;
-  opacity: 0.01;
 }
-
-#hopper1Blue:hover {
-  opacity:0.5;
-  background-color:yellow;
-}
-
 #hopper2Blue {
-  position: absolute;
   left: 320px;
   top: 270px;
-  height: 100px;
-  width: 100px;
-  background-color:#111;
-  opacity: 0.01;
 }
-
-#hopper2Blue:hover {
-  opacity:0.5;
-  background-color:yellow;
-}
-
 #hopper3Blue {
-  position: absolute;
   left: 320px;
   top: 450px;
-  height: 100px;
-  width: 100px;
-  background-color:#111;
-  opacity: 0.01;
 }
-
-#hopper3Blue:hover {
-  opacity:0.5;
-  background-color:yellow;
-}
-
 #hopper4Blue {
-  position: absolute;
   left: 570px;
   top: 160px;
-  height: 100px;
-  width: 100px;
-  background-color:#111;
-  opacity: 0.01;
 }
-
-#hopper4Blue:hover {
-  opacity:0.5;
-  background-color:yellow;
-}
-
 #hopper5Blue {
-  position: absolute;
   left: 570px;
   top: 365px;
-  height: 100px;
-  width: 100px;
-  background-color:#111;
-  opacity: 0.01;
-}
-
-#hopper5Blue:hover {
-  opacity:0.5;
-  background-color:yellow;
 }
 
 .blueButtons {
+  position: absolute;
   visibility: hidden;
+  height: 100px;
+  width: 100px;
+  background-color:#111;
+  opacity: 0.01;
+}
+
+.blueButtons:hover {
+  opacity:0.5;
+  background-color:yellow;
 }
