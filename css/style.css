@@ -72,7 +72,7 @@ header {
   padding: 0;
   position: absolute;
   top:0;
-  right:0;
+  left:750px;
   width: 45vw;
   height: 100vh;
   overflow: hidden;
@@ -274,4 +274,12 @@ ul.tab li a:focus, .active {
 .blueButtons:hover {
   opacity:0.5;
   background-color:yellow;
+}
+
+#miniRobot {
+  position: absolute;
+  visibility: hidden;
+  top: 560px;
+  left: 480px;
+  z-index:1;
 }

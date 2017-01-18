@@ -250,6 +250,7 @@ function submitAlliance() {
 	document.getElementById("colorSelection").style.visibility="hidden";
 	if (document.getElementById("blueAlliance").checked) {
 		document.getElementById("blueField").style.visibility="visible";
+		document.getElementById("miniRobot").style.visibility="visible";
 		/*document.getElementById("hopper1Blue").style.visibility="visible";
 		document.getElementById("hopper2Blue").style.visibility="visible";
 		document.getElementById("hopper3Blue").style.visibility="visible";
@@ -257,6 +258,7 @@ function submitAlliance() {
 		document.getElementById("hopper5Blue").style.visibility="visible";*/
 	} else if (document.getElementById("redAlliance").checked) {
 		document.getElementById("redField").style.visibility="visible";
+		document.getElementById("miniRobot").style.visibility="visible";
 	}
 	document.getElementById("defaultOpen").click();
 	dashboardInit();
@@ -299,19 +301,27 @@ function pneumatics(move) {
 
 function processTouch() {
 	if (document.getElementById("blueField").style.visibility === "visible") {
-		document.getElementById("blueField").addEventListener("touchstart", getTouchPosition, false);
-
+		document.getElementById("miniRobot").addEventListener("touchmove", getTouchPosition, false);
 	} else {
-		console.log("Red");2
+		console.log("Red");
 	}
 }
 
 function getTouchPosition(e) {
-	e.preventDefault();
+	/*e.preventDefault();
 	var x = e.changedTouches[0].pageX;
 	var y = e.changedTouches[0].pageY;
 	console.log("x: " +  x);
-	console.log("y: " + y);
+	console.log("y: " + y);*/
+	var draggable = document.getElementById("miniRobot");
+	var touch = event.targetTouches[0];
+
+    // Place element where the finger is
+    draggable.style.left = touch.pageX-25 + 'px';
+    draggable.style.top = touch.pageY-25 + 'px';
+		console.log(touch.pageX-25);
+		console.log(touch.pageY-25);
+    event.preventDefault();
 }
 
 function dashboardInit() {
