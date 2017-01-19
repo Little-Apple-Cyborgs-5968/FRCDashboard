@@ -81,12 +81,12 @@ header {
 }
 #camera1 {
   /*background-image: url('http://raspberrypi:8070/?action=stream');*/
-  background-color: #123;
+  background-color: #123; /*blue*/
   visibility:hidden;
 }
 #camera2 {
   /*background-image: url('http://raspberrypi:8080/?action=stream');*/
-  background-color: #132;
+  background-color: #132; /*green*/
   visibility:hidden;
 }
 #cameraSelection {

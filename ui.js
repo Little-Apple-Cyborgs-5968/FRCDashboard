@@ -278,8 +278,10 @@ function submitCamera() {
 	document.getElementById("cameraSelection").style.visibility="hidden";
 	if (document.getElementById("8070").checked) {
 		document.getElementById("camera1").style.visibility="visible";
+		document.getElementById("camera2").style.visibility="hidden";
 	} else if (document.getElementById("8080").checked) {
 		document.getElementById("camera2").style.visibility="visible";
+		document.getElementById("camera1").style.visibility="hidden";
 	}
 }
 
@@ -341,6 +343,23 @@ function getTouchPosition(event) {
 			console.log(x);
 			console.log(y);
 		  event.preventDefault();
+		}
+	}
+}
+
+function switchCam(e) {
+	var blueCam = document.getElementById("camera1");
+	var greenCam = document.getElementById("camera2");
+	if (e.keyCode == 61) {
+		console.log("Equals detected");
+		if (blueCam.style.visibility==="visible") {
+			console.log("Blue visible");
+			blueCam.style.visibility="hidden";
+			greenCam.style.visibility="visible";
+		} else if (greenCam.style.visibility==="visible") {
+			console.log("Green visible");
+			greenCam.style.visibility="hidden";
+			blueCam.style.visibility="visible";
 		}
 	}
 }
