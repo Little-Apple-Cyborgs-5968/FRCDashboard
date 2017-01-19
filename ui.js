@@ -247,19 +247,29 @@ function openTab(evt, tabName) {
 }
 
 function submitAlliance() {
+	var blueField = document.getElementById("blueField");
+	var robot = document.getElementById("miniRobot");
+
 	document.getElementById("colorSelection").style.visibility="hidden";
-	if (document.getElementById("blueAlliance").checked) {
-		document.getElementById("blueField").style.visibility="visible";
-		document.getElementById("miniRobot").style.visibility="visible";
-		/*document.getElementById("hopper1Blue").style.visibility="visible";
-		document.getElementById("hopper2Blue").style.visibility="visible";
-		document.getElementById("hopper3Blue").style.visibility="visible";
-		document.getElementById("hopper4Blue").style.visibility="visible";
-		document.getElementById("hopper5Blue").style.visibility="visible";*/
-	} else if (document.getElementById("redAlliance").checked) {
-		document.getElementById("redField").style.visibility="visible";
-		document.getElementById("miniRobot").style.visibility="visible";
+	if(document.getElementById("blueAlliance1").checked || document.getElementById("blueAlliance2").checked || document.getElementById("blueAlliance3").checked) {
+		blueField.style.visibility="visible";
+		robot.style.visibility="visible";
 	}
+
+	if(document.getElementById("redAlliance1").checked || document.getElementById("redAlliance2").checked || document.getElementById("redAlliance3").checked) {
+		redField.style.visibility="visible";
+		robot.style.visibility="visible";
+	}
+
+
+	if(document.getElementById("blueAlliance1").checked) robot.style.left = "415px";
+	else if(document.getElementById("blueAlliance2").checked)	robot.style.left = "492px";
+	else if(document.getElementById("blueAlliance3").checked)	robot.style.left = "575px";
+
+	else if(document.getElementById("redAlliance1").checked) robot.style.left = "415px";
+	else if(document.getElementById("redAlliance2").checked)	robot.style.left = "492px";
+	else if(document.getElementById("redAlliance3").checked)	robot.style.left = "575px";
+
 	document.getElementById("defaultOpen").click();
 	dashboardInit();
 }
@@ -300,32 +310,43 @@ function pneumatics(move) {
 }
 
 function processTouch() {
-	if (document.getElementById("blueField").style.visibility === "visible") {
-		document.getElementById("miniRobot").addEventListener("touchmove", getTouchPosition, false);
-	} else {
-		console.log("Red");
-	}
+	document.getElementById("miniRobot").addEventListener("touchmove", getTouchPosition, false);
+	document.getElementById("miniRobot").addEventListener("touchend", unselected, false);
 }
 
-function getTouchPosition(e) {
+function unselected(event) {
+	var draggable = document.getElementById("miniRobot");
+	draggable.style.backgroundColor = "red";
+}
+
+function getTouchPosition(event) {
 	/*e.preventDefault();
 	var x = e.changedTouches[0].pageX;
 	var y = e.changedTouches[0].pageY;
 	console.log("x: " +  x);
 	console.log("y: " + y);*/
 	var draggable = document.getElementById("miniRobot");
+	draggable.style.backgroundColor = "green";
 	var touch = event.targetTouches[0];
+	var x = touch.pageX-25;
+	var y = touch.pageY-25;
+	var airship1 = document.getElementById("airship1");
+	var m = Math.sqrt(3);
 
-    // Place element where the finger is
-    draggable.style.left = touch.pageX-25 + 'px';
-    draggable.style.top = touch.pageY-25 + 'px';
-		console.log(touch.pageX-25);
-		console.log(touch.pageY-25);
-    event.preventDefault();
+	if (x > 335 && x < 648 && y > 40 && y < 675) { // Inside field bounds
+		if (!(x > 436 && x < 542 && y > 98 && y < 244)) { // Vertical rectangle
+			// Place element where the finger is
+		  draggable.style.left = x + 'px';
+		  draggable.style.top = y + 'px';
+			console.log(x);
+			console.log(y);
+		  event.preventDefault();
+		}
+	}
 }
 
 function dashboardInit() {
-	var id = setInterval(frame, 0.5);
+	var id = setInterval(frame, 1);
   function frame() {
 		processTouch();
   }

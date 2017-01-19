@@ -49,15 +49,15 @@ body > * {
     padding: 10px;
     position: fixed;
     overflow: scroll;
-    background: #222;
+    /*background: #222;*/
 }
 #timer {
     font-family: monospace;
     display: block;
     height: 20vh;
-    width: 30vw;
+    width: 35vw;
     top: 0;
-    left: 45px;
+    left: 25px;
     font-size: 15vh;
     line-height: .8;
 }
@@ -229,7 +229,8 @@ ul.tab li a:focus, .active {
 
 .fieldImage {
   position: fixed;
-  left:320px;
+  left:310px;
+  top:10px;
   padding: 3px;
   visibility:hidden;
 }
@@ -241,7 +242,7 @@ ul.tab li a:focus, .active {
 #submitAlliance.active {
   background-color:#222;
 }
-#hopper1Blue {
+/*#hopper1Blue {
   left: 320px;
   top: 100px;
 }
@@ -260,7 +261,7 @@ ul.tab li a:focus, .active {
 #hopper5Blue {
   left: 570px;
   top: 365px;
-}
+}*/
 
 .blueButtons {
   position: absolute;
@@ -276,10 +277,19 @@ ul.tab li a:focus, .active {
   background-color:yellow;
 }
 
-#miniRobot {
+.robot {
   position: absolute;
   visibility: hidden;
-  top: 560px;
-  left: 480px;
+  top: 675px;
   z-index:1;
+  background-color:"red";
+  padding:5px;
+}
+
+#airship1 {
+  position: absolute;
+  visibility: hidden;
+  top: 138px;
+  left: 450px;
+  z-index: 1;
 }
