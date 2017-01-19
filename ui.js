@@ -311,9 +311,26 @@ function pneumatics(move) {
 	}
 }
 
-function processTouch() {
+function addListeners() {
+	document.getElementById("Nothing").addEventListener("change", autoDisable);
 	document.getElementById("miniRobot").addEventListener("touchmove", getTouchPosition, false);
 	document.getElementById("miniRobot").addEventListener("touchend", unselected, false);
+}
+
+function autoDisable() {
+	console.log("Nothing");
+	if(document.getElementById("Nothing").checked) {
+		document.getElementById("Hopper").disabled=true; document.getElementById("Hopper").checked=false;
+		document.getElementById("Dump").disabled=true; document.getElementById("Dump").checked=false;
+		document.getElementById("Gear").disabled=true; document.getElementById("Gear").checked=false;
+		document.getElementById("Baseline").disabled=true; document.getElementById("Baseline").checked=false;
+	}
+	else {
+		document.getElementById("Hopper").disabled=false;
+		document.getElementById("Dump").disabled=false;
+		document.getElementById("Gear").disabled=false;
+		document.getElementById("Baseline").disabled=false;
+	}
 }
 
 function unselected(event) {
@@ -364,9 +381,14 @@ function switchCam(e) {
 	}
 }
 
+function submitAuto() {
+	var nothing = document.getElementById("Nothing");
+	var hopper = document.getElementById("Hopper");
+	var dump = document.getElementById("Dump");
+	var gear = document.getElementById("Gear");
+	var baseline = document.getElementById("Baseline");
+}
+
 function dashboardInit() {
-	var id = setInterval(frame, 1);
-  function frame() {
-		processTouch();
-  }
+		addListeners();
 }

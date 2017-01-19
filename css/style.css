@@ -191,13 +191,13 @@ ul.tab li a:focus, .active {
 
 #tabs {
   position: absolute;
-  top:135px;
+  top:160px;
   left:20px;
 }
 
 #Auto, #Warnings {
   position: fixed;
-  top:185px;
+  top:210px;
   font-family: "Lato", sans-serif;
   font-size:18px;
   left:20px;
