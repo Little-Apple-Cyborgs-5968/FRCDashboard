@@ -24,14 +24,24 @@
         <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Warnings')" id="nextOpen">Warnings</a></li>
       </ul>
 
-      <form id="Auto" class="tabcontent" action="javascript:submitAuto();">
-        <br>
-        <input type="checkbox" id="Baseline"> Cross the line </input> <br> <br>
-        <input type="checkbox" id="Dump"> Dump balls into goal </input> <br> <br>
-        <input type="checkbox" id="Gear"> Put gear on peg </input> <br> <br>
-        <input type="checkbox" id="Hopper"> Get balls from hopper </input> <br> <br>
-        <input type="checkbox" id="Nothing"> Nothing </input> <br> <br>
-        <button type="submit" id="submitAlliance"> Submit </button>
+      <form id="Auto" class="tabcontent">
+        <input class='skewed' id='Baseline' type='checkbox'>
+        <label class='skewed' data-tg-off='Baseline' data-tg-on='Baseline' for='Baseline'></label> <br>
+
+        <input class='skewed' id='Dump' type='checkbox'>
+        <label class='skewed' data-tg-off='Low Goal' data-tg-on='Low Goal' for='Dump'></label> <br>
+
+        <input class='skewed' id='Gear' type='checkbox'>
+        <label class='skewed' data-tg-off='Gear' data-tg-on='Gear' for='Gear'></label> <br>
+
+        <input class='skewed' id='Hopper' type='checkbox'>
+        <label class='skewed' data-tg-off='Hopper' data-tg-on='Hopper' for='Hopper'></label> <br>
+
+        <input class='skewed' id='Nothing' type='checkbox'>
+        <label class='skewed' data-tg-off='Nothing' data-tg-on='Nothing' for='Nothing'></label> <br><br>
+
+        <input class='skewed' id='submit' type='checkbox' onchange='javascript:submitAuto();'>
+        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submit'></label> <br><br>
       </form>
 
       <div id="Warnings" class="tabcontent">

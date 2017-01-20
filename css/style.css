@@ -146,15 +146,16 @@ aside > * {
     top:110px;
 }
 
-body {font-family: "Lato", sans-serif;}
+body {
+  font-family: "Lato", sans-serif;
+}
 
 ul.tab {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    border: 1px solid #64ce74;
 }
 
 /* Float the list items side by side */
@@ -163,7 +164,7 @@ ul.tab li {float: left;}
 /* Style the links inside the list items */
 ul.tab li a {
     display: inline-block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -173,19 +174,19 @@ ul.tab li a {
 
 /* Change background color of links on hover */
 ul.tab li a:hover {
-    background-color: #ddd;
+    background-color: #64ce74;
 }
 
 /* Create an active/current tablink class */
 ul.tab li a:focus, .active {
-    background-color: #ccc;
+    background-color: #64ce74;
 }
 
 /* Style the tab content */
 .tabcontent {
     display: none;
     padding: 6px 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #64ce74;
     border-top: none;
 }
 
@@ -198,7 +199,6 @@ ul.tab li a:focus, .active {
 #Auto, #Warnings {
   position: fixed;
   top:210px;
-  font-family: "Lato", sans-serif;
   font-size:18px;
   left:20px;
   width:272px;
@@ -239,29 +239,7 @@ ul.tab li a:focus, .active {
   display:block;
   margin:0 auto;
 }
-#submitAlliance.active {
-  background-color:#222;
-}
-/*#hopper1Blue {
-  left: 320px;
-  top: 100px;
-}
-#hopper2Blue {
-  left: 320px;
-  top: 270px;
-}
-#hopper3Blue {
-  left: 320px;
-  top: 450px;
-}
-#hopper4Blue {
-  left: 570px;
-  top: 160px;
-}
-#hopper5Blue {
-  left: 570px;
-  top: 365px;
-}*/
+
 
 .blueButtons {
   position: absolute;
@@ -292,4 +270,82 @@ ul.tab li a:focus, .active {
   top: 138px;
   left: 450px;
   z-index: 1;
+}
+
+.skewed {
+  display: none;
+}
+
+.skewed + .skewed {
+  outline: 0;
+  display:inline-flex;
+  width: 13em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+
+  overflow: hidden;
+  -webkit-transform: skew(-10deg);
+      -ms-transform: skew(-10deg);
+          transform: skew(-10deg);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transition: all .2s ease;
+          transition: all .2s ease;
+  font-family: sans-serif;
+  background: #222;
+}
+
+.skewed + .skewed:after, .skewed + .skewed:before {
+  -webkit-transform: skew(10deg);
+      -ms-transform: skew(10deg);
+          transform: skew(10deg);
+  display: inline-block;
+  -webkit-transition: all .2s ease;
+          transition: all .2s ease;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  line-height: 2em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.skewed + .skewed:after {
+  left: 100%;
+  content: attr(data-tg-on);
+}
+
+.skewed + .skewed:before {
+  left: 0;
+  content: attr(data-tg-off);
+}
+
+.skewed + .skewed:active {
+  background: #222;
+}
+
+.skewed + .skewed:active:before {
+  left: -10%;
+}
+
+.skewed:checked + .skewed {
+  background: #64ce74;
+}
+
+.skewed:checked + .skewed:before {
+  left: -100%;
+}
+
+.skewed:checked + .skewed:after {
+  left: 0;
+}
+
+.skewed:checked + .skewed:active:after {
+  left: 10%;
 }

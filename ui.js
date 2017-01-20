@@ -206,7 +206,6 @@ function addListeners() {
 }
 
 function autoDisable() {
-	console.log("Nothing");
 	if(document.getElementById("Nothing").checked) {
 		document.getElementById("Hopper").disabled=true; document.getElementById("Hopper").checked=false;
 		document.getElementById("Dump").disabled=true; document.getElementById("Dump").checked=false;
@@ -275,18 +274,24 @@ function switchCam(e) { // Switch camera feeds on key press
 }
 
 function submitAuto() {
-	var nothing = document.getElementById("Nothing");
-	var hopper = document.getElementById("Hopper");
-	var dump = document.getElementById("Dump");
-	var gear = document.getElementById("Gear");
-	var baseline = document.getElementById("Baseline");
+	if (document.getElementById("submit").checked) {
+		var nothing = document.getElementById("Nothing");
+		var hopper = document.getElementById("Hopper");
+		var dump = document.getElementById("Dump");
+		var gear = document.getElementById("Gear");
+		var baseline = document.getElementById("Baseline");
 
-	var autoModes = "";
-	if (hopper.checked) autoModes += "hopper";
-	if (dump.checked) autoModes += "dump";
-	if (gear.checked) autoModes += "gear";
-	if (baseline.checked) autoModes += "baseline";
-	NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
+		var autoModes = "";
+		if (hopper.checked) autoModes += "hopper";
+		if (dump.checked) autoModes += "dump";
+		if (gear.checked) autoModes += "gear";
+		if (baseline.checked) autoModes += "baseline";
+		console.log(autoModes);
+		//NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
+	} else {
+		document.getElementById("Auto").reset();
+	}
+
 }
 
 function dashboardInit() { // Called after alliance is submitted
