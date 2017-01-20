@@ -12,14 +12,16 @@
       <!-- Clock that shows up in top left -->
       <div id="timer">2:15</div>
       <!-- Tells whether robot is connected to dashboard. -->
-      <input class='skewed robot-state' id='robot-state-unknown' type='checkbox'>
-      <label class='skewed robot-state' data-tg-off="Unknown State" data-tg-on='Unknown State' for='robot-state-unknown'></label><br>
+      <form id="state">
+        <input class='skewed' id='robot-state-unknown' type='checkbox' checked>
+        <label class='skewed' id='unknown-label' data-tg-off="Unknown State" data-tg-on='Unknown State' for='robot-state-unknown'></label><br>
 
-      <input class='skewed robot-state' id='robot-state-connected' type='checkbox'>
-      <label class='skewed robot-state' data-tg-off="Connected" data-tg-on='Connected' for='robot-state-connected'></label><br>
+        <input class='skewed' id='robot-state-disconnected' type='checkbox' checked>
+        <label class='skewed' id='disconnected-label' data-tg-off="Disconnected" data-tg-on='Disconnected' for='robot-state-disconnected'></label><br>
 
-      <input class='skewed robot-state' id='robot-state-disconnected' type='checkbox'>
-      <label class='skewed robot-state' data-tg-off="Disconnected" data-tg-on='Disconnected' for='robot-state-disconnected'></label><br>
+        <input class='skewed' id='robot-state-connected' type='checkbox' checked>
+        <label class='skewed' id='connected-label' data-tg-off="Connected" data-tg-on='Connected' for='robot-state-connected'></label><br>
+      </form>
 
       <!-- <button id="tuning-button">Tuning</button> -->
 

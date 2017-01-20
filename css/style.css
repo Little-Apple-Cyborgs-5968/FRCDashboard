@@ -141,6 +141,7 @@ aside > * {
     margin-bottom: 20px;
 }
 .skewed.robot-state {
+    display: none;
     left:50px;
     top:110px;
 }
@@ -191,16 +192,55 @@ ul.tab li a:focus, .active {
 
 #tabs {
   position: absolute;
-  top:160px;
+  top:180px;
   left:20px;
 }
 
 #Auto, #Warnings {
   position: fixed;
-  top:210px;
+  top:230px;
   font-size:18px;
   left:20px;
   width:272px;
+}
+
+#connected-label, #disconnected-label {
+  display: none;
+  position: absolute;
+}
+
+#timer {
+  position: absolute;
+}
+
+#unknown-label {
+  display: inline-flex;
+}
+
+#robot-state-unknown:checked + #unknown-label {
+  position: relative;
+  top:33px;
+  background: #ffe066;
+}
+
+#robot-state-connected:checked + #connected-label {
+  position: relative;
+  top:-2px;
+  background: #64ce74;
+}
+
+#robot-state-disconnected:checked + #disconnected-label {
+  position: relative;
+  top:11px;
+  background: #ff3333;
+}
+
+#state {
+  position: absolute;
+  top:80px;
+  left:40px;
+  width: 240px;
+  height: 80px;
 }
 
 #defaultOpen, #nextOpen {
@@ -275,6 +315,11 @@ ul.tab li a:focus, .active {
   top: 138px;
   left: 450px;
   z-index: 1;
+}
+
+#robot-state-unknown, #robot-state-connected, #robot-state-disconnected {
+  top: 100px;
+  left: 100px;
 }
 
 .skewed {

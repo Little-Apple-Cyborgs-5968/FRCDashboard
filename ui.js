@@ -16,14 +16,29 @@ var said5 = false;
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
 // NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
 // Sets function to be called when robot dis/connects
-NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+//NetworkTables.addRobotConnectionListener(onRobotConnection, true);
 // Sets function to be called when any NetworkTables key/value changes
+//onRobotConnection(true);
 NetworkTables.addGlobalListener(onValueChanged, true);
 
 function onRobotConnection(connected) {
-	var state = connected ? 'Robot connected!' : 'Robot disconnected.';
-	console.log(state);
-	ui.robotState.innerHTML = state;
+	var connectBox = document.getElementById("robot-state-connected");
+	var connectLabel = document.getElementById("connected-label");
+	var disconnectBox = document.getElementById("robot-state-disconnected");
+	var disconnectLabel = document.getElementById("disconnected-label");
+	var unknownBox = document.getElementById("robot-state-unknown");
+	var unknownLabel = document.getElementById("unknown-label");
+
+	if (connected) {
+		disconnectLabel.style.display = "none";
+		unknownLabel.style.display = "none";
+		connectLabel.style.display = "inline-flex";
+	}
+	else if (!connected) {
+		disconnectLabel.style.display = "inline-flex";
+		unknownLabel.style.display = "none";
+		connectLabel.style.display = "none";
+	}
 }
 
 function onValueChanged(key, value, isNew) {
@@ -274,7 +289,9 @@ function switchCam(e) { // Switch camera feeds on key press
 }
 
 function submitAuto() {
+	var submitted;
 	if (document.getElementById("submit").checked) {
+		submitted = true;
 		var nothing = document.getElementById("Nothing");
 		var hopper = document.getElementById("Hopper");
 		var dump = document.getElementById("Dump");
@@ -289,6 +306,7 @@ function submitAuto() {
 		console.log(autoModes);
 		//NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
 	} else {
+		submitted = false;
 		document.getElementById("Auto").reset();
 	}
 
