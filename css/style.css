@@ -140,9 +140,8 @@ aside {
 aside > * {
     margin-bottom: 20px;
 }
-#robot-state {
-    position: fixed;
-    left:100px;
+.skewed.robot-state {
+    left:50px;
     top:110px;
 }
 
@@ -240,6 +239,12 @@ ul.tab li a:focus, .active {
   margin:0 auto;
 }
 
+#climb {
+  top: 560px;
+}
+#pneumatics {
+  top: 600px;
+}
 
 .blueButtons {
   position: absolute;

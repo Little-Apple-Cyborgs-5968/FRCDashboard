@@ -11,11 +11,17 @@
 
       <!-- Clock that shows up in top left -->
       <div id="timer">2:15</div>
-      <header>
-          <!-- Tells whether robot is connected to dashboard. -->
-          <div id="robot-state">Unknown state</div>
-          <!-- <button id="tuning-button">Tuning</button> -->
-      </header>
+      <!-- Tells whether robot is connected to dashboard. -->
+      <input class='skewed robot-state' id='robot-state-unknown' type='checkbox'>
+      <label class='skewed robot-state' data-tg-off="Unknown State" data-tg-on='Unknown State' for='robot-state-unknown'></label><br>
+
+      <input class='skewed robot-state' id='robot-state-connected' type='checkbox'>
+      <label class='skewed robot-state' data-tg-off="Connected" data-tg-on='Connected' for='robot-state-connected'></label><br>
+
+      <input class='skewed robot-state' id='robot-state-disconnected' type='checkbox'>
+      <label class='skewed robot-state' data-tg-off="Disconnected" data-tg-on='Disconnected' for='robot-state-disconnected'></label><br>
+
+      <!-- <button id="tuning-button">Tuning</button> -->
 
       <!-- Tabs - Automodes checkboxes and warnings -->
 
