@@ -36,42 +36,6 @@ function onValueChanged(key, value, isNew) {
 
 	// This switch statement chooses which UI element to update when a NetworkTables variable changes.
 	switch (key) {
-		case '/SmartDashboard/yaw': // Gyro rotation
-			ui.gyro.val = value;
-			ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
-			if (ui.gyro.visualVal < 0) { // Corrects for negative values
-				ui.gyro.visualVal += 360;
-			}
-			ui.gyro.arm.style.transform = ('rotate(' + ui.gyro.visualVal + 'deg)');
-			ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
-			break;
-			// The following case is an example, for a robot with an arm at the front.
-			// Info on the actual robot that this works with can be seen at thebluealliance.com/team/1418/2016.
-		case '/SmartDashboard/arm/encoder':
-			// 0 is all the way back, 1200 is 45 degrees forward. We don't want it going past that.
-			if (value > 1140) {
-				value = 1140;
-			} else if (value < 0) {
-				value = 0;
-			}
-			// Calculate visual rotation of arm
-			var armAngle = value * 3 / 20 - 45;
-
-			// Rotate the arm in diagram to match real arm
-			ui.robotDiagram.arm.style.transform = 'rotate(' + armAngle + 'deg)';
-			break;
-			// This button is just an example of triggering an event on the robot by clicking a button.
-		case '/SmartDashboard/exampleVariable':
-			if (value) { // If function is active:
-				// Add active class to button.
-				ui.example.button.className = 'active';
-				ui.example.readout.innerHTML = 'Value is true';
-			} else { // Otherwise
-				// Take it off
-				ui.example.button.className = '';
-				ui.example.readout.innerHTML = 'Value is false';
-			}
-			break;
 		case '/SmartDashboard/timeRemaining':
 			// When this NetworkTables variable is true, the timer will start.
 			// You shouldn't need to touch this code, but it's documented anyway in case you do.
@@ -137,23 +101,6 @@ function onValueChanged(key, value, isNew) {
 				isTeleop = true;
 			}
 			break;
-		case '/SmartDashboard/options': // Load list of prewritten autonomous modes
-			// Clear previous list
-			while (ui.autoSelect.firstChild) {
-				ui.autoSelect.removeChild(ui.autoSelect.firstChild);
-			}
-			// Make an option for each autonomous mode and put it in the selector
-			for (i = 0; i < value.length; i++) {
-				var option = document.createElement('option');
-				option.innerHTML = value[i];
-				ui.autoSelect.appendChild(option);
-			}
-			// Set value to the already-selected mode. If there is none, nothing will happen.
-			ui.autoSelect.value = NetworkTables.getValue('/SmartDashboard/currentlySelectedMode');
-			break;
-		case '/SmartDashboard/autonomous/selected':
-			ui.autoSelect.value = value;
-			break;
 
 		// TODO: JAVA WRITE TO NETWORKTABLES FOR THESE WARNINGS
 		case '/SmartDashboard/warnings/none':
@@ -165,68 +112,6 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/warnings/temperature':
 			if(value) document.getElementById("Temperature").style.visibility="visible";
 
-	}
-	// The following code manages tuning section of the interface.
-	// This section displays a list of all NetworkTables variables (that start with /SmartDashboard/) and allows you to directly manipulate them.
-	var propName = key.substring(16, key.length);
-	// Check if value is new and doesn't have a spot on the list yet
-	if (isNew && !document.getElementsByName(propName)[0]) {
-		// Make sure name starts with /SmartDashboard/. Properties that don't are technical and don't need to be shown on the list.
-		if (key.substring(0, 16) === '/SmartDashboard/') {
-			// Make a new div for this value
-			var div = document.createElement('div'); // Make div
-			ui.tuning.list.appendChild(div); // Add the div to the page
-
-			var p = document.createElement('p'); // Make a <p> to display the name of the property
-			p.innerHTML = propName; // Make content of <p> have the name of the NetworkTables value
-			div.appendChild(p); // Put <p> in div
-
-			var input = document.createElement('input'); // Create input
-			input.name = propName; // Make its name property be the name of the NetworkTables value
-			input.value = value; // Set
-			// The following statement figures out which data type the variable is.
-			// If it's a boolean, it will make the input be a checkbox. If it's a number,
-			// it will make it a number chooser with up and down arrows in the box. Otherwise, it will make it a textbox.
-			if (value === true || value === false) { // Is it a boolean value?
-				input.type = 'checkbox';
-				input.checked = value; // value property doesn't work on checkboxes, we'll need to use the checked property instead
-			} else if (!isNaN(value)) { // Is the value not not a number? Great!
-				input.type = 'number';
-			} else { // Just use a text if there's no better manipulation method
-				input.type = 'text';
-			}
-			// Create listener for value of input being modified
-			input.onchange = function() {
-				switch (input.type) { // Figure out how to pass data based on data type
-					case 'checkbox':
-						// For booleans, send bool of whether or not checkbox is checked
-						NetworkTables.setValue(key, input.checked);
-						break;
-					case 'number':
-						// For number values, send value of input as an int.
-						NetworkTables.setValue(key, parseInt(input.value));
-						break;
-					case 'text':
-						// For normal text values, just send the value.
-						NetworkTables.setValue(key, input.value);
-						break;
-				}
-			};
-			// Put the input into the div.
-			div.appendChild(input);
-		}
-	} else { // If the value is not new
-		// Find already-existing input for changing this variable
-		var oldInput = document.getElementsByName(propName)[0];
-		if (oldInput) { // If there is one (there should be, unless something is wrong)
-			if (oldInput.type === 'checkbox') { // Figure out what data type it is and update it in the list
-				oldInput.checked = value;
-			} else {
-				oldInput.value = value;
-			}
-		} else {
-			console.log('Error: Non-new variable ' + key + ' not present in tuning list!');
-		}
 	}
 }
 
@@ -314,7 +199,10 @@ function pneumatics(move) {
 function addListeners() {
 	document.getElementById("Nothing").addEventListener("change", autoDisable);
 	document.getElementById("miniRobot").addEventListener("touchmove", getTouchPosition, false);
-	document.getElementById("miniRobot").addEventListener("touchend", unselected, false);
+	document.getElementById("miniRobot").addEventListener("touchend", function() {
+		var draggable = document.getElementById("miniRobot");
+		draggable.style.backgroundColor = "red";
+	}, false);
 }
 
 function autoDisable() {
@@ -333,27 +221,15 @@ function autoDisable() {
 	}
 }
 
-function unselected(event) {
-	var draggable = document.getElementById("miniRobot");
-	draggable.style.backgroundColor = "red";
-}
-
 function getTouchPosition(event) {
-	/*e.preventDefault();
-	var x = e.changedTouches[0].pageX;
-	var y = e.changedTouches[0].pageY;
-	console.log("x: " +  x);
-	console.log("y: " + y);*/
 	var draggable = document.getElementById("miniRobot");
 	draggable.style.backgroundColor = "green";
 	var touch = event.targetTouches[0];
 	var x = touch.pageX-25;
 	var y = touch.pageY-25;
 	var airship1 = document.getElementById("airship1");
-	var m = Math.sqrt(3);
 
-	if (x >= 339 && x <= 643) { // Inside field bounds
-		//if (!(x > 436 && x < 542 && y > 98 && y < 244)) { // Vertical rectangle
+	if (x >= 339 && x <= 643) { // Keep these conditionals separate so the robot can be dragged along the edge
 			// Place element where the finger is
 		draggable.style.left = x + 'px';
 	}
@@ -366,26 +242,25 @@ function getTouchPosition(event) {
 	if (y < 49)  y = 49;
 	if (y > 672) y = 672;
 
-	if (document.getElementById("redField").style.visibility=="visible") {
+	if (document.getElementById("redField").style.visibility=="visible") { // Matching the computer coordinates to the field coordinates
 		y *= -1;
 		x -= 339;
 		y += 672;
 	} else if (document.getElementById("blueField").style.visibility=="visible") {
 		x *= -1;
-		x += 642;
+		x += 643;
 		y -= 49;
 	}
 
 	console.log(x);
 	console.log(y);
 	event.preventDefault();
-	//}
 }
 
-function switchCam(e) {
+function switchCam(e) { // Switch camera feeds on key press
 	var blueCam = document.getElementById("camera1");
 	var greenCam = document.getElementById("camera2");
-	if (e.keyCode == 61) {
+	if (e.keyCode == 61) { // equals/plus button
 		console.log("Equals detected");
 		if (blueCam.style.visibility==="visible") {
 			console.log("Blue visible");
@@ -405,8 +280,15 @@ function submitAuto() {
 	var dump = document.getElementById("Dump");
 	var gear = document.getElementById("Gear");
 	var baseline = document.getElementById("Baseline");
+
+	var autoModes = "";
+	if (hopper.checked) autoModes += "hopper";
+	if (dump.checked) autoModes += "dump";
+	if (gear.checked) autoModes += "gear";
+	if (baseline.checked) autoModes += "baseline";
+	NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
 }
 
-function dashboardInit() {
+function dashboardInit() { // Called after alliance is submitted
 		addListeners();
 }
