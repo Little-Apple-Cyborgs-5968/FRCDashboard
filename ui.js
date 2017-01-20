@@ -352,16 +352,34 @@ function getTouchPosition(event) {
 	var airship1 = document.getElementById("airship1");
 	var m = Math.sqrt(3);
 
-	if (x > 335 && x < 648 && y > 40 && y < 675) { // Inside field bounds
-		if (!(x > 436 && x < 542 && y > 98 && y < 244)) { // Vertical rectangle
+	if (x >= 339 && x <= 643) { // Inside field bounds
+		//if (!(x > 436 && x < 542 && y > 98 && y < 244)) { // Vertical rectangle
 			// Place element where the finger is
-		  draggable.style.left = x + 'px';
-		  draggable.style.top = y + 'px';
-			console.log(x);
-			console.log(y);
-		  event.preventDefault();
-		}
+		draggable.style.left = x + 'px';
 	}
+	if (y >= 49 && y <= 672) {
+		draggable.style.top = y + 'px';
+	}
+
+	if (x > 643) x = 643;
+	if (x < 339) x = 339;
+	if (y < 49)  y = 49;
+	if (y > 672) y = 672;
+
+	if (document.getElementById("redField").style.visibility=="visible") {
+		y *= -1;
+		x -= 339;
+		y += 672;
+	} else if (document.getElementById("blueField").style.visibility=="visible") {
+		x *= -1;
+		x += 642;
+		y -= 49;
+	}
+
+	console.log(x);
+	console.log(y);
+	event.preventDefault();
+	//}
 }
 
 function switchCam(e) {
