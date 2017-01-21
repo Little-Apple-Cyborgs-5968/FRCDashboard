@@ -1,3 +1,19 @@
+var dash = {
+	miniRobot : document.getElementById("miniRobot"),
+	connectBox : document.getElementById("robot-state-connected"),
+	connectLabel : document.getElementById("connected-label"),
+	disconnectBox : document.getElementById("robot-state-disconnected"),
+	disconnectLabel : document.getElementById("disconnected-label"),
+	unknownBox : document.getElementById("robot-state-unknown"),
+	unknownLabel : document.getElementById("unknown-label"),
+	b1 : document.getElementById("blueAlliance1"),
+	b2 : document.getElementById("blueAlliance2"),
+	b3 : document.getElementById("blueAlliance3"),
+	r1 : document.getElementById("redAlliance1"),
+	r2 : document.getElementById("redAlliance2"),
+	r4 : document.getElementById("redAlliance3")
+};
+
 //Whether measured times are in teleop or auto
 var isTeleop = false;
 
@@ -9,21 +25,12 @@ var said30 = false;
 var said15 = false;
 var said10 = false;
 var said5 = false;
-// Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
-// NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
-// Sets function to be called when robot dis/connects
+
 NetworkTables.addRobotConnectionListener(onRobotConnection, true);
-// Sets function to be called when any NetworkTables key/value changes
 //onRobotConnection(true);
 NetworkTables.addGlobalListener(onValueChanged, true);
 
 function onRobotConnection(connected) {
-	var connectBox = document.getElementById("robot-state-connected");
-	var connectLabel = document.getElementById("connected-label");
-	var disconnectBox = document.getElementById("robot-state-disconnected");
-	var disconnectLabel = document.getElementById("disconnected-label");
-	var unknownBox = document.getElementById("robot-state-unknown");
-	var unknownLabel = document.getElementById("unknown-label");
 
 	if (connected) {
 		disconnectLabel.style.display = "none";
@@ -113,7 +120,6 @@ function onValueChanged(key, value, isNew) {
 			}
 			break;
 
-		// TODO: JAVA WRITE TO NETWORKTABLES FOR THESE WARNINGS
 		case '/SmartDashboard/warnings/none':
 			if(value) document.getElementById("None").style.visibility="visible";
 		case '/SmartDashboard/warnings/collision':
@@ -122,7 +128,6 @@ function onValueChanged(key, value, isNew) {
 			if(value) document.getElementById("Pneumatics").style.visibility="visible";
 		case '/SmartDashboard/warnings/temperature':
 			if(value) document.getElementById("Temperature").style.visibility="visible";
-
 	}
 }
 
@@ -181,10 +186,12 @@ function pneumatics(move) {
 
 function addListeners() {
 	document.getElementById("Nothing").addEventListener("change", autoDisable);
-	document.getElementById("miniRobot").addEventListener("touchmove", getTouchPosition, false);
-	document.getElementById("miniRobot").addEventListener("touchend", function() {
-		var draggable = document.getElementById("miniRobot");
-		draggable.style.backgroundColor = "red";
+	dash.miniRobot.addEventListener("touchmove", getTouchPosition, false);
+	dash.miniRobot.addEventListener("touchend", function() {
+		dash.miniRobot.style.backgroundColor = "red";
+	}, false);
+	dash.miniRobot.addEventListener("touchend", function() {
+		console.log("-1");
 	}, false);
 }
 
@@ -204,7 +211,7 @@ function autoDisable() {
 }
 
 function getTouchPosition(event) {
-	var draggable = document.getElementById("miniRobot");
+	var draggable = dash.miniRobot;
 	draggable.style.backgroundColor = "green";
 	var touch = event.targetTouches[0];
 	var x = touch.pageX-25;
@@ -232,6 +239,11 @@ function getTouchPosition(event) {
 		x *= -1;
 		x += 643;
 		y -= 49;
+	}
+
+	if (dash.miniRobot.style.backgroundColor == "red") {
+		x = -1;
+		y = -1;
 	}
 
 	console.log(x);
@@ -291,27 +303,25 @@ function dashboardInit() { // Called after alliance is submitted
 
 function allianceSelect() {
 	var blueField = document.getElementById("blueField");
-	var robot = document.getElementById("miniRobot");
 
 	document.getElementById("colorSelection").style.visibility="hidden";
-	if(document.getElementById("blueAlliance1").checked || document.getElementById("blueAlliance2").checked || document.getElementById("blueAlliance3").checked) {
+	if(dash.b1.checked || dash.b2.checked || dash.b3.checked) {
 		blueField.style.visibility="visible";
-		robot.style.visibility="visible";
+		dash.miniRobot.style.visibility="visible";
 	}
 
-	if(document.getElementById("redAlliance1").checked || document.getElementById("redAlliance2").checked || document.getElementById("redAlliance3").checked) {
+	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
 		redField.style.visibility="visible";
 		robot.style.visibility="visible";
 	}
 
+	if(dash.b1.checked) dash.miniRobot.style.left = "415px";
+	else if(dash.b2.checked)	dash.miniRobot.style.left = "492px";
+	else if(dash.b3.checked)	dash.miniRobot.style.left = "575px";
 
-	if(document.getElementById("blueAlliance1").checked) robot.style.left = "415px";
-	else if(document.getElementById("blueAlliance2").checked)	robot.style.left = "492px";
-	else if(document.getElementById("blueAlliance3").checked)	robot.style.left = "575px";
-
-	else if(document.getElementById("redAlliance1").checked) robot.style.left = "415px";
-	else if(document.getElementById("redAlliance2").checked)	robot.style.left = "492px";
-	else if(document.getElementById("redAlliance3").checked)	robot.style.left = "575px";
+	else if(dash.r1.checked) dash.miniRobot.style.left = "415px";
+	else if(dash.r2.checked)	dash.miniRobot.style.left = "492px";
+	else if(dash.r4.checked)	dash.miniRobot.style.left = "575px";
 
 	document.getElementById("defaultOpen").click();
 	dashboardInit();
