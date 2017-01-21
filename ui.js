@@ -191,7 +191,8 @@ function addListeners() {
 		dash.miniRobot.style.backgroundColor = "red";
 	}, false);
 	dash.miniRobot.addEventListener("touchend", function() {
-		console.log("-1");
+		NetworkTables.putNumber("fieldX", -1);
+		NetworkTables.putNumber("fieldY", -1);
 	}, false);
 }
 
@@ -245,7 +246,8 @@ function getTouchPosition(event) {
 		x = -1;
 		y = -1;
 	}
-
+	NetworkTables.putNumber("fieldX", x);
+	NetworkTables.putNumber("fieldY", y);
 	console.log(x);
 	console.log(y);
 	event.preventDefault();
@@ -294,7 +296,6 @@ function autoSelect() {
 		submitted = false;
 		document.getElementById("Auto").reset();
 	}
-
 }
 
 function dashboardInit() { // Called after alliance is submitted
