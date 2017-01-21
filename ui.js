@@ -1,7 +1,3 @@
-var ui = {
-	timer: document.getElementById('timer'),
-	robotState: document.getElementById('robot-state'),
-};
 //Whether measured times are in teleop or auto
 var isTeleop = false;
 
@@ -16,7 +12,7 @@ var said5 = false;
 // Sets function to be called on NetworkTables connect. Commented out because it's usually not necessary.
 // NetworkTables.addWsConnectionListener(onNetworkTablesConnection, true);
 // Sets function to be called when robot dis/connects
-//NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+NetworkTables.addRobotConnectionListener(onRobotConnection, true);
 // Sets function to be called when any NetworkTables key/value changes
 //onRobotConnection(true);
 NetworkTables.addGlobalListener(onValueChanged, true);
@@ -146,34 +142,6 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
-function submitAlliance() {
-	var blueField = document.getElementById("blueField");
-	var robot = document.getElementById("miniRobot");
-
-	document.getElementById("colorSelection").style.visibility="hidden";
-	if(document.getElementById("blueAlliance1").checked || document.getElementById("blueAlliance2").checked || document.getElementById("blueAlliance3").checked) {
-		blueField.style.visibility="visible";
-		robot.style.visibility="visible";
-	}
-
-	if(document.getElementById("redAlliance1").checked || document.getElementById("redAlliance2").checked || document.getElementById("redAlliance3").checked) {
-		redField.style.visibility="visible";
-		robot.style.visibility="visible";
-	}
-
-
-	if(document.getElementById("blueAlliance1").checked) robot.style.left = "415px";
-	else if(document.getElementById("blueAlliance2").checked)	robot.style.left = "492px";
-	else if(document.getElementById("blueAlliance3").checked)	robot.style.left = "575px";
-
-	else if(document.getElementById("redAlliance1").checked) robot.style.left = "415px";
-	else if(document.getElementById("redAlliance2").checked)	robot.style.left = "492px";
-	else if(document.getElementById("redAlliance3").checked)	robot.style.left = "575px";
-
-	document.getElementById("defaultOpen").click();
-	dashboardInit();
-}
-
 function submitCamera() {
 	document.getElementById("cameraSelection").style.visibility="hidden";
 	if (document.getElementById("8070").checked) {
@@ -288,24 +256,29 @@ function switchCam(e) { // Switch camera feeds on key press
 	}
 }
 
-function submitAuto() {
+function autoSelect() {
 	var submitted;
-	if (document.getElementById("submit").checked) {
-		submitted = true;
+	if (document.getElementById("submitAuto").checked) {
 		var nothing = document.getElementById("Nothing");
 		var hopper = document.getElementById("Hopper");
 		var dump = document.getElementById("Dump");
 		var gear = document.getElementById("Gear");
 		var baseline = document.getElementById("Baseline");
 
-		var autoModes = "";
-		if (hopper.checked) autoModes += "hopper";
-		if (dump.checked) autoModes += "dump";
-		if (gear.checked) autoModes += "gear";
-		if (baseline.checked) autoModes += "baseline";
-		console.log(autoModes);
-		//NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
-	} else {
+		if (nothing.checked || hopper.checked || dump.checked || gear.checked || baseline.checked) {
+			submitted = true;
+			var autoModes = "";
+			if (hopper.checked) autoModes += "hopper";
+			if (dump.checked) autoModes += "dump";
+			if (gear.checked) autoModes += "gear";
+			if (baseline.checked) autoModes += "baseline";
+			console.log(autoModes);
+			//NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
+		} else {
+			document.getElementById("submitAuto").checked = false;
+		}
+	}
+		else {
 		submitted = false;
 		document.getElementById("Auto").reset();
 	}
@@ -314,4 +287,32 @@ function submitAuto() {
 
 function dashboardInit() { // Called after alliance is submitted
 		addListeners();
+}
+
+function allianceSelect() {
+	var blueField = document.getElementById("blueField");
+	var robot = document.getElementById("miniRobot");
+
+	document.getElementById("colorSelection").style.visibility="hidden";
+	if(document.getElementById("blueAlliance1").checked || document.getElementById("blueAlliance2").checked || document.getElementById("blueAlliance3").checked) {
+		blueField.style.visibility="visible";
+		robot.style.visibility="visible";
+	}
+
+	if(document.getElementById("redAlliance1").checked || document.getElementById("redAlliance2").checked || document.getElementById("redAlliance3").checked) {
+		redField.style.visibility="visible";
+		robot.style.visibility="visible";
+	}
+
+
+	if(document.getElementById("blueAlliance1").checked) robot.style.left = "415px";
+	else if(document.getElementById("blueAlliance2").checked)	robot.style.left = "492px";
+	else if(document.getElementById("blueAlliance3").checked)	robot.style.left = "575px";
+
+	else if(document.getElementById("redAlliance1").checked) robot.style.left = "415px";
+	else if(document.getElementById("redAlliance2").checked)	robot.style.left = "492px";
+	else if(document.getElementById("redAlliance3").checked)	robot.style.left = "575px";
+
+	document.getElementById("defaultOpen").click();
+	dashboardInit();
 }

@@ -235,6 +235,14 @@ ul.tab li a:focus, .active {
   background: #ff3333;
 }
 
+.skewed:checked + .skewed.blueAlliance {
+  background: #3366ff;
+}
+
+.skewed:checked + .skewed.redAlliance {
+  background: #ff3333;
+}
+
 #state {
   position: absolute;
   top:80px;
@@ -253,9 +261,9 @@ ul.tab li a:focus, .active {
 
 #colorSelection {
   position: fixed;
-  top:250px;
+  top:200px;
   left:425px;
-  background-color:#333;
+  background-color:#222;
 }
 
 #redField {
@@ -272,11 +280,6 @@ ul.tab li a:focus, .active {
   top:10px;
   padding: 3px;
   visibility:hidden;
-}
-
-#submitAlliance {
-  display:block;
-  margin:0 auto;
 }
 
 #climb {
@@ -320,6 +323,11 @@ ul.tab li a:focus, .active {
 #robot-state-unknown, #robot-state-connected, #robot-state-disconnected {
   top: 100px;
   left: 100px;
+}
+
+#allianceText {
+  font-family: sans-serif;
+  font-weight: bold;
 }
 
 .skewed {

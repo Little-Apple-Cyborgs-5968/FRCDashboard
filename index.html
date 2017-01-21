@@ -48,8 +48,8 @@
         <input class='skewed' id='Nothing' type='checkbox'>
         <label class='skewed' data-tg-off='Nothing' data-tg-on='Nothing' for='Nothing'></label> <br><br>
 
-        <input class='skewed' id='submit' type='checkbox' onchange='javascript:submitAuto();'>
-        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submit'></label> <br><br>
+        <input class='skewed' id='submitAuto' type='checkbox' onchange='javascript:autoSelect();'>
+        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitAuto'></label> <br><br>
       </form>
 
       <div id="Warnings" class="tabcontent">
@@ -62,15 +62,30 @@
         </div>
       </div>
 
-      <form action="javascript:submitAlliance();" id="colorSelection">
-        <p align="middle">Select Alliance:</p><br>
-        <input type="radio" id="redAlliance1" name="alliance"> Red Alliance 1</input><br><br>
-        <input type="radio" id="redAlliance2" name="alliance"> Red Alliance 2</input><br><br>
-        <input type="radio" id="redAlliance3" name="alliance"> Red Alliance 3</input><br><br>
-        <input type="radio" id="blueAlliance1" name="alliance"> Blue Alliance 1</input> <br><br>
-        <input type="radio" id="blueAlliance2" name="alliance"> Blue Alliance 2</input> <br><br>
-        <input type="radio" id="blueAlliance3" name="alliance"> Blue Alliance 3</input> <br><br>
-        <button type="submit" id="submitAlliance"> Submit </button>
+      <form id="colorSelection">
+        <p align="middle" id="allianceText">Select Alliance:</p><br>
+        <hr><br>
+
+        <input class='skewed' id='redAlliance1' name="alliance" type='radio'>
+        <label class='skewed redAlliance' data-tg-off='Red Alliance 1' data-tg-on='Red Alliance 1' for='redAlliance1'></label> <br>
+
+        <input class='skewed' id='redAlliance2' name="alliance" type='radio'>
+        <label class='skewed redAlliance' data-tg-off='Red Alliance 2' data-tg-on='Red Alliance 2' for='redAlliance2'></label> <br>
+
+        <input class='skewed' id='redAlliance3' name="alliance" type='radio'>
+        <label class='skewed redAlliance' data-tg-off='Red Alliance 3' data-tg-on='Red Alliance 3' for='redAlliance3'></label> <br>
+
+        <input class='skewed' id='blueAlliance1' name="alliance" type='radio'>
+        <label class='skewed blueAlliance' data-tg-off='Blue Alliance 1' data-tg-on='Blue Alliance 1' for='blueAlliance1'></label> <br>
+
+        <input class='skewed' id='blueAlliance2' name="alliance" type='radio'>
+        <label class='skewed blueAlliance' data-tg-off='Blue Alliance 2' data-tg-on='Blue Alliance 2' for='blueAlliance2'></label> <br>
+
+        <input class='skewed' id='blueAlliance3' name="alliance" type='radio'>
+        <label class='skewed blueAlliance' data-tg-off='Blue Alliance 3' data-tg-on='Blue Alliance 3' for='blueAlliance3'></label> <br><br>
+
+        <input class='skewed' id='submitAlliance' type='checkbox' onchange = 'javascript:allianceSelect();'>
+        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitAlliance'></label> <br><br>
       </form>
       <img src="field.png" id="blueField" height="755.568" width="422.304" class="fieldImage">
 
@@ -86,7 +101,7 @@
         <p align="middle">Select Default Camera:</p><br>
         <input type="radio" id="8070" name="camera"> http://raspberrypi:8070/?action=stream </input><br><br>
         <input type="radio" id="8080" name="camera"> http://raspberrypi:8080/?action=stream </input> <br><br>
-        <button type="submit" id="submitAlliance"> Submit </button>
+        <button type="submit" id="submitCamera"> Submit </button>
       </form>
 
       <svg id="robot-diagram" width="320" height="200">
