@@ -170,16 +170,27 @@ function climb(climbing) {
 	}
 }
 
-function pneumatics(move) {
-	if (move) {
-		var elem = document.getElementById("pneumatics");
-		var yPos = 0;
+function pneumatics() {
+	var elemBox = document.getElementById("pneumaticsBox");
+	var elem = document.getElementById("pneumatics");
+	var yPos = 0;
+	if (elemBox.checked) {
 	  var id = setInterval(frame, 5);
 	  function frame() {
 			if (yPos > -30) {
 				yPos--;
 				elem.style.transform = 'translateY(' + yPos + 'px)';
 			}
+	  }
+	} else if (!elemBox.checked){
+	  var id = setInterval(frame, 5);
+
+	  function frame() {
+			if (yPos < 30) {
+				yPos++;
+				elem.style.transform = 'translateY(' + yPos + 'px)';
+			}
+
 	  }
 	}
 }

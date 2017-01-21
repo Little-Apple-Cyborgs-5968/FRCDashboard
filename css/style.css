@@ -429,9 +429,12 @@ ul.tab li a:focus, .active {
 }
 
 #climb {
+  position: absolute;
   top: 560px;
 }
-#pneumatics {
+
+#pneumaticsBox {
+  position: absolute;
   top: 600px;
 }
 
