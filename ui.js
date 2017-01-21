@@ -313,7 +313,7 @@ function allianceSelect() {
 
 	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
 		redField.style.visibility="visible";
-		robot.style.visibility="visible";
+		dash.miniRobot.style.visibility="visible";
 	}
 
 	if(dash.b1.checked) dash.miniRobot.style.left = "415px";
@@ -324,6 +324,9 @@ function allianceSelect() {
 	else if(dash.r2.checked)	dash.miniRobot.style.left = "492px";
 	else if(dash.r4.checked)	dash.miniRobot.style.left = "575px";
 
+
+	document.getElementById("defaultOpen").style.pointerEvents = "auto";
+	document.getElementById("nextOpen").style.pointerEvents = "auto";
 	document.getElementById("defaultOpen").click();
 	dashboardInit();
 }

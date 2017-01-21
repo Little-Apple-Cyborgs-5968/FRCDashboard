@@ -213,6 +213,10 @@ ul.tab li a:focus, .active {
     border-top: none;
 }
 
+.tablinks {
+  pointer-events:none;
+}
+
 #tabs {
   position: absolute;
   top:180px;
