@@ -142,12 +142,12 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
-function submitCamera() {
+function cameraSelect() {
 	document.getElementById("cameraSelection").style.visibility="hidden";
-	if (document.getElementById("8070").checked) {
+	if (document.getElementById("camera8070").checked) {
 		document.getElementById("camera1").style.visibility="visible";
 		document.getElementById("camera2").style.visibility="hidden";
-	} else if (document.getElementById("8080").checked) {
+	} else if (document.getElementById("camera8080").checked) {
 		document.getElementById("camera2").style.visibility="visible";
 		document.getElementById("camera1").style.visibility="hidden";
 	}

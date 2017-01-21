@@ -90,10 +90,10 @@ header {
   visibility:hidden;
 }
 #cameraSelection {
-  position: absolute;
+  position: fixed;
   left:850px;
   top: 250px;
-  background-color: #333;
+  background-color: #222;
 }
 
 article {
@@ -243,6 +243,17 @@ ul.tab li a:focus, .active {
   background: #ff3333;
 }
 
+.skewed:checked + .skewed.camera {
+  background: #ababab;
+}
+
+.skewed + .skewed.camera {
+  position: relative;
+  top:0px;
+  left:0px;
+}
+
+
 #state {
   position: absolute;
   top:80px;
@@ -325,7 +336,7 @@ ul.tab li a:focus, .active {
   left: 100px;
 }
 
-#allianceText {
+.text {
   font-family: sans-serif;
   font-weight: bold;
 }

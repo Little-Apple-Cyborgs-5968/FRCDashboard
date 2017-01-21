@@ -63,7 +63,7 @@
       </div>
 
       <form id="colorSelection">
-        <p align="middle" id="allianceText">Select Alliance:</p><br>
+        <p align="middle" class="text">Select Alliance:</p><br>
         <hr><br>
 
         <input class='skewed' id='redAlliance1' name="alliance" type='radio'>
@@ -97,11 +97,17 @@
       <div id="camera1" class="camera"></div>
       <div id="camera2" class="camera"></div>
 
-      <form action="javascript:submitCamera();" id="cameraSelection">
-        <p align="middle">Select Default Camera:</p><br>
-        <input type="radio" id="8070" name="camera"> http://raspberrypi:8070/?action=stream </input><br><br>
-        <input type="radio" id="8080" name="camera"> http://raspberrypi:8080/?action=stream </input> <br><br>
-        <button type="submit" id="submitCamera"> Submit </button>
+      <form id="cameraSelection">
+        <p align="middle" class="text">Select Default Camera: </p><br>
+        <hr><br>
+        <input class='skewed' id='camera8070' name="camera" type='radio'>
+        <label class='skewed camera' data-tg-off='8070' data-tg-on='8070' for='camera8070'></label> <br>
+
+        <input class='skewed' id='camera8080' name="camera" type='radio'>
+        <label class='skewed camera' data-tg-off='8080' data-tg-on='8080' for='camera8080'></label> <br><br>
+
+        <input class='skewed' id='submitCamera' type='checkbox' onchange = 'javascript:cameraSelect();'>
+        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitCamera'></label> <br><br>
       </form>
 
       <svg id="robot-diagram" width="320" height="200">
