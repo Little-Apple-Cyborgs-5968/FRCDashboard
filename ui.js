@@ -202,8 +202,8 @@ function addListeners() {
 		dash.miniRobot.style.backgroundColor = "red";
 	}, false);
 	dash.miniRobot.addEventListener("touchend", function() {
-		NetworkTables.putNumber("fieldX", -1);
-		NetworkTables.putNumber("fieldY", -1);
+		//NetworkTables.putNumber("fieldX", -1);
+		//NetworkTables.putNumber("fieldY", -1);
 	}, false);
 }
 
@@ -223,42 +223,46 @@ function autoDisable() {
 }
 
 function getTouchPosition(event) {
-	var draggable = dash.miniRobot;
-	draggable.style.backgroundColor = "green";
+	var left = 349;
+	var right = 631;
+	var up = 50;
+	var down = 670;
+
+	dash.miniRobot.style.backgroundColor = "green";
 	var touch = event.targetTouches[0];
 	var x = touch.pageX-25;
 	var y = touch.pageY-25;
 	var airship1 = document.getElementById("airship1");
 
-	if (x >= 339 && x <= 643) { // Keep these conditionals separate so the robot can be dragged along the edge
+	if (x >= left && x <= right) { // Keep these conditionals separate so the robot can be dragged along the edge
 			// Place element where the finger is
-		draggable.style.left = x + 'px';
+		dash.miniRobot.style.left = x + 'px';
 	}
-	if (y >= 49 && y <= 672) {
-		draggable.style.top = y + 'px';
+	if (y >= up && y <= down) {
+		dash.miniRobot.style.top = y + 'px';
 	}
 
-	if (x > 643) x = 643;
-	if (x < 339) x = 339;
-	if (y < 49)  y = 49;
-	if (y > 672) y = 672;
+	if (x > right) x = right;
+	if (x < left) x = left;
+	if (y < up)  y = up;
+	if (y > down) y = down;
 
-	if (document.getElementById("redField").style.visibility=="visible") { // Matching the computer coordinates to the field coordinates
+	if (document.getElementById("redFieldSmall").style.visibility=="visible") { // Matching the computer coordinates to the field coordinates
 		y *= -1;
-		x -= 339;
-		y += 672;
-	} else if (document.getElementById("blueField").style.visibility=="visible") {
+		x -= left;
+		y += down;
+	} else if (document.getElementById("blueFieldSmall").style.visibility=="visible") {
 		x *= -1;
-		x += 643;
-		y -= 49;
+		x += right;
+		y -= up;
 	}
 
 	if (dash.miniRobot.style.backgroundColor == "red") {
 		x = -1;
 		y = -1;
 	}
-	NetworkTables.putNumber("fieldX", x);
-	NetworkTables.putNumber("fieldY", y);
+	//NetworkTables.putNumber("fieldX", x);
+	//NetworkTables.putNumber("fieldY", y);
 	console.log(x);
 	console.log(y);
 	event.preventDefault();
@@ -314,16 +318,22 @@ function dashboardInit() { // Called after alliance is submitted
 }
 
 function allianceSelect() {
-	var blueField = document.getElementById("blueField");
+	var blueFieldSmall = document.getElementById("blueFieldSmall");
+	var redFieldSmall = document.getElementById("redFieldSmall");
+
+	var blueFieldBig = document.getElementById("blueFieldBig");
+	var redFieldBig = document.getElementById("redFieldBig");
 
 	document.getElementById("colorSelection").style.visibility="hidden";
 	if(dash.b1.checked || dash.b2.checked || dash.b3.checked) {
-		blueField.style.visibility="visible";
+		blueFieldSmall.style.visibility="visible";
+		blueFieldBig.style.visibility="visible";
 		dash.miniRobot.style.visibility="visible";
 	}
 
 	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
-		redField.style.visibility="visible";
+		redFieldSmall.style.visibility="visible";
+		redFieldBig.style.visibility="visible";
 		dash.miniRobot.style.visibility="visible";
 	}
 

@@ -161,12 +161,12 @@ aside > * {
 }
 
 #miniRobot {
-  position: absolute;
+  position:absolute;
   visibility: hidden;
-  top: 675px;
-  z-index:1;
+  top: 665px;
+  z-index:2;
   background-color:"red";
-  padding:5px;
+  padding:2px;
 }
 
 /* END ROBOT AND FIELD */
@@ -243,7 +243,7 @@ ul.tab li a:focus, .active {
 
 /* BEGIN FIELD */
 
-#redField {
+#redFieldBig, #redFieldSmall {
   -webkit-transform:rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -251,10 +251,26 @@ ul.tab li a:focus, .active {
   transform: rotate(180deg);
 }
 
-.fieldImage {
-  position: fixed;
+#redFieldSmall, #blueFieldSmall {
+  opacity: 0;
+}
+
+#redFieldBig, #blueFieldBig {
+  opacity: 1;
+}
+
+.fieldImageBig {
+  position: absolute;
   left:310px;
   top:10px;
+  padding: 3px;
+  visibility:hidden;
+}
+
+.fieldImageSmall {
+  position: absolute;
+  left:339px;
+  top:41px;
   padding: 3px;
   visibility:hidden;
 }
