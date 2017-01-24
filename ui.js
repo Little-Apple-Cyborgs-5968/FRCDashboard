@@ -11,7 +11,9 @@ var dash = {
 	b3 : document.getElementById("blueAlliance3"),
 	r1 : document.getElementById("redAlliance1"),
 	r2 : document.getElementById("redAlliance2"),
-	r4 : document.getElementById("redAlliance3")
+	r4 : document.getElementById("redAlliance3"),
+	x : -1,
+	y : -1
 };
 
 //Whether measured times are in teleop or auto
@@ -190,7 +192,6 @@ function pneumatics() {
 				yPos++;
 				elem.style.transform = 'translateY(' + yPos + 'px)';
 			}
-
 	  }
 	}
 }
@@ -200,10 +201,6 @@ function addListeners() {
 	dash.miniRobot.addEventListener("touchmove", getTouchPosition, false);
 	dash.miniRobot.addEventListener("touchend", function() {
 		dash.miniRobot.style.backgroundColor = "red";
-	}, false);
-	dash.miniRobot.addEventListener("touchend", function() {
-		//NetworkTables.putNumber("fieldX", -1);
-		//NetworkTables.putNumber("fieldY", -1);
 	}, false);
 }
 
@@ -220,6 +217,28 @@ function autoDisable() {
 		document.getElementById("Gear").disabled=false;
 		document.getElementById("Baseline").disabled=false;
 	}
+}
+
+function pixelsToInches(height, base) {
+	//console.log("Height: " + height);
+	//console.log("Width: " + base);
+
+	// Height of field image is 620 px
+	// Width of field image is 282 px
+
+	// Height of real field is 652 in
+	// Width of real field is 324 in
+
+	// Height ratio: 1.051612903 in per px
+	// Width ratio: 1.14893617 in per px
+	var inchesHeight = height * 1.051612903;
+	var inchesWidth = base * 1.14893617;
+
+	console.log(inchesHeight + " inches height");
+	console.log(inchesWidth + " inches width");
+
+	//NetworkTables.putNumber("fieldX", inchesWidth);
+	//NetworkTables.putNumber("fieldY", inchesHeight);
 }
 
 function getTouchPosition(event) {
@@ -261,10 +280,10 @@ function getTouchPosition(event) {
 		x = -1;
 		y = -1;
 	}
-	//NetworkTables.putNumber("fieldX", x);
-	//NetworkTables.putNumber("fieldY", y);
-	console.log(x);
-	console.log(y);
+
+	dash.x = x;
+	dash.y = y;
+	pixelsToInches(dash.y, dash.x);
 	event.preventDefault();
 }
 
@@ -272,13 +291,10 @@ function switchCam(e) { // Switch camera feeds on key press
 	var blueCam = document.getElementById("camera1");
 	var greenCam = document.getElementById("camera2");
 	if (e.keyCode == 61) { // equals/plus button
-		console.log("Equals detected");
 		if (blueCam.style.visibility==="visible") {
-			console.log("Blue visible");
 			blueCam.style.visibility="hidden";
 			greenCam.style.visibility="visible";
 		} else if (greenCam.style.visibility==="visible") {
-			console.log("Green visible");
 			greenCam.style.visibility="hidden";
 			blueCam.style.visibility="visible";
 		}
