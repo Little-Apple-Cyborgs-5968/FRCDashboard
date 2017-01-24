@@ -124,12 +124,21 @@ function onValueChanged(key, value, isNew) {
 
 		case '/SmartDashboard/warnings/none':
 			if(value) document.getElementById("None").style.visibility="visible";
+			break;
 		case '/SmartDashboard/warnings/collision':
 			if(value) document.getElementById("Collision").style.visibility="visible";
+			break;
 		case '/SmartDashboard/warnings/pneumatics':
 			if(value) document.getElementById("Pneumatics").style.visibility="visible";
+			break;
 		case '/SmartDashboard/warnings/temperature':
 			if(value) document.getElementById("Temperature").style.visibility="visible";
+			break;
+
+		case '/SmartDashboard/climbingRope':
+			if (value == -1) climb(-1);
+			else if (value == 1) climb(1);
+			break;
 	}
 }
 
@@ -161,22 +170,36 @@ function cameraSelect() {
 }
 
 function climb(climbing) {
-	if (climbing) {
+	if (climbing == 1) {
 		var elem = document.getElementById("climb");
 	  var angle = 0;
 	  var id = setInterval(frame, 5);
 	  function frame() {
-			angle++;;
+			angle++;
+			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
+	  }
+	} else if (climbing == -1) {
+		var elem = document.getElementById("climb");
+	  var angle = 0;
+	  var id = setInterval(frame, 5);
+	  function frame() {
+			angle--;
+			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
+	  }
+	} else if (climbing == 0) {
+		var elem = document.getElementById("climb");
+	  var angle = 0;
+	  var id = setInterval(frame, 5);
+	  function frame() {
 			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
 	  }
 	}
 }
 
-function pneumatics() {
-	var elemBox = document.getElementById("pneumaticsBox");
+function pneumatics(move) {
 	var elem = document.getElementById("pneumatics");
 	var yPos = 0;
-	if (elemBox.checked) {
+	if (move == 1) {
 	  var id = setInterval(frame, 5);
 	  function frame() {
 			if (yPos > -30) {
@@ -184,9 +207,8 @@ function pneumatics() {
 				elem.style.transform = 'translateY(' + yPos + 'px)';
 			}
 	  }
-	} else if (!elemBox.checked){
+	} else if (move == -1){
 	  var id = setInterval(frame, 5);
-
 	  function frame() {
 			if (yPos < 30) {
 				yPos++;
