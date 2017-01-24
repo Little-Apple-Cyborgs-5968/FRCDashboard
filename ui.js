@@ -366,12 +366,14 @@ function allianceSelect() {
 	if(dash.b1.checked || dash.b2.checked || dash.b3.checked) {
 		blueFieldSmall.style.visibility="visible";
 		blueFieldBig.style.visibility="visible";
+		dash.miniRobot.src="minirobotBlue.png";
 		dash.miniRobot.style.visibility="visible";
 	}
 
 	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
 		redFieldSmall.style.visibility="visible";
 		redFieldBig.style.visibility="visible";
+		dash.miniRobot.src="minirobotRed.png";
 		dash.miniRobot.style.visibility="visible";
 	}
 
