@@ -124,10 +124,14 @@
         <input class='skewed' id='submitCamera' type='checkbox' onchange = 'javascript:cameraSelect();'>
         <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitCamera'></label> <br><br>
       </form>
-
-      <!--<input type="range" id="climbMeter" min="0" max="58" value="0" onchange="javascript:updateClimbValue(this.value);" />
-      <span id="climbNumber">0</span>-->
-
+      <span id="climbLabel">Climb Height</span>
+      <input type="range" id="climbMeter" min="0" max="58" value="0" />
+      <span id="climbNumber">0</span>
+<!--
+      <span id="pressureLabel">Pressure</span>
+      <input type="range" id="pressureMeter" min="0" max="100" value="0" />
+      <span id="pressureNumber">0</span>
+-->
       <svg id="robot-diagram" width="320" height="200">
           <rect x="28" y="10" width="150" height ="100" />
           <rect x="195" y="50" width="55" height="70" />

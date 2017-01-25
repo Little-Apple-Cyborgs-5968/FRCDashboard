@@ -136,19 +136,20 @@ function onValueChanged(key, value, isNew) {
 			break;
 		case '/SmartDashboard/warnings/collision':
 			if(value) document.getElementById("Collision").style.visibility="visible";
+			break;
 		case '/SmartDashboard/warnings/done':
 			if(value) document.getElementById("Done").style.visibility="visible";
+			break;
 
 		case '/SmartDashboard/climbingRope':
 			if (value == -1) climb(-1);
 			else if (value == 1) climb(1);
 			break;
+		case '/SmartDashboard/climbHeight':
+			updateClimbHeight(value);
+		case '/SmartDashboard/pressure':
+			updatePressure(value);
 	}
-}
-
-
-function updateClimbValue(meterValue) {
-	document.getElementById("climbNumber").innerHTML=meterValue;
 }
 
 // Automode and Warning tabs
@@ -165,6 +166,16 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+function updateClimbHeight(inches) {
+	document.getElementById("climbMeter").value = inches;
+	document.getElementById("climbNumber").innerHTML = inches;
+}
+
+function updatePressure(pressure) {
+	document.getElementById("pressureMeter").value = pressure;
+	document.getElementById("pressureNumber").innerHTML = pressure;
 }
 
 function cameraSelect() {

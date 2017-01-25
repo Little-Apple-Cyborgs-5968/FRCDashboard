@@ -484,15 +484,46 @@ ul.tab li a:focus, .active {
 
 /* BEGIN METERS */
 
+#climbLabel {
+  position: absolute;
+  top: 495px;
+  left: 980px;
+  font-size: 20px;
+}
+
 #climbMeter {
   position: absolute;
-  top: 520px;
-  left: 875px;
+  top: 540px;
+  left: 845px;
+  width: 450px;
 }
 
 #climbNumber {
   position: absolute;
-  top: 520px;
-  left: 800px;
+  top: 540px;
+  left: 775px;
   font-size: 20px;
 }
+
+#pressureLabel {
+  position: absolute;
+  top: 585px;
+  left: 1000px;
+  font-size: 20px;
+}
+
+#pressureMeter {
+  position: absolute;
+  top: 630px;
+  left: 845px;
+  width: 450px;
+}
+
+#pressureNumber {
+  position: absolute;
+  top: 630px;
+  left: 775px;
+  font-size: 20px;
+}
+
+/* END METERS */
