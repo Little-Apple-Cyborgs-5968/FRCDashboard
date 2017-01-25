@@ -49,7 +49,7 @@
         <label class='skewed' data-tg-off='Nothing' data-tg-on='Nothing' for='Nothing'></label> <br><br>
 
         <input class='skewed' id='submitAuto' type='checkbox' onchange='javascript:autoSelect();'>
-        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitAuto'></label> <br><br>
+        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitAuto'></label>
       </form>
 
       <div id="Warnings" class="tabcontent">
@@ -59,8 +59,19 @@
           <p id="Collision"> Collision detected </p> <br>
           <p id="Pneumatics"> Pneumatics pressure too low </p> <br>
           <p id="Temperature"> Motor controllers too hot </p> <br>
+          <p id="Collision"> There was a collision! </p> <br>
+          <p id="Done"> Task completed </p> <br>
         </div>
       </div>
+
+      <!-- Tells if the robot is in teleop or auto -->
+      <form id="mode">
+        <input class='skewed' id='teleop' type='checkbox' checked>
+        <label class='skewed' id='teleop-label' data-tg-off="Teleop" data-tg-on='Teleop' for='teleop'></label><br>
+
+        <input class='skewed' id='auto' type='checkbox' checked>
+        <label class='skewed' id='auto-label' data-tg-off="Auto" data-tg-on='Auto' for='auto'></label><br>
+      </form>
 
       <form id="colorSelection">
         <p align="middle" class="text">Select Alliance:</p><br>
@@ -113,6 +124,9 @@
         <input class='skewed' id='submitCamera' type='checkbox' onchange = 'javascript:cameraSelect();'>
         <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitCamera'></label> <br><br>
       </form>
+
+      <!--<input type="range" id="climbMeter" min="0" max="58" value="0" onchange="javascript:updateClimbValue(this.value);" />
+      <span id="climbNumber">0</span>-->
 
       <svg id="robot-diagram" width="320" height="200">
           <rect x="28" y="10" width="150" height ="100" />

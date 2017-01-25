@@ -134,12 +134,21 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/warnings/temperature':
 			if(value) document.getElementById("Temperature").style.visibility="visible";
 			break;
+		case '/SmartDashboard/warnings/collision':
+			if(value) document.getElementById("Collision").style.visibility="visible";
+		case '/SmartDashboard/warnings/done':
+			if(value) document.getElementById("Done").style.visibility="visible";
 
 		case '/SmartDashboard/climbingRope':
 			if (value == -1) climb(-1);
 			else if (value == 1) climb(1);
 			break;
 	}
+}
+
+
+function updateClimbValue(meterValue) {
+	document.getElementById("climbNumber").innerHTML=meterValue;
 }
 
 // Automode and Warning tabs
@@ -263,8 +272,19 @@ function pixelsToInches(height, base) {
 	//NetworkTables.putNumber("fieldY", inchesHeight);
 }
 
+function checkTeleop() {
+	if (isTeleop) {
+		document.getElementById("auto-label").style.visibility = "hidden";
+		document.getElementById("teleop-label").style.visibility = "visible";
+	} else if (!isTeleop) {
+		document.getElementById("teleop-label").style.visibility = "hidden";
+		document.getElementById("auto-label").style.visibility = "visible";
+	}
+	//console.log(isTeleop);
+}
+
 function getTouchPosition(event) {
-	var left = 349;
+	var left = 344;
 	var right = 631;
 	var up = 50;
 	var down = 670;
@@ -353,6 +373,11 @@ function autoSelect() {
 
 function dashboardInit() { // Called after alliance is submitted
 		addListeners();
+
+		var id = setInterval(frame, 5);
+	  function frame() {
+			checkTeleop();
+	  }
 }
 
 function allianceSelect() {

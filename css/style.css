@@ -115,13 +115,12 @@ aside > * {
 .camera {
   padding: 0;
   position: absolute;
-  top:0;
-  left:750px;
-  width: 45vw;
-  height: 100vh;
+  top:0px;
+  left:726px;
+  width: 640px;
+  height: 480px;
   overflow: hidden;
   background-repeat: no-repeat;
-  background-size: 50vw 80vh
 }
 
 #camera1 {
@@ -219,13 +218,13 @@ ul.tab li a:focus, .active {
 
 #tabs {
   position: absolute;
-  top:180px;
+  top:165px;
   left:20px;
 }
 
 #Auto, #Warnings {
   position: fixed;
-  top:230px;
+  top:215px;
   font-size:18px;
   left:20px;
   width:272px;
@@ -252,11 +251,11 @@ ul.tab li a:focus, .active {
 }
 
 #redFieldBig {
-  left:315px;
+  left:310px;
 }
 
 #blueFieldBig {
-  left:310px;
+  left:305px;
 }
 
 .fieldImageBig {
@@ -269,7 +268,7 @@ ul.tab li a:focus, .active {
 
 .fieldImageSmall {
   position: absolute;
-  left:351px;
+  left:346px;
   top:49px;
   padding: 3px;
   visibility:hidden;
@@ -279,6 +278,27 @@ ul.tab li a:focus, .active {
 /* END FIELD */
 
 /* BEGIN CHECKBOXES */
+
+#mode {
+  position: absolute;
+  top:500px;
+  left:35px;
+  width: 240px;
+  height: 80px;
+}
+
+#teleop-label, #auto-label {
+  visibility: hidden;
+  position: absolute;
+}
+
+#auto-label {
+  background: #ff3333;
+}
+
+#teleop-label {
+  top: 28px;
+}
 
 #colorSelection {
   position: fixed;
@@ -311,7 +331,7 @@ ul.tab li a:focus, .active {
 
 #robot-state-unknown:checked + #unknown-label {
   position: relative;
-  top:33px;
+  top:25px;
   background: #ffe066;
 }
 
@@ -461,3 +481,18 @@ ul.tab li a:focus, .active {
 }
 
 /* END MISC */
+
+/* BEGIN METERS */
+
+#climbMeter {
+  position: absolute;
+  top: 520px;
+  left: 875px;
+}
+
+#climbNumber {
+  position: absolute;
+  top: 520px;
+  left: 800px;
+  font-size: 20px;
+}
