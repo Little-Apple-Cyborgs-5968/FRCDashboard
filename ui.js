@@ -29,7 +29,6 @@ var said10 = false;
 var said5 = false;
 
 NetworkTables.addRobotConnectionListener(onRobotConnection, true);
-//onRobotConnection(true);
 NetworkTables.addGlobalListener(onValueChanged, true);
 
 function onRobotConnection(connected) {
