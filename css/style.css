@@ -140,6 +140,7 @@ aside > * {
 }
 
 #cameraSelection {
+  visibility: hidden;
   position: fixed;
   left:850px;
   top: 250px;
@@ -221,6 +222,7 @@ ul.tab li a:focus, .active {
 }
 
 #tabs {
+  visibility:hidden;
   position: absolute;
   top:165px;
   left:20px;
@@ -245,14 +247,6 @@ ul.tab li a:focus, .active {
 /* END UL AND TAB */
 
 /* BEGIN FIELD */
-
-#redFieldBig, #redFieldSmall {
-  -webkit-transform:rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
 
 #redFieldBig {
   left:310px;
@@ -284,9 +278,11 @@ ul.tab li a:focus, .active {
 /* BEGIN CHECKBOXES */
 
 #mode {
+  visibility: hidden;
   position: absolute;
   top:500px;
-  left:35px;
+  left:0px;
+  padding-left: 35px;
   width: 240px;
   height: 80px;
 }
@@ -305,6 +301,7 @@ ul.tab li a:focus, .active {
 }
 
 #colorSelection {
+  visibility: hidden;
   position: fixed;
   top:200px;
   left:425px;
@@ -317,6 +314,7 @@ ul.tab li a:focus, .active {
 }
 
 #state {
+  visibility:hidden;
   position: absolute;
   top:80px;
   left:40px;
@@ -457,7 +455,12 @@ ul.tab li a:focus, .active {
 
 /* BEGIN MISC */
 
+#robot-diagram {
+  visibility: hidden;
+}
+
 #timer {
+  visibility: hidden;
   position: absolute;
   font-family: monospace;
   display: block;
@@ -485,6 +488,7 @@ ul.tab li a:focus, .active {
 }
 
 #logo {
+  visibility: hidden;
   height: 140px;
   top: 600px;
   left: 720px;
@@ -495,6 +499,7 @@ ul.tab li a:focus, .active {
 /* BEGIN METERS */
 
 #climbLabel {
+  visibility: hidden;
   position: absolute;
   top: 495px;
   left: 980px;
@@ -502,6 +507,7 @@ ul.tab li a:focus, .active {
 }
 
 #climbMeter {
+  visibility: hidden;
   position: absolute;
   top: 540px;
   left: 845px;
@@ -531,6 +537,7 @@ input[type=range] {
   }
 
 #climbNumber {
+  visibility: hidden;
   position: absolute;
   top: 540px;
   left: 775px;

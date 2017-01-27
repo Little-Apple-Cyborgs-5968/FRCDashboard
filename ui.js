@@ -181,9 +181,11 @@ function cameraSelect() {
 	document.getElementById("cameraSelection").style.visibility="hidden";
 	if (document.getElementById("camera8070").checked) {
 		document.getElementById("camera1").style.visibility="visible";
+		$("#camera1").addClass("animated fadeInRight");
 		document.getElementById("camera2").style.visibility="hidden";
 	} else if (document.getElementById("camera8080").checked) {
 		document.getElementById("camera2").style.visibility="visible";
+		$("#camera2").addClass("animated fadeInRight");
 		document.getElementById("camera1").style.visibility="hidden";
 	}
 }
@@ -286,9 +288,11 @@ function checkTeleop() {
 	if (isTeleop) {
 		document.getElementById("auto-label").style.visibility = "hidden";
 		document.getElementById("teleop-label").style.visibility = "visible";
+		$("#teleop-label").addClass("animated fadeInLeft");
 	} else if (!isTeleop) {
 		document.getElementById("teleop-label").style.visibility = "hidden";
 		document.getElementById("auto-label").style.visibility = "visible";
+		$("#auto-label").addClass("animated fadeInLeft");
 	}
 	//console.log(isTeleop);
 }
@@ -383,26 +387,62 @@ function autoSelect() {
 
 function dashboardInit() { // Called after alliance is submitted
 		addListeners();
-
-		var id = setInterval(frame, 5);
-	  function frame() {
-			checkTeleop();
-	  }
 }
 
 function allianceSelect() {
+
+	$("#selectAlliance, #redAlliance1-label, #redAlliance3-label, #blueAlliance2-label").addClass("animated fadeOutLeft");
+	$("#hr, #redAlliance2-label, #blueAlliance1-label, #blueAlliance3-label, #blueAlliance3-label, #submitAlliance-label").addClass("animated fadeOutRight");
+
+	document.getElementById("timer").style.visibility="visible";
+	$("#timer").addClass("animated fadeInLeft");
+
+	setTimeout(function () {
+		document.getElementById("state").style.visibility="visible";
+		$("#state").addClass("animated fadeInLeft");
+  }, 500);
+	setTimeout(function () {
+		document.getElementById("tabs").style.visibility="visible";
+		$("#tabs, #Auto, #Warnings").addClass("animated fadeInLeft");
+		document.getElementById("defaultOpen").style.pointerEvents = "auto";
+		document.getElementById("nextOpen").style.pointerEvents = "auto";
+		document.getElementById("defaultOpen").click();
+  }, 1000);
+	setTimeout(function () {
+		var id = setInterval(frame, 5);
+		function frame() {
+			checkTeleop();
+	  }
+  }, 1500);
+	setTimeout(function () {
+		document.getElementById("robot-diagram").style.visibility = "visible";
+		$("#robot-diagram").addClass("animated fadeInLeft");
+  }, 2000);
+	setTimeout(function () {
+		document.getElementById("climbMeter").style.visibility = "visible";
+		document.getElementById("climbNumber").style.visibility = "visible";
+		document.getElementById("climbLabel").style.visibility = "visible";
+		$("#climbMeter, #climbNumber, #climbLabel").addClass("animated fadeInRight");
+  }, 2500);
+	setTimeout(function () {
+		document.getElementById("logo").style.visibility = "visible";
+		$("#logo").addClass("animated lightSpeedIn");
+  }, 3000);
+
 	var blueFieldSmall = document.getElementById("blueFieldSmall");
 	var redFieldSmall = document.getElementById("redFieldSmall");
 
 	var blueFieldBig = document.getElementById("blueFieldBig");
 	var redFieldBig = document.getElementById("redFieldBig");
 
-	document.getElementById("colorSelection").style.visibility="hidden";
+	$("#miniRobot").addClass("animated zoomIn");
+
 	if(dash.b1.checked || dash.b2.checked || dash.b3.checked) {
 		blueFieldSmall.style.visibility="visible";
 		blueFieldBig.style.visibility="visible";
 		dash.miniRobot.src="images/minirobotBlue.png";
 		dash.miniRobot.style.visibility="visible";
+		$("#blueFieldBig").addClass("animated zoomIn");
 	}
 
 	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
@@ -410,6 +450,7 @@ function allianceSelect() {
 		redFieldBig.style.visibility="visible";
 		dash.miniRobot.src="images/minirobotRed.png";
 		dash.miniRobot.style.visibility="visible";
+		$("#redFieldBig").addClass("animated zoomIn");
 	}
 
 	if(dash.b1.checked) dash.miniRobot.style.left = "415px";
@@ -421,8 +462,36 @@ function allianceSelect() {
 	else if(dash.r4.checked)	dash.miniRobot.style.left = "575px";
 
 
-	document.getElementById("defaultOpen").style.pointerEvents = "auto";
-	document.getElementById("nextOpen").style.pointerEvents = "auto";
-	document.getElementById("defaultOpen").click();
+	document.getElementById("cameraSelection").style.visibility="visible";
+	$("#cameraSelection").addClass("animated fadeInRight");
 	dashboardInit();
+}
+
+function initAllianceSelection() {
+	document.getElementById("selectAlliance").style.visibility="visible";
+	$("#selectAlliance").addClass("animated fadeInLeft");
+
+	document.getElementById("redAlliance1-label").style.visibility="visible";
+	$("#redAlliance1-label").addClass("animated fadeInLeft");
+
+	document.getElementById("redAlliance3-label").style.visibility="visible";
+	$("#redAlliance3-label").addClass("animated fadeInLeft");
+
+	document.getElementById("blueAlliance2-label").style.visibility="visible";
+	$("#blueAlliance2-label").addClass("animated fadeInLeft");
+
+	document.getElementById("hr").style.visibility="visible";
+	$("#hr").addClass("animated fadeInRight");
+
+	document.getElementById("redAlliance2-label").style.visibility="visible";
+	$("#redAlliance2-label").addClass("animated fadeInRight");
+
+	document.getElementById("blueAlliance1-label").style.visibility="visible";
+	$("#blueAlliance1-label").addClass("animated fadeInRight");
+
+	document.getElementById("blueAlliance3-label").style.visibility="visible";
+	$("#blueAlliance3-label").addClass("animated fadeInRight");
+
+	document.getElementById("submitAlliance-label").style.visibility="visible";
+	$("#submitAlliance-label").addClass("animated fadeInLeft");
 }

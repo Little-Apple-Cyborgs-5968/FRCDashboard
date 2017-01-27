@@ -5,9 +5,11 @@
       <meta charset="utf-8">
       <title>FRC Dashboard</title>
       <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
 
-  <body>
+  <body onload="javascript:initAllianceSelection();">
 
       <!-- Clock that shows up in top left -->
       <div id="timer">2:15</div>
@@ -74,34 +76,34 @@
       </form>
 
       <form id="colorSelection">
-        <p align="middle" class="text">Select Alliance:</p><br>
-        <hr><br>
+        <p align="middle" class="text" id="selectAlliance">Select Alliance:</p><br>
+        <hr id='hr'><br>
 
         <input class='skewed' id='redAlliance1' name="alliance" type='radio'>
-        <label class='skewed redAlliance' data-tg-off='Red Alliance 1' data-tg-on='Red Alliance 1' for='redAlliance1'></label> <br>
+        <label class='skewed redAlliance' id='redAlliance1-label' data-tg-off='Red Alliance 1' data-tg-on='Red Alliance 1' for='redAlliance1'></label> <br>
 
         <input class='skewed' id='redAlliance2' name="alliance" type='radio'>
-        <label class='skewed redAlliance' data-tg-off='Red Alliance 2' data-tg-on='Red Alliance 2' for='redAlliance2'></label> <br>
+        <label class='skewed redAlliance' id='redAlliance2-label' data-tg-off='Red Alliance 2' data-tg-on='Red Alliance 2' for='redAlliance2'></label> <br>
 
         <input class='skewed' id='redAlliance3' name="alliance" type='radio'>
-        <label class='skewed redAlliance' data-tg-off='Red Alliance 3' data-tg-on='Red Alliance 3' for='redAlliance3'></label> <br>
+        <label class='skewed redAlliance' id='redAlliance3-label' data-tg-off='Red Alliance 3' data-tg-on='Red Alliance 3' for='redAlliance3'></label> <br>
 
         <input class='skewed' id='blueAlliance1' name="alliance" type='radio'>
-        <label class='skewed blueAlliance' data-tg-off='Blue Alliance 1' data-tg-on='Blue Alliance 1' for='blueAlliance1'></label> <br>
+        <label class='skewed blueAlliance' id='blueAlliance1-label' data-tg-off='Blue Alliance 1' data-tg-on='Blue Alliance 1' for='blueAlliance1'></label> <br>
 
         <input class='skewed' id='blueAlliance2' name="alliance" type='radio'>
-        <label class='skewed blueAlliance' data-tg-off='Blue Alliance 2' data-tg-on='Blue Alliance 2' for='blueAlliance2'></label> <br>
+        <label class='skewed blueAlliance' id='blueAlliance2-label' data-tg-off='Blue Alliance 2' data-tg-on='Blue Alliance 2' for='blueAlliance2'></label> <br>
 
         <input class='skewed' id='blueAlliance3' name="alliance" type='radio'>
-        <label class='skewed blueAlliance' data-tg-off='Blue Alliance 3' data-tg-on='Blue Alliance 3' for='blueAlliance3'></label> <br><br>
+        <label class='skewed blueAlliance' id='blueAlliance3-label' data-tg-off='Blue Alliance 3' data-tg-on='Blue Alliance 3' for='blueAlliance3'></label> <br><br>
 
         <input class='skewed' id='submitAlliance' type='checkbox' onchange = 'javascript:allianceSelect();'>
-        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitAlliance'></label> <br><br>
+        <label class='skewed' id='submitAlliance-label' data-tg-off='Submit' data-tg-on='Submit' for='submitAlliance'></label> <br><br>
       </form>
 
-      <img src="images/fieldBig.png" style="height:98%;" id="blueFieldBig" class="fieldImageBig">
+      <img src="images/fieldBigBlue.png" style="height:98%;" id="blueFieldBig" class="fieldImageBig">
 
-      <img src="images/fieldBig.png" style="height:98%;" id="redFieldBig" class="fieldImageBig">
+      <img src="images/fieldBigRed.png" style="height:98%;" id="redFieldBig" class="fieldImageBig">
 
       <img src="images/fieldSmall.png" style="height:88%;" id="blueFieldSmall" class="fieldImageSmall">
 
