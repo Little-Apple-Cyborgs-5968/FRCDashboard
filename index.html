@@ -6,7 +6,6 @@
       <title>FRC Dashboard</title>
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
 
   <body onload="javascript:initAllianceSelection();">
@@ -30,8 +29,8 @@
       <!-- Tabs - Automodes checkboxes and warnings -->
 
       <ul class="tab" id="tabs">
-        <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Auto')" id="defaultOpen">Automodes</a></li>
-        <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'Warnings')" id="nextOpen">Warnings</a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, '#Auto')" id="defaultOpen">Automodes</a></li>
+        <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, '#Warnings')" id="nextOpen">Warnings</a></li>
       </ul>
 
       <form id="Auto" class="tabcontent">
@@ -149,6 +148,7 @@
       <br><br><br>
 
       <script src="ui.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="/networktables/networktables.js"></script>
   </body>
 

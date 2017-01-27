@@ -1,17 +1,4 @@
 var dash = {
-	miniRobot : document.getElementById("miniRobot"),
-	connectBox : document.getElementById("robot-state-connected"),
-	connectLabel : document.getElementById("connected-label"),
-	disconnectBox : document.getElementById("robot-state-disconnected"),
-	disconnectLabel : document.getElementById("disconnected-label"),
-	unknownBox : document.getElementById("robot-state-unknown"),
-	unknownLabel : document.getElementById("unknown-label"),
-	b1 : document.getElementById("blueAlliance1"),
-	b2 : document.getElementById("blueAlliance2"),
-	b3 : document.getElementById("blueAlliance3"),
-	r1 : document.getElementById("redAlliance1"),
-	r2 : document.getElementById("redAlliance2"),
-	r4 : document.getElementById("redAlliance3"),
 	x : -1,
 	y : -1
 };
@@ -34,14 +21,14 @@ NetworkTables.addGlobalListener(onValueChanged, true);
 function onRobotConnection(connected) {
 
 	if (connected) {
-		disconnectLabel.style.display = "none";
-		unknownLabel.style.display = "none";
-		connectLabel.style.display = "inline-flex";
+		$("#unknown-label").hide();
+		$("#disconnected-label").hide();
+		$("#connected-label").css("display", "inline-flex");
 	}
 	else if (!connected) {
-		disconnectLabel.style.display = "inline-flex";
-		unknownLabel.style.display = "none";
-		connectLabel.style.display = "none";
+		$("#disconnected-label").css("display", "inline-flex");
+		$("#unknown-label").hide();
+		$("#connected-label").hide();
 	}
 }
 
@@ -61,7 +48,7 @@ function onValueChanged(key, value, isNew) {
 			var s = Math.floor(value);
 
 			// Make sure timer is reset to black when it starts
-			ui.timer.style.color = '#FFFFFF';
+			$("#timer").css('color', '#FFFFFF');
 
 			// Minutes (m) is equal to the total seconds divided by sixty with the decimal removed.
 			var m = Math.floor(s / 60);
@@ -74,45 +61,46 @@ function onValueChanged(key, value, isNew) {
 			}
 			else if (s <= 30) {
 				// Solid red timer when less than 30 seconds left.
-				ui.timer.style.color = '#FF3030';
+				$("#timer").css('color', '#FF3030');
 			}
 
 			// Add leading zero if seconds is one digit long, for proper time formatting.
 			visualS = visualS < 10 ? '0' + visualS : visualS;
-			ui.timer.innerHTML = m + ':' + visualS;
+			$("#timer").html(m + ':' + visualS);
+			var audio;
 
 			if(s == 90 && !said90 && isTeleop){
-				var audio = new Audio('voice\\90seconds.mp3');
+				audio = new Audio('voice\\90seconds.mp3');
 				audio.play();
 				said90 = true;
 			}
 			else if(s == 60 && !said60 && isTeleop){
-				var audio = new Audio('voice\\60seconds.mp3');
+				audio = new Audio('voice\\60seconds.mp3');
 				audio.play();
 				said60 = true;
 			}
 			else if(s == 45 && !said45 && isTeleop){
-				var audio = new Audio('voice\\45seconds.mp3');
+				audio = new Audio('voice\\45seconds.mp3');
 				audio.play();
 				said45 = true;
 			}
 			else if(s == 30 && !said30 && isTeleop){
-				var audio = new Audio('voice\\30seconds.mp3');
+				audio = new Audio('voice\\30seconds.mp3');
 				audio.play();
 				said30 = true;
 			}
 			else if(s == 15 && !said15 && isTeleop){
-				var audio = new Audio('voice\\15seconds.mp3');
+				audio = new Audio('voice\\15seconds.mp3');
 				audio.play();
 				said15 = true;
 			}
 			else if(s == 10 && !said10 && isTeleop){
-				var audio = new Audio('voice\\10seconds.mp3');
+				audio = new Audio('voice\\10seconds.mp3');
 				audio.play();
 				said10 = true;
 			}
 			else if(s == 5 && !said5 && isTeleop){
-				var audio = new Audio('voice\\5seconds.mp3');
+				audio = new Audio('voice\\5seconds.mp3');
 				audio.play();
 				said5 = true;
 			}
@@ -122,22 +110,22 @@ function onValueChanged(key, value, isNew) {
 			break;
 
 		case '/SmartDashboard/warnings/none':
-			if(value) document.getElementById("None").style.visibility="visible";
+			if(value) $("#None").css("visibility", "visible");
 			break;
 		case '/SmartDashboard/warnings/collision':
-			if(value) document.getElementById("Collision").style.visibility="visible";
+			if(value) $("#Collision").css("visibility", "visible");
 			break;
 		case '/SmartDashboard/warnings/pneumatics':
-			if(value) document.getElementById("Pneumatics").style.visibility="visible";
+			if(value) $("#Pneumatics").css("visibility", "visible");
 			break;
 		case '/SmartDashboard/warnings/temperature':
-			if(value) document.getElementById("Temperature").style.visibility="visible";
+			if(value) $("#Temperature").css("visibility", "visible");
 			break;
 		case '/SmartDashboard/warnings/collision':
-			if(value) document.getElementById("Collision").style.visibility="visible";
+			if(value) $("#Collision").css("visibility", "visible");
 			break;
 		case '/SmartDashboard/warnings/done':
-			if(value) document.getElementById("Done").style.visibility="visible";
+			if(value) $("#Done").css("visibility", "visible");
 			break;
 
 		case '/SmartDashboard/climbingRope':
@@ -146,8 +134,10 @@ function onValueChanged(key, value, isNew) {
 			break;
 		case '/SmartDashboard/climbHeight':
 			updateClimbHeight(value);
+			break;
 		case '/SmartDashboard/pressure':
 			updatePressure(value);
+			break;
 	}
 }
 
@@ -155,110 +145,104 @@ function onValueChanged(key, value, isNew) {
 
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
+  tabcontent = $(".tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+      tabcontent.eq(i).css("display", "none");
   }
-  tablinks = document.getElementsByClassName("tablinks");
+  tablinks = $(".tablinks");
   for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tablinks.eq(i).removeClass("active");
   }
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
+  $(tabName).css("display", "block");
+	$(evt.currentTarget).addClass("active");
 }
 
 function updateClimbHeight(inches) {
-	document.getElementById("climbMeter").value = inches;
-	document.getElementById("climbNumber").innerHTML = inches;
+	$("#climbMeter").slider('value', inches);
+	$("#climbNumber").html(inches);
 }
 
 function updatePressure(pressure) {
-	document.getElementById("pressureMeter").value = pressure;
-	document.getElementById("pressureNumber").innerHTML = pressure;
+	$("#pressureMeter").slider('value', pressure);
+	$("#pressureNumber").html(pressure);
 }
 
 function cameraSelect() {
-	document.getElementById("cameraSelection").style.visibility="hidden";
-	if (document.getElementById("camera8070").checked) {
-		document.getElementById("camera1").style.visibility="visible";
+	$("#cameraSelection").css("visibility", "hidden");
+	if ($("#camera8070").is(':checked')) {
+		$("#camera1").css("visibility", "visible");
 		$("#camera1").addClass("animated fadeInRight");
-		document.getElementById("camera2").style.visibility="hidden";
-	} else if (document.getElementById("camera8080").checked) {
-		document.getElementById("camera2").style.visibility="visible";
+		$("#camera2").css("visibility", "hidden");
+	} else if ($("#camera8080").is(':checked')) {
+		$("#camera2").css("visibility", "visible");
 		$("#camera2").addClass("animated fadeInRight");
-		document.getElementById("camera1").style.visibility="hidden";
+		$("#camera1").css("visibility", "hidden");
 	}
 }
 
 function climb(climbing) {
+	var id = setInterval(frame, 5);
+	var angle = 0;
 	if (climbing == 1) {
-		var elem = document.getElementById("climb");
-	  var angle = 0;
-	  var id = setInterval(frame, 5);
 	  function frame() {
 			angle++;
-			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
+			$("#climb").css('transform', 'rotate(' + angle + 'deg)');
 	  }
 	} else if (climbing == -1) {
-		var elem = document.getElementById("climb");
-	  var angle = 0;
-	  var id = setInterval(frame, 5);
 	  function frame() {
 			angle--;
-			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
+			$("#climb").css('transform', 'rotate(' + angle + 'deg)');
 	  }
 	} else if (climbing == 0) {
-		var elem = document.getElementById("climb");
-	  var angle = 0;
-	  var id = setInterval(frame, 5);
 	  function frame() {
-			document.getElementById("climb").style.transform = 'rotate(' + angle + 'deg)';
+			$("#climb").css('transform', 'rotate(' + angle + 'deg)');
 	  }
 	}
 }
 
 function pneumatics(move) {
-	var elem = document.getElementById("pneumatics");
+	var id = setInterval(frame, 5);
 	var yPos = 0;
 	if (move == 1) {
-	  var id = setInterval(frame, 5);
 	  function frame() {
 			if (yPos > -30) {
 				yPos--;
-				elem.style.transform = 'translateY(' + yPos + 'px)';
+				$("#pneumatics").css('transform', 'translateY(' + yPos + 'px)');
 			}
 	  }
 	} else if (move == -1){
-	  var id = setInterval(frame, 5);
 	  function frame() {
 			if (yPos < 30) {
 				yPos++;
-				elem.style.transform = 'translateY(' + yPos + 'px)';
+				$("#pneumatics").css('transform', 'translateY(' + yPos + 'px)');
 			}
 	  }
 	}
 }
 
 function addListeners() {
-	document.getElementById("Nothing").addEventListener("change", autoDisable);
-	dash.miniRobot.addEventListener("touchmove", getTouchPosition, false);
-	dash.miniRobot.addEventListener("touchend", function() {
-		dash.miniRobot.style.backgroundColor = "red";
-	}, false);
+	$("#Nothing").on("change", autoDisable);
+	$("#miniRobot").on("touchmove", getTouchPosition);
+	$("#miniRobot").on("touchend", function() {
+		$("#miniRobot").css("background-color", "red");
+		dash.x = -1;
+		dash.y = -1;
+		// Write x and y to NetworkTables to show touchend
+	});
 }
 
 function autoDisable() {
-	if(document.getElementById("Nothing").checked) {
-		document.getElementById("Hopper").disabled=true; document.getElementById("Hopper").checked=false;
-		document.getElementById("Dump").disabled=true; document.getElementById("Dump").checked=false;
-		document.getElementById("Gear").disabled=true; document.getElementById("Gear").checked=false;
-		document.getElementById("Baseline").disabled=true; document.getElementById("Baseline").checked=false;
+	if($("#Nothing").is(':checked')) {
+		$("#Hopper").prop("disabled", true); $("#Hopper").prop("checked", false);
+		$("#Dump").prop("disabled", true); $("#Dump").prop("checked", false);
+		$("#Gear").prop("disabled", true); $("#Gear").prop("checked", false);
+		$("#Baseline").prop("disabled", true); $("#Baseline").prop("checked", false);
 	}
 	else {
-		document.getElementById("Hopper").disabled=false;
-		document.getElementById("Dump").disabled=false;
-		document.getElementById("Gear").disabled=false;
-		document.getElementById("Baseline").disabled=false;
+		$("#Hopper").prop("disabled", false);
+		$("#Dump").prop("disabled", false);
+		$("#Gear").prop("disabled", false);
+		$("#Baseline").prop("disabled", false);
 	}
 }
 
@@ -274,11 +258,14 @@ function pixelsToInches(height, base) {
 
 	// Height ratio: 1.051612903 in per px
 	// Width ratio: 1.14893617 in per px
-	var inchesHeight = height * 1.051612903;
-	var inchesWidth = base * 1.14893617;
-
-	console.log(inchesHeight + " inches height");
-	console.log(inchesWidth + " inches width");
+	if (height != -1 && base != -1) {
+		var inchesHeight = height * 1.051612903;
+		var inchesWidth = base * 1.14893617;
+		console.log(inchesHeight + " inches height");
+		console.log(inchesWidth + " inches width");
+	} else {
+		console.log("-1");
+	}
 
 	//NetworkTables.putNumber("fieldX", inchesWidth);
 	//NetworkTables.putNumber("fieldY", inchesHeight);
@@ -286,15 +273,14 @@ function pixelsToInches(height, base) {
 
 function checkTeleop() {
 	if (isTeleop) {
-		document.getElementById("auto-label").style.visibility = "hidden";
-		document.getElementById("teleop-label").style.visibility = "visible";
+		$("#auto-label").css("visibility", "hidden");
+		$("#teleop-label").css("visibility", "visible");
 		$("#teleop-label").addClass("animated fadeInLeft");
 	} else if (!isTeleop) {
-		document.getElementById("teleop-label").style.visibility = "hidden";
-		document.getElementById("auto-label").style.visibility = "visible";
+		$("#teleop-label").css("visibility", "hidden");
+		$("#auto-label").css("visibility", "visible");
 		$("#auto-label").addClass("animated fadeInLeft");
 	}
-	//console.log(isTeleop);
 }
 
 function getTouchPosition(event) {
@@ -303,18 +289,17 @@ function getTouchPosition(event) {
 	var up = 50;
 	var down = 670;
 
-	dash.miniRobot.style.backgroundColor = "green";
+	$("#miniRobot").css('background-color', 'green');
 	var touch = event.targetTouches[0];
 	var x = touch.pageX-25;
 	var y = touch.pageY-25;
-	var airship1 = document.getElementById("airship1");
 
 	if (x >= left && x <= right) { // Keep these conditionals separate so the robot can be dragged along the edge
 			// Place element where the finger is
-		dash.miniRobot.style.left = x + 'px';
+		$("#miniRobot").css("left", x + 'px');
 	}
 	if (y >= up && y <= down) {
-		dash.miniRobot.style.top = y + 'px';
+		$("#miniRobot").css("top", y + 'px');
 	}
 
 	if (x > right) x = right;
@@ -322,17 +307,18 @@ function getTouchPosition(event) {
 	if (y < up)  y = up;
 	if (y > down) y = down;
 
-	if (document.getElementById("redFieldSmall").style.visibility=="visible") { // Matching the computer coordinates to the field coordinates
+	if ($("#redFieldSmall").css("visibility")==="visible") { // Matching the computer coordinates to the field coordinates
 		y *= -1;
 		x -= left;
 		y += down;
-	} else if (document.getElementById("blueFieldSmall").style.visibility=="visible") {
+	} else if ($("#blueFieldSmall").css("visibility")==="visible") {
 		x *= -1;
 		x += right;
 		y -= up;
 	}
 
-	if (dash.miniRobot.style.backgroundColor == "red") {
+	if ($("#miniRobot").css("backgroundColor") === "red") {
+		console.log("red");
 		x = -1;
 		y = -1;
 	}
@@ -344,44 +330,38 @@ function getTouchPosition(event) {
 }
 
 function switchCam(e) { // Switch camera feeds on key press
-	var blueCam = document.getElementById("camera1");
-	var greenCam = document.getElementById("camera2");
+	// blue is 1, green is 2
 	if (e.keyCode == 61) { // equals/plus button
-		if (blueCam.style.visibility==="visible") {
-			blueCam.style.visibility="hidden";
-			greenCam.style.visibility="visible";
-		} else if (greenCam.style.visibility==="visible") {
-			greenCam.style.visibility="hidden";
-			blueCam.style.visibility="visible";
+		if ($("#camera1").css("visibility")==="visible") {
+			$("#camera1").css("visibility", "hidden");
+			$("#camera2").css("visibility", "visible");
+		} else if ($("#camera2").css("visibility")==="visible") {
+			$("#camera2").css("visibility", "hidden");
+			$("#camera1").css("visibility", "visible");
 		}
 	}
 }
 
 function autoSelect() {
 	var submitted;
-	if (document.getElementById("submitAuto").checked) {
-		var nothing = document.getElementById("Nothing");
-		var hopper = document.getElementById("Hopper");
-		var dump = document.getElementById("Dump");
-		var gear = document.getElementById("Gear");
-		var baseline = document.getElementById("Baseline");
+	if ($("#submitAuto").is(':checked')) {
 
-		if (nothing.checked || hopper.checked || dump.checked || gear.checked || baseline.checked) {
+		if ($("#Nothing").is(':checked') || $("#Hopper").is(':checked') || $("#Dump").is(':checked') || $("#Gear").is(':checked') || $("#Baseline").is(':checked')) {
 			submitted = true;
 			var autoModes = "";
-			if (hopper.checked) autoModes += "hopper";
-			if (dump.checked) autoModes += "dump";
-			if (gear.checked) autoModes += "gear";
-			if (baseline.checked) autoModes += "baseline";
+			if ($("#Hopper").is(':checked')) autoModes += "hopper";
+			if ($("#Dump").is(':checked')) autoModes += "dump";
+			if ($("#Gear").is(':checked')) autoModes += "gear";
+			if ($("#Baseline").is(':checked')) autoModes += "baseline";
 			console.log(autoModes);
 			//NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
 		} else {
-			document.getElementById("submitAuto").checked = false;
+			$("#submitAuto").css('checked', false);
 		}
 	}
 		else {
 		submitted = false;
-		document.getElementById("Auto").reset();
+		$("#Auto").trigger("reset");
 	}
 }
 
@@ -390,7 +370,7 @@ function dashboardInit() { // Called after alliance is submitted
 }
 
 function animate(element_ID, animation) {
-		document.getElementById(element_ID.substring(1)).style.visibility="visible";
+		$(element_ID).css("visibility", "visible");
 		$(element_ID).addClass("animated");
 	  $(element_ID).addClass(animation);
 }
@@ -417,8 +397,8 @@ function allianceSelect() {
 		animate("#tabs", "fadeInLeft");
 		animate("#Auto", "fadeInLeft");
 		animate("#Warnings", "fadeInLeft");
-		document.getElementById("defaultOpen").style.pointerEvents = "auto";
-		document.getElementById("defaultOpen").click();
+		$("#defaultOpen").css('pointer-events', 'auto');
+		$("#defaultOpen").click();
   }, 1000);
 	setTimeout(function () {
 		var id = setInterval(frame, 5);
@@ -438,35 +418,29 @@ function allianceSelect() {
 		animate("#logo", "lightSpeedIn");
   }, 3000);
 
-	var blueFieldSmall = document.getElementById("blueFieldSmall");
-	var redFieldSmall = document.getElementById("redFieldSmall");
-
-	var blueFieldBig = document.getElementById("blueFieldBig");
-	var redFieldBig = document.getElementById("redFieldBig");
-
 	$("#miniRobot").addClass("animated zoomIn");
 
-	if(dash.b1.checked || dash.b2.checked || dash.b3.checked) {
-		blueFieldSmall.style.visibility="visible";
-		dash.miniRobot.src="images/minirobotBlue.png";
-		dash.miniRobot.style.visibility="visible";
+	if($("#blueAlliance1").is(':checked') || $("#blueAlliance2").is(':checked') || $("#blueAlliance3").is(':checked')) {
+		$("#blueFieldSmall").css("visibility", "visible");
+		$("#miniRobot").attr("src", "images/minirobotBlue.png");
+		$("#miniRobot").css("visibility", "visible");
 		animate("#blueFieldBig", "zoomIn");
 	}
 
-	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
-		redFieldSmall.style.visibility="visible";
-		dash.miniRobot.src="images/minirobotRed.png";
-		dash.miniRobot.style.visibility="visible";
+	if($("#redAlliance1").is(':checked') || $("#redAlliance2").is(':checked') || $("#redAlliance3").is(':checked')) {
+		$("#redFieldSmall").css("visibility", "visible");
+		$("#miniRobot").attr("src", "images/minirobotRed.png");
+		$("#miniRobot").css("visibility", "visible");
 		animate("#redFieldBig", "zoomIn");
 	}
 
-	if(dash.b1.checked) dash.miniRobot.style.left = "415px";
-	else if(dash.b2.checked)	dash.miniRobot.style.left = "492px";
-	else if(dash.b3.checked)	dash.miniRobot.style.left = "575px";
+	if($("#blueAlliance1").is(':checked')) $("#miniRobot").css("left", "415px");
+	else if($("#blueAlliance2").is(':checked'))	$("#miniRobot").css("left", "492px");
+	else if($("#blueAlliance3").is(':checked'))	$("#miniRobot").css("left", "575px");
 
-	else if(dash.r1.checked) dash.miniRobot.style.left = "415px";
-	else if(dash.r2.checked)	dash.miniRobot.style.left = "492px";
-	else if(dash.r4.checked)	dash.miniRobot.style.left = "575px";
+	else if($("#redAlliance1").is(':checked')) $("#miniRobot").css("left", "415px");
+	else if($("#redAlliance2").is(':checked'))	$("#miniRobot").css("left", "492px");
+	else if($("#redAlliance3").is(':checked'))	$("#miniRobot").css("left", "575px");
 
 	animate("#cameraSelection", "fadeInRight");
 	dashboardInit();
