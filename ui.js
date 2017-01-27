@@ -389,23 +389,35 @@ function dashboardInit() { // Called after alliance is submitted
 		addListeners();
 }
 
+function animate(element_ID, animation) {
+		document.getElementById(element_ID.substring(1)).style.visibility="visible";
+		$(element_ID).addClass("animated");
+	  $(element_ID).addClass(animation);
+}
+
 function allianceSelect() {
 
-	$("#selectAlliance, #redAlliance1-label, #redAlliance3-label, #blueAlliance2-label").addClass("animated fadeOutLeft");
-	$("#hr, #redAlliance2-label, #blueAlliance1-label, #blueAlliance3-label, #blueAlliance3-label, #submitAlliance-label").addClass("animated fadeOutRight");
+	animate("#selectAlliance", "fadeOutLeft");
+	animate("#redAlliance1-label", "fadeOutLeft");
+	animate("#redAlliance3-label", "fadeOutLeft");
+	animate("#blueAlliance2-label", "fadeOutLeft");
 
-	document.getElementById("timer").style.visibility="visible";
-	$("#timer").addClass("animated fadeInLeft");
+	animate("#hr", "fadeOutRight");
+	animate("#redAlliance2-label", "fadeOutRight");
+	animate("#blueAlliance1-label", "fadeOutRight");
+	animate("#blueAlliance3-label", "fadeOutRight");
+	animate("#submitAlliance-label", "fadeOutRight");
+
+	animate("#timer", "fadeInLeft");
 
 	setTimeout(function () {
-		document.getElementById("state").style.visibility="visible";
-		$("#state").addClass("animated fadeInLeft");
+		animate("#state", "fadeInLeft");
   }, 500);
 	setTimeout(function () {
-		document.getElementById("tabs").style.visibility="visible";
-		$("#tabs, #Auto, #Warnings").addClass("animated fadeInLeft");
+		animate("#tabs", "fadeInLeft");
+		animate("#Auto", "fadeInLeft");
+		animate("#Warnings", "fadeInLeft");
 		document.getElementById("defaultOpen").style.pointerEvents = "auto";
-		document.getElementById("nextOpen").style.pointerEvents = "auto";
 		document.getElementById("defaultOpen").click();
   }, 1000);
 	setTimeout(function () {
@@ -415,18 +427,15 @@ function allianceSelect() {
 	  }
   }, 1500);
 	setTimeout(function () {
-		document.getElementById("robot-diagram").style.visibility = "visible";
-		$("#robot-diagram").addClass("animated fadeInLeft");
+		animate("#robot-diagram", "fadeInLeft");
   }, 2000);
 	setTimeout(function () {
-		document.getElementById("climbMeter").style.visibility = "visible";
-		document.getElementById("climbNumber").style.visibility = "visible";
-		document.getElementById("climbLabel").style.visibility = "visible";
-		$("#climbMeter, #climbNumber, #climbLabel").addClass("animated fadeInRight");
+		animate("#climbMeter", "fadeInRight");
+		animate("#climbNumber", "fadeInRight");
+		animate("#climbLabel", "fadeInRight");
   }, 2500);
 	setTimeout(function () {
-		document.getElementById("logo").style.visibility = "visible";
-		$("#logo").addClass("animated lightSpeedIn");
+		animate("#logo", "lightSpeedIn");
   }, 3000);
 
 	var blueFieldSmall = document.getElementById("blueFieldSmall");
@@ -439,18 +448,16 @@ function allianceSelect() {
 
 	if(dash.b1.checked || dash.b2.checked || dash.b3.checked) {
 		blueFieldSmall.style.visibility="visible";
-		blueFieldBig.style.visibility="visible";
 		dash.miniRobot.src="images/minirobotBlue.png";
 		dash.miniRobot.style.visibility="visible";
-		$("#blueFieldBig").addClass("animated zoomIn");
+		animate("#blueFieldBig", "zoomIn");
 	}
 
 	if(dash.r1.checked || dash.r2.checked || dash.r4.checked) {
 		redFieldSmall.style.visibility="visible";
-		redFieldBig.style.visibility="visible";
 		dash.miniRobot.src="images/minirobotRed.png";
 		dash.miniRobot.style.visibility="visible";
-		$("#redFieldBig").addClass("animated zoomIn");
+		animate("#redFieldBig", "zoomIn");
 	}
 
 	if(dash.b1.checked) dash.miniRobot.style.left = "415px";
@@ -461,37 +468,19 @@ function allianceSelect() {
 	else if(dash.r2.checked)	dash.miniRobot.style.left = "492px";
 	else if(dash.r4.checked)	dash.miniRobot.style.left = "575px";
 
-
-	document.getElementById("cameraSelection").style.visibility="visible";
-	$("#cameraSelection").addClass("animated fadeInRight");
+	animate("#cameraSelection", "fadeInRight");
 	dashboardInit();
 }
 
 function initAllianceSelection() {
-	document.getElementById("selectAlliance").style.visibility="visible";
-	$("#selectAlliance").addClass("animated fadeInLeft");
+	animate("#selectAlliance", "fadeInLeft");
+	animate("#redAlliance1-label", "fadeInLeft");
+	animate("#redAlliance3-label", "fadeInLeft");
+	animate("#blueAlliance2-label", "fadeInLeft");
 
-	document.getElementById("redAlliance1-label").style.visibility="visible";
-	$("#redAlliance1-label").addClass("animated fadeInLeft");
-
-	document.getElementById("redAlliance3-label").style.visibility="visible";
-	$("#redAlliance3-label").addClass("animated fadeInLeft");
-
-	document.getElementById("blueAlliance2-label").style.visibility="visible";
-	$("#blueAlliance2-label").addClass("animated fadeInLeft");
-
-	document.getElementById("hr").style.visibility="visible";
-	$("#hr").addClass("animated fadeInRight");
-
-	document.getElementById("redAlliance2-label").style.visibility="visible";
-	$("#redAlliance2-label").addClass("animated fadeInRight");
-
-	document.getElementById("blueAlliance1-label").style.visibility="visible";
-	$("#blueAlliance1-label").addClass("animated fadeInRight");
-
-	document.getElementById("blueAlliance3-label").style.visibility="visible";
-	$("#blueAlliance3-label").addClass("animated fadeInRight");
-
-	document.getElementById("submitAlliance-label").style.visibility="visible";
-	$("#submitAlliance-label").addClass("animated fadeInLeft");
+	animate("#hr", "fadeInRight");
+	animate("#redAlliance2-label", "fadeInRight");
+	animate("#blueAlliance1-label", "fadeInRight");
+	animate("#blueAlliance3-label", "fadeInRight");
+	animate("#submitAlliance-label", "fadeInRight");
 }
