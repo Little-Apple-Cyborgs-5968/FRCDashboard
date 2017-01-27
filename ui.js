@@ -400,10 +400,12 @@
 		}, 500);
 		setTimeout(function () {
 		 animate("#tabs", "fadeInLeft");
-		 animate("#Auto", "fadeInLeft");
-		 animate("#Warnings", "fadeInLeft");
+		 animate("#Auto", "fadeInUp");
+		 animate("#Warnings", "fadeInUp");
 		 $("#defaultOpen").css('pointer-events', 'auto');
+		 $("#nextOpen").css('pointer-events', 'auto');
 		 $("#defaultOpen").click();
+		 $("#defaultOpen").addClass("active");
 		}, 1000);
 		setTimeout(function () {
 		 var id = setInterval(frame, 5);
@@ -423,7 +425,7 @@
 		 animate("#logo", "lightSpeedIn");
 		}, 3000);
 
-		$("#miniRobot").addClass("animated zoomIn");
+		animate("#miniRobot", "zoomIn");
 
 		if($("#blueAlliance1").is(':checked') || $("#blueAlliance2").is(':checked') || $("#blueAlliance3").is(':checked')) {
 		 $("#blueFieldSmall").css("visibility", "visible");
@@ -452,17 +454,11 @@
 	}
 
 	function initAllianceSelection() {
-		animate("#robo", "fadeIn");
-		animate("#logoBegin", "fadeIn");
-		animate("#selectAlliance", "fadeInLeft");
-		animate("#redAlliance1-label", "fadeInLeft");
-		animate("#redAlliance3-label", "fadeInLeft");
-		animate("#blueAlliance2-label", "fadeInLeft");
-
-		animate("#hr", "fadeInRight");
-		animate("#redAlliance2-label", "fadeInRight");
-		animate("#blueAlliance1-label", "fadeInRight");
-		animate("#blueAlliance3-label", "fadeInRight");
-		animate("#submitAlliance-label", "fadeInRight");
-		//$("#colorSelection").css("visibility", "visible");
+		animate("#robo", "pulse");
+		setTimeout(function () {
+			animate("#logoBegin", "pulse");
+		}, 300);
+		setTimeout(function () {
+			animate("#colorSelection", "pulse");
+	 }, 600);
 	}
