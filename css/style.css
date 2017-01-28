@@ -229,6 +229,22 @@ ul.tab li a:focus, .active {
   width:272px;
 }
 
+#auto1 {
+  visibility: hidden;
+  position: fixed;
+  top: 120px;
+  left: 400px;
+  background-color: #333;
+}
+
+.secondStepAuto {
+  visibility: hidden;
+  position: fixed;
+  top: 400px;
+  left: 400px;
+  background-color: #333;
+}
+
 #defaultOpen, #nextOpen {
   width:135px;
 }
@@ -340,6 +356,10 @@ ul.tab li a:focus, .active {
   position: relative;
   top:11px;
   background: #ff3333;
+}
+
+.skewed:checked + .skewed.step1, .skewed:checked + .skewed.step2 {
+  background: #9900cc;
 }
 
 .skewed.robot-state {

@@ -1,6 +1,7 @@
 	var dash = {
 	 x : -1,
-	 y : -1
+	 y : -1,
+	 autoModes : 0
 	};
 
 	//Whether measured times are in teleop or auto
@@ -221,7 +222,6 @@
 	}
 
 	function addListeners() {
-	 $("#Nothing").on("change", autoDisable);
 	 $("#miniRobot").on("touchmove", getTouchPosition);
 	 $("#miniRobot").on("touchend", function() {
 		 $("#miniRobot").css("background-color", "red");
@@ -229,21 +229,6 @@
 		 dash.y = -1;
 		 // Write x and y to NetworkTables to show touchend
 	 });
-	}
-
-	function autoDisable() {
-	 if($("#Nothing").is(':checked')) {
-		 $("#Hopper").prop("disabled", true); $("#Hopper").prop("checked", false);
-		 $("#Dump").prop("disabled", true); $("#Dump").prop("checked", false);
-		 $("#Gear").prop("disabled", true); $("#Gear").prop("checked", false);
-		 $("#Baseline").prop("disabled", true); $("#Baseline").prop("checked", false);
-	 }
-	 else {
-		 $("#Hopper").prop("disabled", false);
-		 $("#Dump").prop("disabled", false);
-		 $("#Gear").prop("disabled", false);
-		 $("#Baseline").prop("disabled", false);
-	 }
 	}
 
 	function pixelsToInches(height, base) {
@@ -342,29 +327,6 @@
 	 }
 	}
 
-	function autoSelect() {
-	 var submitted;
-	 if ($("#submitAuto").is(':checked')) {
-
-		 if ($("#Nothing").is(':checked') || $("#Hopper").is(':checked') || $("#Dump").is(':checked') || $("#Gear").is(':checked') || $("#Baseline").is(':checked')) {
-			 submitted = true;
-			 var autoModes = "";
-			 if ($("#Hopper").is(':checked')) autoModes += "hopper";
-			 if ($("#Dump").is(':checked')) autoModes += "dump";
-			 if ($("#Gear").is(':checked')) autoModes += "gear";
-			 if ($("#Baseline").is(':checked')) autoModes += "baseline";
-			 console.log(autoModes);
-			 //NetworkTables.putValue("autoModes", autoModes); // Concatenates autoModes string so Java can uses contains() to get modes
-		 } else {
-			 $("#submitAuto").css('checked', false);
-		 }
-	 }
-		 else {
-		 submitted = false;
-		 $("#Auto").trigger("reset");
-	 }
-	}
-
 	function dashboardInit() { // Called after alliance is submitted
 		 addListeners();
 	}
@@ -400,8 +362,9 @@
 		}, 500);
 		setTimeout(function () {
 		 animate("#tabs", "fadeInLeft");
-		 animate("#Auto", "fadeInUp");
+		 animate("#auto1", "fadeInUp");
 		 animate("#Warnings", "fadeInUp");
+		 animate("#Auto", "fadeInUp");
 		 $("#defaultOpen").css('pointer-events', 'auto');
 		 $("#nextOpen").css('pointer-events', 'auto');
 		 $("#defaultOpen").click();
@@ -461,4 +424,63 @@
 		setTimeout(function () {
 			animate("#colorSelection", "pulse");
 	 }, 600);
+	}
+
+	function autoStep2() {
+		console.log("Moving to auto step 2");
+		$("#Hopper1, #Gear1, #Dump1, #Nothing1, #submitStep1-1").prop("disabled", true);
+		if ($("#Hopper1").is(':checked')) {
+			animate("#auto2", "fadeInUp");
+		} else if ($("#Gear1").is(':checked')) {
+			animate("#auto3", "fadeInUp");
+		} else if ($("#Dump1").is(':checked')) {
+			animate("#auto4", "fadeInUp");
+		} else if ($("#Nothing1").is(':checked')) {
+			dash.autoModes = 6;
+			$("#autoModeNumber").text(dash.autoModes);
+			$("#autoModeLabel").text("Nothing");
+			finalAutoSubmit();
+		}
+	}
+
+	function finalAutoSubmit() {
+		$("#Auto").css("display", "block");
+		animate("#Auto", "fadeInDown");
+
+		console.log("Final auto submitted");
+		animate("#auto1", "fadeOutDown");
+		if ($("#auto2").css("visibility")==="visible") {
+			if($("#Dump2").is(':checked')) {
+				dash.autoModes = 1;
+				$("#autoModeNumber").text(dash.autoModes);
+				$("#autoModeLabel").text("Hopper, then Low Goal");
+			} else if($("#Nothing2").is(':checked')) {
+				dash.autoModes = 2;
+				$("#autoModeNumber").text(dash.autoModes);
+				$("#autoModeLabel").text("Hopper, then Nothing");
+			}
+			animate("#auto2", "fadeOutDown");
+		}
+		else if ($("#auto3").css("visibility")==="visible") {
+			if($("#Cross2").is(':checked')) {
+				dash.autoModes = 3;
+				$("#autoModeNumber").text(dash.autoModes);
+				$("#autoModeLabel").text("Gear, then Baseline");
+			} else if ($("#Hopper2").is(':checked')) {
+				dash.autoModes = 4;
+				$("#autoModeNumber").text(dash.autoModes);
+				$("#autoModeLabel").text("Gear, then Hopper");
+			}
+			animate("#auto3", "fadeOutDown");
+		}
+		else if ($("#auto4").css("visibility")==="visible") {
+			if ($("#Cross3").is(':checked')) {
+				dash.autoModes = 5;
+				$("#autoModeNumber").text(dash.autoModes);
+				$("#autoModeLabel").text("Low Goal, then Baseline");
+			}
+			animate("#auto4", "fadeOutDown");
+		}
+		console.log(dash.autoModes);
+		//NetworkTables.putNumber("autoMode", dash.autoModes);
 	}
