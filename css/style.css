@@ -164,6 +164,8 @@ aside > * {
   z-index:2;
   background-color:"red";
   padding:2px;
+  height: 37.798px;
+  width: 33.309px;
 }
 
 /* END ROBOT AND FIELD */
@@ -296,12 +298,13 @@ ul.tab li a:focus, .active {
   height: 80px;
 }
 
-#teleop-label, #auto-label {
-  visibility: hidden;
+#auto-label, #teleop-label {
+  display: none;
   position: absolute;
 }
 
 #auto-label {
+  display: inline-flex;
   background: #ff3333;
 }
 
