@@ -145,13 +145,40 @@ function onValueChanged(key, value, isNew) {
 
 		case '/SmartDashboard/currentX':
 			dash.currentX = value;
-			updateRobotPosition();
+			robotChange(currentX, dash.currentY);
 			break;
 		case '/SmartDashboard/currentY':
 			dash.currentY = value;
-			updateRobotPosition();
+			robotChange(dash.currentX, currentY);
 			break;
 	 }
+}
+
+function robotChange(x, y) {
+  var left = 344;
+  var right = 648;
+  var up = 50;
+  var down = 685;
+
+  var x = 200;
+  var y = 50;
+
+  console.log("robotChange");
+
+  if ($("#redFieldSmall").css("visibility")==="visible") {
+    y *= -1;
+ 	  x += left;
+ 	  y += down;
+
+  } else if ($("#blueFieldSmall").css("visibility")==="visible") {
+    x *= -1;
+ 	  x += right;
+ 	  y += up;
+ }
+
+
+  updateRobotPosition("y", y);
+  updateRobotPosition("x", x);
 }
 
 // Automode and Warning tabs
@@ -328,10 +355,13 @@ function pixelsToInches(height, base) {
 	event.preventDefault();
 }
 
-function updateRobotPosition(x, y) {
-
-	$("#miniRobot").css("left", x + 'px');
-	$("#miniRobot").css("top", y + 'px');
+// Update robot position on computer
+function updateRobotPosition(dimension, pixel) {
+  if (dimension === "x") {
+    $("#miniRobot").css("left", pixel + 'px');
+  } else if (dimension === "y") {
+    $("#miniRobot").css("top", pixel + 'px');
+  }
 }
 
 function switchCam(e) { // Switch camera feeds on key press
@@ -498,5 +528,6 @@ function finalAutoSubmit() {
 		animate("#auto4", "fadeOutDown");
 	}
 	console.log(dash.autoModes);
+  robotChange();
 	//NetworkTables.putNumber("autoMode", dash.autoModes);
 }
