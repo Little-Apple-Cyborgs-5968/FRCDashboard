@@ -160,7 +160,7 @@ aside > * {
 #miniRobot {
   position:relative;
   visibility: hidden;
-  top: 670px;
+  top: 685px;
   z-index:2;
   background-color:"red";
   padding:2px;

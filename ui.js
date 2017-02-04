@@ -296,15 +296,15 @@ function pixelsToInches(height, base) {
 	}
 
 	function checkTeleop() {
-	if (isTeleop) {
-	 $("#auto-label").hide();
-	 $("#teleop-label").css("display", "inline-flex");
-	 console.log("isTeleop");
-	} else if (!isTeleop) {
-	 $("#teleop-label").hide();
-	 $("#auto-label").css("display", "inline-flex");
-	 console.log("NOT isTeleop");
-	}
+  	if (isTeleop) {
+  	 $("#auto-label").hide();
+  	 $("#teleop-label").css("display", "inline-flex");
+  	 console.log("isTeleop");
+  	} else if (!isTeleop) {
+  	 $("#teleop-label").hide();
+  	 $("#auto-label").css("display", "inline-flex");
+  	 console.log("NOT isTeleop");
+  	}
 	}
 
 	function getTouchPosition(event) {
@@ -446,19 +446,26 @@ function allianceSelect() {
 	}
 
 	if($("#redAlliance1").is(':checked') || $("#redAlliance2").is(':checked') || $("#redAlliance3").is(':checked')) {
-	 $("#redFieldSmall").css("visibility", "visible");
-	 $("#miniRobot").attr("src", "images/minirobotRed.png");
-	 $("#miniRobot").css("visibility", "visible");
-	 animate("#redFieldBig", "zoomIn");
+    $("#redFieldSmall").css("visibility", "visible");
+    $("#miniRobot").attr("src", "images/minirobotRed.png");
+    $("#miniRobot").css("visibility", "visible");
+    animate("#redFieldBig", "zoomIn");
 	}
 
-	if($("#blueAlliance1").is(':checked')) $("#miniRobot").css("left", "415px");
-	else if($("#blueAlliance2").is(':checked'))	$("#miniRobot").css("left", "492px");
-	else if($("#blueAlliance3").is(':checked'))	$("#miniRobot").css("left", "575px");
+  var left = 344;
+  var widthRatio = 1.065789474;
 
-	else if($("#redAlliance1").is(':checked')) $("#miniRobot").css("left", "415px");
-	else if($("#redAlliance2").is(':checked'))	$("#miniRobot").css("left", "492px");
-	else if($("#redAlliance3").is(':checked'))	$("#miniRobot").css("left", "575px");
+  var midline = (162/widthRatio) + 344;
+  var retrieval = (83.238/widthRatio) + 344;
+  var key = (57.8553009/widthRatio) + 344;
+
+	if($("#blueAlliance1").is(':checked')) $("#miniRobot").css("left", retrieval + "px");
+	else if($("#blueAlliance2").is(':checked'))	$("#miniRobot").css("left", midline + "px");
+	else if($("#blueAlliance3").is(':checked'))	$("#miniRobot").css("left", key + "px");
+
+	else if($("#redAlliance1").is(':checked')) $("#miniRobot").css("left", retrieval + "px");
+	else if($("#redAlliance2").is(':checked'))	$("#miniRobot").css("left", midline + "px");
+	else if($("#redAlliance3").is(':checked'))	$("#miniRobot").css("left", key + "px");
 
 	animate("#cameraSelection", "fadeInRight");
 	dashboardInit();
@@ -528,6 +535,5 @@ function finalAutoSubmit() {
 		animate("#auto4", "fadeOutDown");
 	}
 	console.log(dash.autoModes);
-  robotChange();
 	//NetworkTables.putNumber("autoMode", dash.autoModes);
 }
