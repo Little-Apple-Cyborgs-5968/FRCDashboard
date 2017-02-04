@@ -139,9 +139,6 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/climbHeight':
 			 updateClimbHeight(value);
 			 break;
-		case '/SmartDashboard/pressure':
-			 updatePressure(value);
-			 break;
 
 		case '/SmartDashboard/currentX':
 			dash.currentX = value;
@@ -291,8 +288,8 @@ function pixelsToInches(height, base) {
 	 console.log("-1");
 	}
 
-	//NetworkTables.putNumber("fieldX", inchesWidth);
-	//NetworkTables.putNumber("fieldY", inchesHeight);
+	//NetworkTables.putNumber("/SmartDashbard/fieldX", inchesWidth);
+	//NetworkTables.putNumber("/SmartDashboard/fieldY", inchesHeight);
 	}
 
 	function checkTeleop() {
@@ -535,5 +532,5 @@ function finalAutoSubmit() {
 		animate("#auto4", "fadeOutDown");
 	}
 	console.log(dash.autoModes);
-	//NetworkTables.putNumber("autoMode", dash.autoModes);
+	//NetworkTables.putNumber("/SmartDashboard/autoMode", dash.autoModes);
 }
