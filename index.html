@@ -36,25 +36,6 @@
       <form id="Auto" class="tabcontent"><br>
         <p align="middle" class="text" id="autoModeNumber">Auto Number</p><br><br>
         <p align="middle" class="text" id="autoModeLabel">Auto Name</p><br>
-        <!--
-        <input class='skewed' id='Baseline' type='checkbox'>
-        <label class='skewed' data-tg-off='Baseline' data-tg-on='Baseline' for='Baseline'></label> <br>
-
-        <input class='skewed' id='Dump' type='checkbox'>
-        <label class='skewed' data-tg-off='Low Goal' data-tg-on='Low Goal' for='Dump'></label> <br>
-
-        <input class='skewed' id='Gear' type='checkbox'>
-        <label class='skewed' data-tg-off='Gear' data-tg-on='Gear' for='Gear'></label> <br>
-
-        <input class='skewed' id='Hopper' type='checkbox'>
-        <label class='skewed' data-tg-off='Hopper' data-tg-on='Hopper' for='Hopper'></label> <br>
-
-        <input class='skewed' id='Nothing' type='checkbox'>
-        <label class='skewed' data-tg-off='Nothing' data-tg-on='Nothing' for='Nothing'></label> <br><br>
-
-        <input class='skewed' id='submitAuto' type='checkbox' onchange='javascript:autoSelect();'>
-        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitAuto'></label>
-      -->
       </form>
 
       <div id="Warnings" class="tabcontent">
@@ -179,7 +160,7 @@
 
 
       <img src="images/minirobot.png" id="miniRobot">
-      <img src="images/CyborgIndians.png" id="logo">
+      <!--<img src="images/CyborgIndians.png" id="logo">-->
 
       <img src="images/robo.png" id="robo">
       <img src="images/CyborgIndians.png" id="logoBegin">
@@ -202,11 +183,9 @@
       <span id="climbLabel">Climb Height</span>
       <input type="range" id="climbMeter" min="0" max="58" value="0" />
       <span id="climbNumber">0</span>
-<!--
-      <span id="pressureLabel">Pressure</span>
-      <input type="range" id="pressureMeter" min="0" max="100" value="0" />
-      <span id="pressureNumber">0</span>
--->
+      <span id="climbTimerLabel">Climb Time</span>
+      <span class="animated" id="climbTimer">17</span>
+
       <svg id="robot-diagram" width="320" height="200">
           <rect x="28" y="10" width="150" height ="100" />
           <rect x="195" y="50" width="55" height="70" />

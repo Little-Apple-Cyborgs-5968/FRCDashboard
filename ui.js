@@ -138,6 +138,7 @@ function onValueChanged(key, value, isNew) {
 			 break;
 		case '/SmartDashboard/climbHeight':
 			 updateClimbHeight(value);
+       startTimer();
 			 break;
 
 		case '/SmartDashboard/currentX':
@@ -149,6 +150,20 @@ function onValueChanged(key, value, isNew) {
 			robotChange(dash.currentX, currentY);
 			break;
 	 }
+}
+
+function startTimer() {
+  console.log("Timer started");
+  var interval = 0;
+  var remaining = 17;
+  for (var i = 17; i > 0; i--) {
+    interval+=1000;
+    setTimeout(function () {
+      remaining--;
+  	 $("#climbTimer").text(remaining);
+     console.log(remaining);
+   }, interval);
+ }
 }
 
 function robotChange(x, y) {
@@ -429,9 +444,10 @@ function allianceSelect() {
 	 animate("#climbNumber", "fadeInRight");
 	 animate("#climbLabel", "fadeInRight");
 	}, 2500);
-	setTimeout(function () {
-	 animate("#logo", "lightSpeedIn");
-	}, 3000);
+  setTimeout(function () {
+	 animate("#climbTimer", "fadeInRight");
+   animate("#climbTimerLabel", "fadeInRight");
+  }, 3000);
 
 	animate("#miniRobot", "zoomIn");
 

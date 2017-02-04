@@ -468,17 +468,25 @@ ul.tab li a:focus, .active {
   visibility: hidden;
 }
 
-#timer {
+#timer, #climbTimer {
   visibility: hidden;
   position: absolute;
   font-family: monospace;
   display: block;
   height: 20vh;
   width: 35vw;
-  top: 0;
-  left: 25px;
   font-size: 15vh;
   line-height: .8;
+}
+
+#timer {
+  top: 0;
+  left: 25px;
+}
+
+#climbTimer {
+  left: 1100px;
+  top: 610px;
 }
 
 #climb {
@@ -496,12 +504,12 @@ ul.tab li a:focus, .active {
   letter-spacing: -1px;
 }
 
-#logo {
+/*#logo {
   visibility: hidden;
-  height: 140px;
+  height: 40px;
   top: 600px;
   left: 720px;
-}
+}*/
 
 #robo {
   height: 400px;
@@ -521,12 +529,22 @@ ul.tab li a:focus, .active {
 
 /* BEGIN METERS */
 
-#climbLabel {
+#climbLabel, #climbTimerLabel {
   visibility: hidden;
   position: absolute;
+}
+
+#climbLabel {
   top: 495px;
   left: 980px;
   font-size: 20px;
+}
+
+#climbTimerLabel {
+  top: 640px;
+  left: 850px;
+  font-size:30px;
+  font-family: "Lato", sans-serif;
 }
 
 #climbMeter {
