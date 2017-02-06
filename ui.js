@@ -133,8 +133,8 @@ function onValueChanged(key, value, isNew) {
 			 break;
 
 		case '/SmartDashboard/climbingRope':
-			 if (value == -1) climb(-1);
-			 else if (value == 1) climb(1);
+			 if (value == -1) changeClimb("yellow");
+			 else if (value == 1) changeClimb("green");
 			 break;
 		case '/SmartDashboard/climbHeight':
 			 updateClimbHeight(value);
@@ -232,49 +232,39 @@ function cameraSelect() {
  }
 }
 
-function climb(climbing) {
- var id = setInterval(frame, 5);
- var angle = 0;
- if (climbing == 1) {
-	 function frame() {
-		 angle++;
-		 $("#climb").css('transform', 'rotate(' + angle + 'deg)');
-	 }
- } else if (climbing == -1) {
-	 function frame() {
-		 angle--;
-		 $("#climb").css('transform', 'rotate(' + angle + 'deg)');
-	 }
- } else if (climbing == 0) {
-	 function frame() {
-		 $("#climb").css('transform', 'rotate(' + angle + 'deg)');
-	 }
- }
+function changeClimb(color) {
+  if (color === "green") {
+    $("#climb").css({ fill: "#64ce74" });
+  } else if (color === "yellow") {
+    $("#climb").css({ fill: "#ffe066" });
+  } else if (color === "red") {
+    $("#climb").css({ fill: "#ff3333" });
+  }
 }
 
-function pneumatics(move) {
- var id = setInterval(frame, 5);
- var yPos = 0;
- if (move == 1) {
-	 function frame() {
-		 if (yPos > -30) {
-			 yPos--;
-			 $("#pneumatics").css('transform', 'translateY(' + yPos + 'px)');
-		 }
-	 }
- } else if (move == -1){
-	 function frame() {
-		 if (yPos < 30) {
-			 yPos++;
-			 $("#pneumatics").css('transform', 'translateY(' + yPos + 'px)');
-		 }
-	 }
- }
+function climb() {
+  var angle = 0;
+  var id1;
+  id1 = setInterval(frame, 5);
+  function frame() {
+     angle++;
+     $("#climb").css('transform', 'rotate(' + angle + 'deg)');
+  }
+}
+
+function pneumatics(color) {
+  if (color === "green") {
+    console.log("Pneumatics turning green");
+    $("#pneumatics").css({ fill: "#64ce74" });
+  } else if (color === "red") {
+    console.log("Pneumatics turning red");
+    $("#pneumatics").css({ fill: "#ff3333" });
+  }
 }
 
 function addListeners() {
- $("#miniRobot").on("touchmove", getTouchPosition);
- $("#miniRobot").on("touchend", function() {
+  $("#miniRobot").on("touchmove", getTouchPosition);
+  $("#miniRobot").on("touchend", function() {
 	 $("#miniRobot").css("background-color", "red");
 	 dash.x = -1;
 	 dash.y = -1;
@@ -387,6 +377,22 @@ function switchCam(e) { // Switch camera feeds on key press
 		 $("#camera1").css("visibility", "visible");
 	 }
  }
+ else if(e.keyCode == 99) {
+   console.log("Climbing now");
+   changeClimb("green");
+ } else if(e.keyCode == 115) {
+   console.log("Climbing stop");
+   changeClimb("red");
+ } else if(e.keyCode == 98) {
+   console.log("Climbing backwards");
+   changeClimb("yellow");
+ } else if(e.keyCode == 117) {
+   console.log("Pneumatics up");
+   pneumatics("green");
+ } else if(e.keyCode == 100) {
+   console.log("Pneumatics down");
+   pneumatics("red");
+ }
 }
 
 function dashboardInit() { // Called after alliance is submitted
@@ -400,7 +406,6 @@ function animate(element_ID, animation) {
 }
 
 function allianceSelect() {
-
 	animate("#robo", "fadeOut");
 	animate("#logoBegin", "fadeOut");
 
@@ -438,6 +443,9 @@ function allianceSelect() {
  	}, 1500);
 	setTimeout(function () {
 	 animate("#robot-diagram", "fadeInLeft");
+   pneumatics("red");
+   climb();
+   changeClimb("red");
 	}, 2000);
 	setTimeout(function () {
 	 animate("#climbMeter", "fadeInRight");
@@ -485,6 +493,11 @@ function allianceSelect() {
 }
 
 function initAllianceSelection() {
+  $(document).keypress(function(event)
+{
+console.log(event.keyCode);
+});
+
 	animate("#robo", "pulse");
 	setTimeout(function () {
 		animate("#logoBegin", "pulse");
