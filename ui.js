@@ -149,6 +149,9 @@ function onValueChanged(key, value, isNew) {
 			dash.currentY = value;
 			robotChange(dash.currentX, currentY);
 			break;
+    case '/SmartDashboard/pneumatics':
+      if (value) pneumatics("green");
+      else if(!value) pneumatics("red");
 	 }
 }
 
