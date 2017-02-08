@@ -312,6 +312,34 @@ ul.tab li a:focus, .active {
   top: 28px;
 }
 
+#chooseHopper {
+  visibility: hidden;
+  position: fixed;
+  top: 200px;
+  left: 405px;
+  background: #333;
+}
+
+#redHopper:checked + #redHopper-label {
+  background: #ff0000;
+}
+
+#orangeHopper:checked + #orangeHopper-label {
+  background: #ff7100;
+}
+
+#greenHopper:checked + #greenHopper-label {
+  background: #00c600;
+}
+
+#blueHopper:checked + #blueHopper-label {
+  background: #0054ff;
+}
+
+#purpleHopper:checked + #purpleHopper-label {
+  background: #a200ff;
+}
+
 #colorSelection {
   visibility: hidden;
   position: fixed;

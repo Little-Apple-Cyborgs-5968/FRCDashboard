@@ -125,15 +125,10 @@ function onValueChanged(key, value, isNew) {
 		case '/SmartDashboard/warnings/temperature':
 			 if(value) $("#Temperature").css("visibility", "visible");
 			 break;
-		case '/SmartDashboard/warnings/collision':
-			 if(value) $("#Collision").css("visibility", "visible");
-			 break;
-		case '/SmartDashboard/warnings/done':
-			 if(value) $("#Done").css("visibility", "visible");
-			 break;
 
 		case '/SmartDashboard/climbingRope':
 			 if (value == -1) changeClimb("yellow");
+       else if (value == 0) changeClimb("red");
 			 else if (value == 1) changeClimb("green");
 			 break;
 		case '/SmartDashboard/climbHeight':
@@ -510,19 +505,48 @@ console.log(event.keyCode);
  }, 600);
 }
 
+function hopperChoiceSubmit() {
+  var hopperChoice = 0;
+  console.log("Hopper submitted");
+  if ($("#redHopper").is(':checked')) {
+    hopperChoice = 5;
+  } else if ($("#orangeHopper").is(':checked')) {
+    hopperChoice = 4;
+  } else if ($("#greenHopper").is(':checked')) {
+    hopperChoice = 3;
+  } else if ($("#blueHopper").is(':checked')) {
+    hopperChoice = 1;
+  } else if ($("#purpleHopper").is(':checked')) {
+    hopperChoice = 2;
+  }
+  //NetworkTables.putNumber("/SmartDashboard/hopperChoice", hopperChoice);
+  animate("#chooseHopper", "fadeOutDown");
+  console.log(hopperChoice);
+  $("#hopperChoiceLabel").text("Hopper: " + hopperChoice);
+}
+
 function autoStep2() {
 	console.log("Moving to auto step 2");
 	$("#Hopper1, #Gear1, #Dump1, #Nothing1, #submitStep1-1").prop("disabled", true);
 	if ($("#Hopper1").is(':checked')) {
 		animate("#auto2", "fadeInUp");
 	} else if ($("#Gear1").is(':checked')) {
-		animate("#auto3", "fadeInUp");
-	} else if ($("#Dump1").is(':checked')) {
-		animate("#auto4", "fadeInUp");
+    dash.autoModes = 6;
+		$("#autoModeNumber").text(dash.autoModes);
+		$("#autoModeLabel").text("Gear");
+    $("#hopperChoiceLabel").text("No Hopper Choice");
+		finalAutoSubmit();
+	} else if ($("#Cross1").is(':checked')) {
+    dash.autoModes = 5;
+		$("#autoModeNumber").text(dash.autoModes);
+		$("#autoModeLabel").text("Cross Baseline");
+    $("#hopperChoiceLabel").text("No Hopper Choice");
+		finalAutoSubmit();
 	} else if ($("#Nothing1").is(':checked')) {
-		dash.autoModes = 6;
+		dash.autoModes = 7;
 		$("#autoModeNumber").text(dash.autoModes);
 		$("#autoModeLabel").text("Nothing");
+    $("#hopperChoiceLabel").text("No Hopper Choice");
 		finalAutoSubmit();
 	}
 }
@@ -542,26 +566,7 @@ function finalAutoSubmit() {
 			$("#autoModeLabel").text("Hopper, then Nothing");
 		}
 		animate("#auto2", "fadeOutDown");
-	}
-	else if ($("#auto3").css("visibility")==="visible") {
-		if($("#Cross2").is(':checked')) {
-			dash.autoModes = 3;
-			$("#autoModeNumber").text(dash.autoModes);
-			$("#autoModeLabel").text("Gear, then Baseline");
-		} else if ($("#Hopper2").is(':checked')) {
-			dash.autoModes = 4;
-			$("#autoModeNumber").text(dash.autoModes);
-			$("#autoModeLabel").text("Gear, then Hopper");
-		}
-		animate("#auto3", "fadeOutDown");
-	}
-	else if ($("#auto4").css("visibility")==="visible") {
-		if ($("#Cross3").is(':checked')) {
-			dash.autoModes = 5;
-			$("#autoModeNumber").text(dash.autoModes);
-			$("#autoModeLabel").text("Low Goal, then Baseline");
-		}
-		animate("#auto4", "fadeOutDown");
+    animate("#chooseHopper", "fadeInUp");
 	}
 	console.log(dash.autoModes);
 	//NetworkTables.putNumber("/SmartDashboard/autoMode", dash.autoModes);

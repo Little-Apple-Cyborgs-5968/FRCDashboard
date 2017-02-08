@@ -35,7 +35,8 @@
 
       <form id="Auto" class="tabcontent"><br>
         <p align="middle" class="text" id="autoModeNumber">Auto Number</p><br><br>
-        <p align="middle" class="text" id="autoModeLabel">Auto Name</p><br>
+        <p align="middle" class="text" id="autoModeLabel">Auto Name</p><br><br>
+        <p align="middle" class="text" id="hopperChoiceLabel">Hopper Choice</p><br>
       </form>
 
       <div id="Warnings" class="tabcontent">
@@ -45,8 +46,6 @@
           <p id="Collision"> Collision detected </p> <br>
           <p id="Pneumatics"> Pneumatics pressure too low </p> <br>
           <p id="Temperature"> Motor controllers too hot </p> <br>
-          <p id="Collision"> There was a collision! </p> <br>
-          <p id="Done"> Task completed </p> <br>
         </div>
       </div>
 
@@ -105,8 +104,8 @@
         <input class='skewed' id='Gear1' name="autoStep1" type='radio'>
         <label class='skewed step1' id='Gear1-label' data-tg-off='Gear' data-tg-on='Gear' for='Gear1'></label> <br>
 
-        <input class='skewed' id='Dump1' name="autoStep1" type='radio'>
-        <label class='skewed step1' id='Dump1-label' data-tg-off='Dump' data-tg-on='Dump' for='Dump1'></label> <br>
+        <input class='skewed' id='Cross1' name="autoStep1" type='radio'>
+        <label class='skewed step1' id='Cross1-label' data-tg-off='Cross' data-tg-on='Cross' for='Cross1'></label> <br>
 
         <input class='skewed' id='Nothing1' name="autoStep1" type='radio'>
         <label class='skewed step1' id='Nothing1-label' data-tg-off='Nothing' data-tg-on='Nothing' for='Nothing1'></label> <br><br>
@@ -146,18 +145,30 @@
 
       </form>
 
-      <form id="auto4" class="secondStepAuto">
-        <p align="middle" class="text" id="auto4-text">Second Automode:</p><br>
+      <!-- Choose hopper -->
+      <form id="chooseHopper">
+        <p align="middle" class="text" id="chooseHopper-text">Choose Hopper:</p><br>
         <hr id='hr'><br>
 
-        <input class='skewed' id='Cross3' name="autoStep2" type='radio'>
-        <label class='skewed step2' id='Cross3-label' data-tg-off='Cross' data-tg-on='Cross' for='Cross3'></label> <br><br>
+        <input class='skewed' id='redHopper' name="hopper" type='radio'>
+        <label class='skewed chooseHopperLabel' id='redHopper-label' data-tg-off='Red Hopper' data-tg-on='Red Hopper' for='redHopper'></label> <br>
 
-        <input class='skewed' id='submitStep2-3' type='checkbox' onchange = 'javascript:finalAutoSubmit();'>
-        <label class='skewed step2' id='submitStep2-label3' data-tg-off='Submit' data-tg-on='Submit' for='submitStep2-3'></label>
+        <input class='skewed' id='orangeHopper' name="hopper" type='radio'>
+        <label class='skewed chooseHopperLabel' id='orangeHopper-label' data-tg-off='Orange Hopper' data-tg-on='Orange Hopper' for='orangeHopper'></label> <br>
+
+        <input class='skewed' id='greenHopper' name="hopper" type='radio'>
+        <label class='skewed chooseHopperLabel' id='greenHopper-label' data-tg-off='Green Hopper' data-tg-on='Green Hopper' for='greenHopper'></label> <br>
+
+        <input class='skewed' id='blueHopper' name="hopper" type='radio'>
+        <label class='skewed chooseHopperLabel' id='blueHopper-label' data-tg-off='Blue Hopper' data-tg-on='Blue Hopper' for='blueHopper'></label> <br>
+
+        <input class='skewed' id='purpleHopper' name="hopper" type='radio'>
+        <label class='skewed chooseHopperLabel' id='purpleHopper-label' data-tg-off='Purple Hopper' data-tg-on='Purple Hopper' for='purpleHopper'></label> <br><br>
+
+        <input class='skewed' id='submitChooseHopper' type='checkbox' onchange = 'javascript:hopperChoiceSubmit();'>
+        <label class='skewed chooseHopperLabel' id='submitChooseHopper-label' data-tg-off='Submit' data-tg-on='Submit' for='submitChooseHopper'></label>
 
       </form>
-
 
       <img src="images/minirobot.png" id="miniRobot">
       <!--<img src="images/CyborgIndians.png" id="logo">-->
