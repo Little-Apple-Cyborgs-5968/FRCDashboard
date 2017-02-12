@@ -478,13 +478,31 @@ function allianceSelect() {
   var retrieval = (83.238/widthRatio) + 344;
   var key = (57.8553009/widthRatio) + 344;
 
-	if($("#blueAlliance1").is(':checked')) $("#miniRobot").css("left", retrieval + "px");
-	else if($("#blueAlliance2").is(':checked'))	$("#miniRobot").css("left", midline + "px");
-	else if($("#blueAlliance3").is(':checked'))	$("#miniRobot").css("left", key + "px");
+	if($("#blueAlliance1").is(':checked')) {
+    $("#miniRobot").css("left", retrieval + "px");
+    //NetworkTables.putNumber("/SmartDashboard/startPosition", 1);
+  }
+	else if($("#blueAlliance2").is(':checked'))	{
+    $("#miniRobot").css("left", midline + "px");
+    //NetworkTables.putNumber("/SmartDashboard/startPosition", 2);
+  }
+	else if($("#blueAlliance3").is(':checked'))	{
+    $("#miniRobot").css("left", key + "px");
+    //NetworkTables.putNumber("/SmartDashboard/startPosition", 3);
+  }
 
-	else if($("#redAlliance1").is(':checked')) $("#miniRobot").css("left", retrieval + "px");
-	else if($("#redAlliance2").is(':checked'))	$("#miniRobot").css("left", midline + "px");
-	else if($("#redAlliance3").is(':checked'))	$("#miniRobot").css("left", key + "px");
+	else if($("#redAlliance1").is(':checked')) {
+    $("#miniRobot").css("left", retrieval + "px");
+    //NetworkTables.putNumber("/SmartDashboard/startPosition", 4);
+  }
+	else if($("#redAlliance2").is(':checked')) {
+    $("#miniRobot").css("left", midline + "px");
+    //NetworkTables.putNumber("/SmartDashboard/startPosition", 5);
+  }
+	else if($("#redAlliance3").is(':checked')) {
+    $("#miniRobot").css("left", key + "px");
+    //NetworkTables.putNumber("/SmartDashboard/startPosition", 5);
+  }
 
 	animate("#cameraSelection", "fadeInRight");
 	dashboardInit();
