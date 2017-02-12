@@ -109,41 +109,6 @@ aside > * {
 
 /* END GENERAL */
 
-/* CAMERA STUFF */
-
-.camera {
-  padding: 0;
-  position: absolute;
-  top:0px;
-  left:726px;
-  width: 640px;
-  height: 480px;
-  overflow: hidden;
-  background-repeat: no-repeat;
-}
-
-#camera1 {
-  background-image: url('http://raspberrypi:8070/?action=stream');
-  background-color: #123; /*blue*/
-  visibility:hidden;
-}
-
-#camera2 {
-  background-image: url('http://raspberrypi:8080/?action=stream');
-  background-color: #132; /*green*/
-  visibility:hidden;
-}
-
-#cameraSelection {
-  visibility: hidden;
-  position: fixed;
-  left:850px;
-  top: 250px;
-  background-color: #222;
-}
-
-/* END CAMERA STUFF */
-
 /* BEGIN ROBOT AND FIELD */
 
 #robot-diagram {

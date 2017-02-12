@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html onkeypress="javascript:switchCam(event);">
+<html onkeypress="javascript:keyPress(event);">
 
   <head>
       <meta charset="utf-8">
@@ -176,21 +176,6 @@
       <img src="images/robo.png" id="robo">
       <img src="images/CyborgIndians.png" id="logoBegin">
 
-      <div id="camera1" class="camera"></div>
-      <div id="camera2" class="camera"></div>
-
-      <form id="cameraSelection">
-        <p align="middle" class="text">Select Default Camera: </p><br>
-        <hr><br>
-        <input class='skewed' id='camera8070' name="camera" type='radio'>
-        <label class='skewed camera' data-tg-off='8070' data-tg-on='8070' for='camera8070'></label> <br>
-
-        <input class='skewed' id='camera8080' name="camera" type='radio'>
-        <label class='skewed camera' data-tg-off='8080' data-tg-on='8080' for='camera8080'></label> <br><br>
-
-        <input class='skewed' id='submitCamera' type='checkbox' onchange = 'javascript:cameraSelect();'>
-        <label class='skewed' data-tg-off='Submit' data-tg-on='Submit' for='submitCamera'></label> <br><br>
-      </form>
       <span id="climbLabel">Climb Height</span>
       <input type="range" id="climbMeter" min="0" max="58" value="0" />
       <span id="climbNumber">0</span>
