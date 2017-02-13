@@ -18,11 +18,10 @@ var said15 = false;
 var said10 = false;
 var said5 = false;
 
-NetworkTables.addRobotConnectionListener(onRobotConnection, true);
-NetworkTables.addGlobalListener(onValueChanged, true);
+
 
 function onRobotConnection(connected) {
-
+  console.log(connected);
 	if (connected) {
 	 $("#unknown-label").hide();
 	 $("#disconnected-label").hide();
@@ -133,7 +132,10 @@ function onValueChanged(key, value, isNew) {
 			 break;
 		case '/SmartDashboard/climbHeight':
 			 updateClimbHeight(value);
-       startTimer();
+       if (value != 0) {
+         startTimer();
+       }
+
 			 break;
 
 		case '/SmartDashboard/currentX':
@@ -208,7 +210,7 @@ function openTab(evt, tabName) {
 }
 
 function updateClimbHeight(inches) {
- $("#climbMeter").slider('value', inches);
+ //$("#climbMeter").slider('value', inches);
  $("#climbNumber").html(inches);
 }
 
@@ -278,8 +280,8 @@ function pixelsToInches(height, base) {
 	 console.log("-1");
 	}
 
-	//NetworkTables.putNumber("/SmartDashbard/fieldX", inchesWidth);
-	//NetworkTables.putNumber("/SmartDashboard/fieldY", inchesHeight);
+	NetworkTables.putValue("/SmartDashbard/fieldX", inchesWidth);
+	NetworkTables.putValue("/SmartDashboard/fieldY", inchesHeight);
 	}
 
 	function checkTeleop() {
@@ -457,38 +459,36 @@ function allianceSelect() {
 
 	if($("#blueAlliance1").is(':checked')) {
     $("#miniRobot").css("left", retrieval + "px");
-    //NetworkTables.putNumber("/SmartDashboard/startPosition", 1);
+    NetworkTables.putValue("/SmartDashboard/startPosition", 1);
   }
 	else if($("#blueAlliance2").is(':checked'))	{
     $("#miniRobot").css("left", midline + "px");
-    //NetworkTables.putNumber("/SmartDashboard/startPosition", 2);
+    NetworkTables.putValue("/SmartDashboard/startPosition", 2);
   }
 	else if($("#blueAlliance3").is(':checked'))	{
     $("#miniRobot").css("left", key + "px");
-    //NetworkTables.putNumber("/SmartDashboard/startPosition", 3);
+    NetworkTables.putValue("/SmartDashboard/startPosition", 3);
   }
 
 	else if($("#redAlliance1").is(':checked')) {
     $("#miniRobot").css("left", retrieval + "px");
-    //NetworkTables.putNumber("/SmartDashboard/startPosition", 4);
+    NetworkTables.putValue("/SmartDashboard/startPosition", 4);
   }
 	else if($("#redAlliance2").is(':checked')) {
     $("#miniRobot").css("left", midline + "px");
-    //NetworkTables.putNumber("/SmartDashboard/startPosition", 5);
+    NetworkTables.putValue("/SmartDashboard/startPosition", 5);
   }
 	else if($("#redAlliance3").is(':checked')) {
     $("#miniRobot").css("left", key + "px");
-    //NetworkTables.putNumber("/SmartDashboard/startPosition", 5);
+    NetworkTables.putValue("/SmartDashboard/startPosition", 6);
   }
 
 	dashboardInit();
 }
 
 function initAllianceSelection() {
-  $(document).keypress(function(event)
-{
-console.log(event.keyCode);
-});
+  NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+  NetworkTables.addGlobalListener(onValueChanged, true);
 
 	animate("#robo", "pulse");
 	setTimeout(function () {
@@ -513,7 +513,7 @@ function hopperChoiceSubmit() {
   } else if ($("#purpleHopper").is(':checked')) {
     hopperChoice = 2;
   }
-  //NetworkTables.putNumber("/SmartDashboard/hopperChoice", hopperChoice);
+  NetworkTables.putValue("/SmartDashboard/hopperChoice", hopperChoice);
   animate("#chooseHopper", "fadeOutDown");
   console.log(hopperChoice);
   $("#hopperChoiceLabel").text("Hopper: " + hopperChoice);
@@ -563,5 +563,5 @@ function finalAutoSubmit() {
     animate("#chooseHopper", "fadeInUp");
 	}
 	console.log(dash.autoModes);
-	//NetworkTables.putNumber("/SmartDashboard/autoMode", dash.autoModes);
+	NetworkTables.putValue("/SmartDashboard/autoMode", dash.autoModes);
 }
