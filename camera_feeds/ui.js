@@ -1,17 +1,40 @@
 function switchCam(e) { // Switch camera feeds on key press
  // blue is 1, green is 2
- if (e.keyCode == 61) { // equals/plus button
+ if (e.keyCode != 32 && e.keyCode!= 13) { // equals/plus button
 	 if ($("#camera1").css("visibility")==="visible") {
 		 $("#camera1").css("visibility", "hidden");
 		 $("#camera2").css("visibility", "visible");
-     $("#camLabel").text("Gear Camera");
+         $("#camLabel").text("Hopper camera");
 	 } else if ($("#camera2").css("visibility")==="visible") {
 		 $("#camera2").css("visibility", "hidden");
 		 $("#camera1").css("visibility", "visible");
-     $("#camLabel").text("Hopper Camera");
+         $("#camLabel").text("Gear Camera");
 	 }
   }
  }
+ 
+ console.log("it's okay");
+ NetworkTables.addKeyListener('/SmartDashboard/reversed', function(key, value, isNew){
+    console.log("no here");
+ 	console.log("here");
+	// Sometimes, NetworkTables will pass booleans as strings. This corrects for that.
+	if (value == 'true') {
+	 value = true;
+	} else if (value == 'false') {
+	 value = false;
+	}
+ 	if(key === '/SmartDashboard/reversed') {
+ 		if(value) {
+	 		$("#camera2").css("visibility", "hidden");
+			$("#camera1").css("visibility", "visible");
+	        $("#camLabel").text("Gear Camera");
+ 		} else {
+	 		$("#camera1").css("visibility", "hidden");
+			$("#camera2").css("visibility", "visible");
+	        $("#camLabel").text("Hopper camera");
+ 		}
+ 	}
+}, true);
 
  function cameraSelect() {
   animate("#camLabel", "fadeInRight");

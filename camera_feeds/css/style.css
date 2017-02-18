@@ -120,6 +120,7 @@ aside > * {
   height: 624px;
   overflow: hidden;
   background-repeat: no-repeat;
+  background-size: 520px 390px;
 }
 
 #camLabel {
@@ -136,13 +137,13 @@ aside > * {
 }
 
 #camera1 {
-  /*background-image: url('http://raspberrypi:8070/?action=stream');*/
+  background-image: url('http://raspberrypi:8070/?action=stream');
   background-color: #123; /*blue*/
   visibility:hidden;
 }
 
 #camera2 {
-  /*background-image: url('http://raspberrypi:8080/?action=stream');*/
+  background-image: url('http://raspberrypi:8080/?action=stream');
   background-color: #132; /*green*/
   visibility:hidden;
 }
