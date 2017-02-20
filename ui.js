@@ -154,9 +154,11 @@ function onValueChanged(key, value, isNew) {
     case '/SmartDashboard/pneumatics':
       if (value) pneumatics("green");
       else if(!value) pneumatics("red");
+      break;
 
     case '/SmartDashboard/pressure':
       $("#pressureLabel").text(value);
+      break;
 	 }
 }
 
@@ -468,7 +470,7 @@ function allianceSelect() {
   var key = (57.8553009/widthRatio) + 344;
 
 	if($("#blueAlliance1").is(':checked')) {
-    $("#miniRobot").css("left", retrieval + "px");
+    $("#miniRobot").css("left", key + "px");
     //NetworkTables.putValue("/SmartDashboard/startPosition", 1);
   }
 	else if($("#blueAlliance2").is(':checked'))	{
@@ -476,7 +478,7 @@ function allianceSelect() {
     //NetworkTables.putValue("/SmartDashboard/startPosition", 2);
   }
 	else if($("#blueAlliance3").is(':checked'))	{
-    $("#miniRobot").css("left", key + "px");
+    $("#miniRobot").css("left", (668)-(retrieval-344) + "px");
     //NetworkTables.putValue("/SmartDashboard/startPosition", 3);
   }
 
@@ -489,7 +491,7 @@ function allianceSelect() {
     //NetworkTables.putValue("/SmartDashboard/startPosition", 5);
   }
 	else if($("#redAlliance3").is(':checked')) {
-    $("#miniRobot").css("left", key + "px");
+    $("#miniRobot").css("left", 646-(key-344) + "px");
     //NetworkTables.putValue("/SmartDashboard/startPosition", 6);
   }
 
