@@ -1,3 +1,8 @@
+// cd FRCDashboard/camera_feeds
+// python -3 -m pynetworktables2js --port 4000 --robot roboRIO-5968-FRC.local
+// cd C:\Program Files (x86)\Google\Chrome\Application
+// chrome.exe --app=localhost:4000
+
 function switchCam(e) { // Switch camera feeds on key press
  // blue is 1, green is 2
  if (e.keyCode != 32 && e.keyCode!= 13) { // equals/plus button
@@ -12,7 +17,7 @@ function switchCam(e) { // Switch camera feeds on key press
 	 }
   }
  }
- 
+
  console.log("it's okay");
  NetworkTables.addKeyListener('/SmartDashboard/reversed', function(key, value, isNew){
     console.log("no here");

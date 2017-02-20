@@ -578,4 +578,22 @@ input[type=range] {
   font-size: 20px;
 }
 
+#psi {
+  visibility: hidden;
+  font-family: "Lato", sans-serif;
+  font: 20px sans-serif;
+  position: absolute;
+  top: 600px;
+  left: 117px;
+}
+
+#pressureLabel {
+  visibility: hidden;
+  font-family: "Lato", sans-serif;
+  font: 20px sans-serif;
+  position: absolute;
+  top: 600px;
+  left: 67px;
+}
+
 /* END METERS */

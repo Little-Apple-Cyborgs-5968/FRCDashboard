@@ -1,3 +1,8 @@
+// cd FRCDashboard
+// python -3 -m pynetworktables2js --robot roboRIO-5968-FRC.local
+// cd C:\Program Files (x86)\Google\Chrome\Application
+// chrome.exe --app=localhost:8888
+
 var dash = {
  x : -1,
  y : -1,
@@ -149,6 +154,9 @@ function onValueChanged(key, value, isNew) {
     case '/SmartDashboard/pneumatics':
       if (value) pneumatics("green");
       else if(!value) pneumatics("red");
+
+    case '/SmartDashboard/pressure':
+      $("#pressureLabel").text(value);
 	 }
 }
 
@@ -280,8 +288,8 @@ function pixelsToInches(height, base) {
 	 console.log("-1");
 	}
 
-	NetworkTables.putValue("/SmartDashbard/fieldX", inchesWidth);
-	NetworkTables.putValue("/SmartDashboard/fieldY", inchesHeight);
+	//NetworkTables.putValue("/SmartDashbard/fieldX", inchesWidth);
+	//NetworkTables.putValue("/SmartDashboard/fieldY", inchesHeight);
 	}
 
 	function checkTeleop() {
@@ -420,6 +428,8 @@ function allianceSelect() {
  	}, 1500);
 	setTimeout(function () {
 	 animate("#robot-diagram", "fadeInLeft");
+   animate("#pressureLabel", "fadeInLeft");
+   animate("#psi", "fadeInLeft");
    pneumatics("red");
    climb();
    changeClimb("red");
@@ -459,36 +469,36 @@ function allianceSelect() {
 
 	if($("#blueAlliance1").is(':checked')) {
     $("#miniRobot").css("left", retrieval + "px");
-    NetworkTables.putValue("/SmartDashboard/startPosition", 1);
+    //NetworkTables.putValue("/SmartDashboard/startPosition", 1);
   }
 	else if($("#blueAlliance2").is(':checked'))	{
     $("#miniRobot").css("left", midline + "px");
-    NetworkTables.putValue("/SmartDashboard/startPosition", 2);
+    //NetworkTables.putValue("/SmartDashboard/startPosition", 2);
   }
 	else if($("#blueAlliance3").is(':checked'))	{
     $("#miniRobot").css("left", key + "px");
-    NetworkTables.putValue("/SmartDashboard/startPosition", 3);
+    //NetworkTables.putValue("/SmartDashboard/startPosition", 3);
   }
 
 	else if($("#redAlliance1").is(':checked')) {
     $("#miniRobot").css("left", retrieval + "px");
-    NetworkTables.putValue("/SmartDashboard/startPosition", 4);
+    //NetworkTables.putValue("/SmartDashboard/startPosition", 4);
   }
 	else if($("#redAlliance2").is(':checked')) {
     $("#miniRobot").css("left", midline + "px");
-    NetworkTables.putValue("/SmartDashboard/startPosition", 5);
+    //NetworkTables.putValue("/SmartDashboard/startPosition", 5);
   }
 	else if($("#redAlliance3").is(':checked')) {
     $("#miniRobot").css("left", key + "px");
-    NetworkTables.putValue("/SmartDashboard/startPosition", 6);
+    //NetworkTables.putValue("/SmartDashboard/startPosition", 6);
   }
 
 	dashboardInit();
 }
 
 function initAllianceSelection() {
-  NetworkTables.addRobotConnectionListener(onRobotConnection, true);
-  NetworkTables.addGlobalListener(onValueChanged, true);
+  //NetworkTables.addRobotConnectionListener(onRobotConnection, true);
+  //.addGlobalListener(onValueChanged, true);
 
 	animate("#robo", "pulse");
 	setTimeout(function () {
@@ -513,7 +523,7 @@ function hopperChoiceSubmit() {
   } else if ($("#purpleHopper").is(':checked')) {
     hopperChoice = 2;
   }
-  NetworkTables.putValue("/SmartDashboard/hopperChoice", hopperChoice);
+  //NetworkTables.putValue("/SmartDashboard/hopperChoice", hopperChoice);
   animate("#chooseHopper", "fadeOutDown");
   console.log(hopperChoice);
   $("#hopperChoiceLabel").text("Hopper: " + hopperChoice);
@@ -563,5 +573,5 @@ function finalAutoSubmit() {
     animate("#chooseHopper", "fadeInUp");
 	}
 	console.log(dash.autoModes);
-	NetworkTables.putValue("/SmartDashboard/autoMode", dash.autoModes);
+	//NetworkTables.putValue("/SmartDashboard/autoMode", dash.autoModes);
 }

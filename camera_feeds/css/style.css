@@ -114,26 +114,13 @@ aside > * {
 .camera {
   padding: 0;
   position: absolute;
-  top:45px;
-  left:50px;
-  width: 832px;
-  height: 624px;
+  top:0px;
+  left:0px;
+  width: 544px;
+  height: 408px;
   overflow: hidden;
   background-repeat: no-repeat;
-  background-size: 520px 390px;
-}
-
-#camLabel {
-  top: 320px;
-  left: 920px;
-  position: absolute;
-  font-family: monospace;
-  display: block;
-  height: 10vh;
-  width: 30vw;
-  font-size: 5vh;
-  line-height: .8;
-  visibility: hidden;
+  background-size: 544px 408px;
 }
 
 #camera1 {
@@ -151,8 +138,8 @@ aside > * {
 #cameraSelection {
   visibility: hidden;
   position: fixed;
-  left:550px;
-  top: 270px;
+  left:180px;
+  top: 100px;
   background-color: #222;
 }
 
