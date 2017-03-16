@@ -1,5 +1,5 @@
 // cd FRCDashboard/camera_feeds
-// python -3 -m pynetworktables2js --port 4000 --robot roboRIO-5968-FRC.local
+// python -3 -m pynetworktables2js --port 4000 --robot 10.59.68.11
 // cd C:\Program Files (x86)\Google\Chrome\Application
 // chrome.exe --app=localhost:4000
 

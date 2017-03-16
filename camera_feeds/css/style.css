@@ -116,21 +116,21 @@ aside > * {
   position: absolute;
   top:0px;
   left:0px;
-  width: 544px;
-  height: 408px;
+  width: 816px;
+  height: 612px;
   overflow: hidden;
   background-repeat: no-repeat;
-  background-size: 544px 408px;
+  background-size: 816px 612px;
 }
 
 #camera1 {
-  background-image: url('http://raspberrypi:8070/?action=stream');
+  background-image: url('http://10.59.68.11:8070/?action=stream');
   background-color: #123; /*blue*/
   visibility:hidden;
 }
 
 #camera2 {
-  background-image: url('http://raspberrypi:8080/?action=stream');
+  background-image: url('http://10.59.68.11:8080/?action=stream');
   background-color: #132; /*green*/
   visibility:hidden;
 }
