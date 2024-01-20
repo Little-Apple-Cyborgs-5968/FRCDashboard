@@ -64,8 +64,8 @@ NetworkTables.addKeyListener('/robot/time', (key, value) => {
     ui.timer.textContent = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
 });
 
-// Load list of prewritten autonomous modes
-NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) => {
+// Load list of prewrit ten autonomous modes
+NetworkTables.addKeyListener('/SmartDashboard/Auto\ List', (key, value) => {
     // Clear previous list
     while (ui.autoSelect.firstChild) {
         ui.autoSelect.removeChild(ui.autoSelect.firstChild);
@@ -81,7 +81,7 @@ NetworkTables.addKeyListener('/SmartDashboard/autonomous/modes', (key, value) =>
 });
 
 // Load list of prewritten autonomous modes
-NetworkTables.addKeyListener('/SmartDashboard/autonomous/selected', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/Autonomous\ Mode/selected', (key, value) => {
     ui.autoSelect.value = value;
 });
 
@@ -99,7 +99,7 @@ ui.gyro.container.onclick = function() {
 };
 // Update NetworkTables when autonomous selector is changed
 ui.autoSelect.onchange = function() {
-    NetworkTables.putValue('/SmartDashboard/autonomous/selected', this.value);
+    NetworkTables.putValue('/SmartDashboard/Autonomous\ Mode/selected', this.value);
 };
 // Get value of arm height slider when it's adjusted
 ui.armPosition.oninput = function() {
