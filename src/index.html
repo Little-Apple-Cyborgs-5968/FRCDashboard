@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>FRC Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tuning.css">
 </head>
 
 <body>
@@ -40,12 +41,6 @@
     </article>
     <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
     <aside>
-        <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
-            The <p> below then says the value. -->
-        <div id="example-section">
-            <button id="example-button">Change example value</button>
-            <p id="example-readout">Value is undefined</p>
-        </div>
         <!-- Autonomous selector -->
         <div class="select-container">
             <select id="auto-select">
@@ -53,9 +48,20 @@
                 <!-- This gets populated by JS -->
             </select>
         </div>
-        <div>
-            <p>Adjust arm height</p>
-            <input id="arm-position" type="range" min="0" max="1200" value="770">
+        <!-- Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
+            The <p> below then says the value. -->
+        <div id="example-section">
+            <button id="example-button">Change example value</button>
+            <p id="example-readout">Value is undefined</p>
+        </div>
+        <!-- The button which will be clicked to open and close the tuning interface -->
+        <button id="tuning-button">Tuning</button>
+        <!-- The actual tuning window -->
+        <div id="tuning">
+            <input type="text" placeholder="Property" id="name">
+            <input type="text" placeholder="Value" id="value">
+            <button id="set">Set</button>
+            <button id="get">Get</button>
         </div>
     </aside>
     <div id="login">
@@ -66,6 +72,7 @@
     <script src="ui.js"></script>
     <script src="connection.js"></script>
     <script src="../node_modules/@frc-web-components/frc-web-components/build/frc-web-components.min.js"></script>
+    <script src="components/tuning.js"></script>
     <script>
         webbitStore.addSourceProvider('NetworkTables');
         webbitStore.setDefaultSourceProvider('NetworkTables');
