@@ -30,6 +30,8 @@ let updateGyro = (key, value) => {
     if (ui.gyro.visualVal < 0) {
         ui.gyro.visualVal += 360;
     }
+    document.getElementById('needle').style.transform = 'translateX(-50%) translateY(-100%) rotate(' + ui.gyro.visualVal + 'deg)';
+    angleValueDisplay.innerText = ui.gyro.visualVal;
     ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
     ui.gyro.number.textContent = ui.gyro.visualVal + 'º';
 };

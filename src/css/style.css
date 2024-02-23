@@ -3,6 +3,22 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    font: 16px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    overflow: hidden;
+    background: #222;
+}
+
+.dashboard-section {
+    padding: 10px;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }

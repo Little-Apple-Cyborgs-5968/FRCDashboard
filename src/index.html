@@ -6,6 +6,8 @@
     <title>FRC Dashboard</title>
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="css/tuning.css">
+    <link rel="stylesheet" href="css/gyrometer.css">
+    <link rel="stylesheet" href="css/motorbars.css">
 </head>
 
 <body>
@@ -19,14 +21,50 @@
         More explanation in that CSS rule. -->
     <div id="camera"></div>
     <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
-    <article>
         <!-- Gyroscope -->
-        <svg id="gyro">
-            <circle cx="85" cy="85" r="83"></circle>
-            <circle cx="85" cy="85" r="50"></circle>
-            <rect id="gyro-arm" x="80" y="5" width="10" height="80"></rect>
-            <text id="gyro-number" x="90" y="115">0º</text>
-        </svg>
+    <article>
+        <!-- i jack of to my little pony-->
+
+        <div id="container">
+            <div id="valueBars">
+                <div class="valueBarContainer" id="bar1">
+                <div class="valueBar" id="valueBar1"></div>
+                <div class="overlay" id="overlay1">50</div>
+                </div>
+        
+                <div class="valueBarContainer" id="bar2">
+                <div class="valueBar" id="valueBar2"></div>
+                <div class="overlay" id="overlay2">30</div>
+                </div>
+        
+                <div class="valueBarContainer" id="bar3">
+                <div class="valueBar" id="valueBar3"></div>
+                <div class="overlay" id="overlay3">70</div>
+                </div>
+        
+                <div class="valueBarContainer" id="bar4">
+                <div class="valueBar" id="valueBar4"></div>
+                <div class="overlay" id="overlay4">40</div>
+                </div>
+            </div>
+        
+            <img src="../images/robot2.jpg" alt="Robot Image" id="image">
+        </div>
+         <!-- i jack of to my compass-->
+        <div id="title">Compass</div>
+            <div id="value-display">Angle: <span id="angle-value">0</span> degrees</div>
+
+            <div id="compass-container">
+            <div id="circle-image"></div>
+            <div id="needle-container">
+            <div id="needle"></div>
+        </div>
+        <div id="title">i ahte minorites</div>
+
+        <!-- other shit -->
+        <input type="number" id="angle-input" placeholder="Angle" min="0" max="360" step="1">
+    </div>
+
         <!-- Example robot diagram, arm moves when encoder value changes -->
         <svg id="robot-diagram" width="332" height="450">
             <text x="40" y="340">Example SVG Robot Diagram</text>
@@ -73,6 +111,7 @@
     <script src="connection.js"></script>
     <script src="../node_modules/@frc-web-components/frc-web-components/build/frc-web-components.min.js"></script>
     <script src="components/tuning.js"></script>
+    <script src="components/gyrometer.js"></script>
     <script>
         webbitStore.addSourceProvider('NetworkTables');
         webbitStore.setDefaultSourceProvider('NetworkTables');
