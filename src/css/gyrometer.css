@@ -19,6 +19,7 @@ body {
     height: 100%;
     background-image: url('../../images/360_circle.webp'); /* image thingmajoog  */
     background-size: cover;
+    filter: invert(100%);
 }
 
 #needle-container {
