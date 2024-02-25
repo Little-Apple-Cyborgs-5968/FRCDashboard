@@ -27,42 +27,39 @@
 
         <div id="container">
             <div id="valueBars">
-                <div class="valueBarContainer" id="bar1">
-                <div class="valueBar" id="valueBar1"></div>
-                <div class="overlay" id="overlay1">50</div>
+                <div class="valueBarContainer" id="bar1" data-motor-speed="0">
+                    <div class="valueBar" id="valueBar1"></div>
+                    <div class="overlay" id="overlay1"> <span id="frontRightMotor">0</span> </div>
                 </div>
-        
-                <div class="valueBarContainer" id="bar2">
-                <div class="valueBar" id="valueBar2"></div>
-                <div class="overlay" id="overlay2">30</div>
+            
+                <div class="valueBarContainer" id="bar2" data-motor-speed="0">
+                    <div class="valueBar" id="valueBar2"></div>
+                    <div class="overlay" id="overlay2"> <span id="frontLeftMotor">0</span> </div>
                 </div>
-        
-                <div class="valueBarContainer" id="bar3">
-                <div class="valueBar" id="valueBar3"></div>
-                <div class="overlay" id="overlay3">70</div>
+            
+                <div class="valueBarContainer" id="bar3" data-motor-speed="0">
+                    <div class="valueBar" id="valueBar3"></div>
+                    <div class="overlay" id="overlay3"> <span id="rearRightMotor">0</span> </div>
                 </div>
-        
-                <div class="valueBarContainer" id="bar4">
-                <div class="valueBar" id="valueBar4"></div>
-                <div class="overlay" id="overlay4">40</div>
+            
+                <div class="valueBarContainer" id="bar4" data-motor-speed="0">
+                    <div class="valueBar" id="valueBar4"></div>
+                    <div class="overlay" id="overlay4"> <span id="rearLeftMotor">0</span> </div>
                 </div>
             </div>
+            
         
             <img src="../images/robot2.jpg" alt="Robot Image" id="image">
         </div>
-         <!-- i jack of to my compass-->
-        <div id="title">Compass</div>
+         <!-- Gyroscope -->
+        <div id="title">Gyroscope</div>
             <div id="value-display">Angle: <span id="angle-value">0</span> degrees</div>
 
             <div id="compass-container">
             <div id="circle-image"></div>
             <div id="needle-container">
             <div id="needle"></div>
-        </div>
-        <div id="title">i ahte minorites</div>
-
-        <!-- other shit -->
-        <input type="number" id="angle-input" placeholder="Angle" min="0" max="360" step="1">
+        </div>∫
     </div>
 
         <!-- Example robot diagram, arm moves when encoder value changes -->
