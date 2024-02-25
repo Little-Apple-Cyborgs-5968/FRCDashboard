@@ -59,6 +59,39 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
     ui.example.readout.data = 'Value is ' + value;
 });
 
+NetworkTables.addKeyListener('/SmartDashboard/frontRightMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar1', Math.round((value * 10000)/100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/frontLeftMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar2', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/rearRightMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar3', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/rearLeftMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar4', Math.round(value * 100));
+});
+
+function updateMotorSpeed(barId, speed) {
+    const bar = document.getElementById(barId);
+    if (bar) {
+        bar.dataset.motorSpeed = speed;
+        const motorSpan = bar.querySelector('.overlay span');
+        if (motorSpan) {
+            motorSpan.textContent = speed;
+        }
+    }
+}
+
+
+
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
     // This is an example of how a dashboard could display the remaining time in a match.
     // We assume here that value is an integer representing the number of seconds left.
