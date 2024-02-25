@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/tuning.css">
     <link rel="stylesheet" href="css/gyrometer.css">
     <link rel="stylesheet" href="css/motorbars.css">
+    <link rel="stylesheet" href="css/miscmotors.css">
+
 </head>
 
 <body>
@@ -47,9 +49,55 @@
                     <div class="overlay" id="overlay4"> <span id="rearLeftMotor">XXBADXX</span> </div>
                 </div>
             </div>
-            
         
             <img src="../images/robot_wheels.png" alt="Robot Image" id="image">
+        </div> 
+    
+        <!-- Part 2: Miscellaneous Motors -->
+        <div id="misc-container">
+            <div id="misc-valueBars">
+                <div class="misc_motors_valueBarContainer" id="bar5" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar5"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay5"> <span id="misc_frontRightMotor5">0</span> </div>
+                </div>
+        
+                <div class="misc_motors_valueBarContainer" id="bar6" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar6"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay6"> <span id="misc_frontLeftMotor6">0</span> </div>
+                </div>
+        
+                <div class="misc_motors_valueBarContainer" id="bar7" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar7"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay7"> <span id="misc_rearRightMotor7">0</span> </div>
+                </div>
+
+                <div class="misc_motors_valueBarContainer" id="bar8" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar8"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay8"> <span id="misc_frontRightMotor8">0</span> </div>
+                </div>
+            </div>
+
+            <img src="../images/square.jpg" alt="Miscellaneous Motors Image" id="misc-image">
+        
+            <div id="misc-valueBars">
+        
+                <div class="misc_motors_valueBarContainer" id="bar9" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar9"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay9"> <span id="misc_frontLeftMotor9">0</span> </div>
+                </div>
+        
+                <div class="misc_motors_valueBarContainer" id="bar10" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar10"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay10"> <span id="misc_rearRightMotor10">0</span> </div>
+                </div>
+
+                <div class="misc_motors_valueBarContainer" id="bar11" data-motor-speed="0">
+                    <div class="misc_motors_valueBar" id="misc_valueBar10"></div>
+                    <div class="misc_motors_overlay" id="misc_overlay10"> <span id="misc_rearRightMotor10">0</span> </div>
+                </div>
+            </div>
+        
+            
         </div>
          <!-- Gyroscope -->
         <div id="title">Gyroscope</div>
@@ -61,6 +109,8 @@
             <div id="needle"></div>
         </div>∫
     </div>
+
+     
 
         <!-- Example robot diagram, arm moves when encoder value changes -->
         <svg id="robot-diagram" width="332" height="450">
