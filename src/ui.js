@@ -55,28 +55,28 @@ NetworkTables.addKeyListener('/SmartDashboard/arm/encoder', (key, value) => {
 // This button is just an example of triggering an event on the robot by clicking a button.
 NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) => {
     // Set class active if value is true and unset it if it is false
-    ui.example.button.classList.toggle('active', Math.round(value * 1000) / 1000);
+    ui.example.button.classList.toggle('active', value);
     ui.example.readout.data = 'Value is ' + value;
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/frontRightMotor', (key, value) => {
-    // Update the motor speed for front right motor
-    updateMotorSpeed('bar1', Math.round(value * 1000) / 1000);
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar1', Math.round(value * 100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/frontLeftMotor', (key, value) => {
-    // Update the motor speed for front left motor
-    updateMotorSpeed('bar2', value);
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar2', Math.round(value * 100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/rearRightMotor', (key, value) => {
-    // Update the motor speed for rear right motor
-    updateMotorSpeed('bar3', Math.round(value * 1000) / 1000);
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar3', Math.round(value * 100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/rearLeftMotor', (key, value) => {
-    // Update the motor speed for rear left motor
-    updateMotorSpeed('bar4', Math.round(value * 1000) / 1000);
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('bar4', Math.round(value * 100));
 });
 
 function updateMotorSpeed(barId, speed) {
