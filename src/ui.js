@@ -61,33 +61,45 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
 
 NetworkTables.addKeyListener('/SmartDashboard/frontRightMotor', (key, value) => {
     // Update the motor speed, rounding to three decimal points
-    updateMotorSpeed('bar1', Math.round((value * 10000)/100));
+    updateMotorSpeed('1', Math.round((value * 10000)/100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/frontLeftMotor', (key, value) => {
     // Update the motor speed, rounding to three decimal points
-    updateMotorSpeed('bar2', Math.round(value * 100));
+    updateMotorSpeed('2', Math.round(value * 100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/rearRightMotor', (key, value) => {
     // Update the motor speed, rounding to three decimal points
-    updateMotorSpeed('bar3', Math.round(value * 100));
+    updateMotorSpeed('3', Math.round(value * 100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/rearLeftMotor', (key, value) => {
     // Update the motor speed, rounding to three decimal points
-    updateMotorSpeed('bar4', Math.round(value * 100));
+    updateMotorSpeed('4', Math.round(value * 100));
 });
 
 function updateMotorSpeed(barId, speed) {
-    const bar = document.getElementById(barId);
+    /*const bar = document.getElementById(barId);
     if (bar) {
         bar.dataset.motorSpeed = speed;
         const motorSpan = bar.querySelector('.overlay span');
         if (motorSpan) {
             motorSpan.textContent = speed;
         }
+    }*/
+    const valueBar = document.getElementById(`valueBar${barId}`);
+    const overlay = document.getElementById(`overlay${barId}`);
+    
+    // Check if the value is negative
+    if (speed < 0) {
+        valueBar.style.backgroundColor = 'red'; // Set background color to red for negative values
+    } else {
+        valueBar.style.backgroundColor = '#3498db'; // Set background color to default for non-negative values
     }
+    
+    valueBar.style.width = Math.abs(speed) + '%'; // Set width to positive value
+    overlay.innerText = speed;
 }
 
 
