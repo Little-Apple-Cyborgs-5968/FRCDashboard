@@ -80,14 +80,6 @@ NetworkTables.addKeyListener('/SmartDashboard/rearLeftMotor', (key, value) => {
 });
 
 function updateMotorSpeed(barId, speed) {
-    /*const bar = document.getElementById(barId);
-    if (bar) {
-        bar.dataset.motorSpeed = speed;
-        const motorSpan = bar.querySelector('.overlay span');
-        if (motorSpan) {
-            motorSpan.textContent = speed;
-        }
-    }*/
     const valueBar = document.getElementById(`valueBar${barId}`);
     const overlay = document.getElementById(`overlay${barId}`);
     
