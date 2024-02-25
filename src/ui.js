@@ -61,7 +61,7 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
 
 NetworkTables.addKeyListener('/SmartDashboard/frontRightMotor', (key, value) => {
     // Update the motor speed, rounding to three decimal points
-    updateMotorSpeed('bar1', Math.round(value * 100));
+    updateMotorSpeed('bar1', Math.round((value * 10000)/100));
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/frontLeftMotor', (key, value) => {
