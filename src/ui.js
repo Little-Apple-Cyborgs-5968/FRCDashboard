@@ -79,6 +79,41 @@ NetworkTables.addKeyListener('/SmartDashboard/rearLeftMotor', (key, value) => {
     updateMotorSpeed('4', Math.round(value * 100));
 });
 
+// misc motors
+
+
+
+
+NetworkTables.addKeyListener('/SmartDashboard/pivotMotorOne', (key, value) => {
+    updateMotorSpeed('6', Math.round(value * 100));
+});
+
+
+NetworkTables.addKeyListener('/SmartDashboard/pivotMotorTwo', (key, value) => {
+    updateMotorSpeed('10', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/intakeMotorOne', (key, value) => {
+    updateMotorSpeed('7', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/intakeMotorTwo', (key, value) => {
+    updateMotorSpeed('9', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/shooterMotor', (key, value) => {
+    updateMotorSpeed('5', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/climberMotorOne', (key, value) => {
+    updateMotorSpeed('8', Math.round((value * 10000)/100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/climberMotorTwo', (key, value) => {
+    updateMotorSpeed('11', Math.round(value * 100));
+});
+
+
 function updateMotorSpeed(barId, speed) {
     const valueBar = document.getElementById(`valueBar${barId}`);
     const overlay = document.getElementById(`overlay${barId}`);
