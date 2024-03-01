@@ -116,7 +116,7 @@ NetworkTables.addKeyListener('/SmartDashboard/alliance', (key, value) => {
     if (String(value).slice(-4) === "Blue") {
         allianceLabelElement.style.backgroundColor = "#2920a0"
     }else{
-        allianceLabelElement.style.backgroundColor = "#a02020
+        allianceLabelElement.style.backgroundColor = "#a02020"
     }
 });
 
