@@ -75,7 +75,10 @@ body > * {
     font-size: 20vh;
     line-height: .8;
 }
+
 header {
+    display: flex;
+    align-items: center;
     width: 20vw;
     height: 20vh;
     top: 0;
