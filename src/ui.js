@@ -30,6 +30,8 @@ let updateGyro = (key, value) => {
     if (ui.gyro.visualVal < 0) {
         ui.gyro.visualVal += 360;
     }
+    document.getElementById('needle').style.transform = 'translateX(-50%) translateY(-100%) rotate(' + ui.gyro.visualVal + 'deg)';
+    angleValueDisplay.innerText = ui.gyro.visualVal;
     ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
     ui.gyro.number.textContent = ui.gyro.visualVal + 'º';
 };
@@ -57,10 +59,97 @@ NetworkTables.addKeyListener('/SmartDashboard/example_variable', (key, value) =>
     ui.example.readout.data = 'Value is ' + value;
 });
 
+//ground motors
+NetworkTables.addKeyListener('/SmartDashboard/frontRightMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('1', Math.round((value * 10000)/100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/frontLeftMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('2', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/rearRightMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('3', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/rearLeftMotor', (key, value) => {
+    // Update the motor speed, rounding to three decimal points
+    updateMotorSpeed('4', Math.round(value * 100));
+});
+
+// misc motors
+NetworkTables.addKeyListener('/SmartDashboard/pivotMotorOne', (key, value) => {
+    updateMotorSpeed('6', Math.round(value * 100));
+});
+
+
+NetworkTables.addKeyListener('/SmartDashboard/pivotMotorTwo', (key, value) => {
+    updateMotorSpeed('10', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/intakeMotorOne', (key, value) => {
+    updateMotorSpeed('7', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/intakeMotorTwo', (key, value) => {
+    updateMotorSpeed('9', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/shooterMotor', (key, value) => {
+    updateMotorSpeed('5', Math.round(value * 100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/climberMotorOne', (key, value) => {
+    updateMotorSpeed('8', Math.round((value * 10000)/100));
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/climberMotorTwo', (key, value) => {
+    updateMotorSpeed('11', Math.round(value * 100));
+});
+
+//alliance
+NetworkTables.addKeyListener('/SmartDashboard/alliance', (key, value) => {
+    const allianceLabelElement = document.getElementById("number_box");
+    if (String(value).slice(-4) === "Blue") {
+        allianceLabelElement.style.backgroundColor = "#2920a0"
+    }else{
+        allianceLabelElement.style.backgroundColor = "#a02020"
+    }
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/location', (key, value) => {
+//NOT WORKING YET CUZ PUT LOCATION CRASHES SIM ON FRC_2024 SIDE
+    const allianceLabelElement = document.getElementById("number_box");
+    allianceLabelElement.textContent = value;
+});
+
+
+
+
+function updateMotorSpeed(barId, speed) {
+    const valueBar = document.getElementById(`valueBar${barId}`);
+    const overlay = document.getElementById(`overlay${barId}`);
+    
+    // Check if the value is negative
+    if (speed < 0) {
+        valueBar.style.backgroundColor = 'red'; // Set background color to red for negative values
+    } else {
+        valueBar.style.backgroundColor = '#3498db'; // Set background color to default for non-negative values
+    }
+    
+    valueBar.style.width = Math.abs(speed) + '%'; // Set width to positive value
+    overlay.innerText = speed;
+}
+
+
+
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
     // This is an example of how a dashboard could display the remaining time in a match.
     // We assume here that value is an integer representing the number of seconds left.
-    ui.timer.textContent = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60;
+    document.getElementById('timer').textContent = "fucking"
 });
 
 // Load list of prewritten autonomous modes

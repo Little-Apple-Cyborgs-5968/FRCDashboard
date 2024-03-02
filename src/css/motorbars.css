@@ -1,0 +1,55 @@
+:root {
+  --scale_factor: 1px;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#container {
+  display: flex;
+  align-items: top;
+  margin-top: 0px;
+}
+
+#valueBars {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0px;
+}
+
+.valueBarContainer {
+  position: relative;
+  width: calc(100*var(--scale_factor)); /* Adjust the width as needed */
+  height: calc(20*var(--scale_factor));
+  margin-bottom: 0px;
+  margin-top: 18px;
+  background-color: #858585;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.valueBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #3498db; /* Adjust the background color as needed */
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+#image {
+  width: calc(215*var(--scale_factor));
+  height: calc(215*var(--scale_factor));
+}

@@ -3,6 +3,22 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    font: 16px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    overflow: hidden;
+    background: #222;
+}
+
+.dashboard-section {
+    padding: 10px;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -59,7 +75,10 @@ body > * {
     font-size: 20vh;
     line-height: .8;
 }
+
 header {
+    display: flex;
+    align-items: center;
     width: 20vw;
     height: 20vh;
     top: 0;
